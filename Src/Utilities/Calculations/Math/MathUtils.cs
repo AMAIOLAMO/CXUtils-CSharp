@@ -57,6 +57,9 @@ namespace CXUtils.Common
 
         /// <inheritdoc cref="Loop(float, float)"/>
         public static int Loop(this int value, int amount) => value % amount;
+        
+        /// <inheritdoc cref="Loop(float, float)"/>
+        public static double Loop(this double value, double amount) => value - Math.Floor(value / amount) * amount;
 
         #region Range
 
@@ -65,6 +68,10 @@ namespace CXUtils.Common
         ///     NOTE: If values overflow, it will cause unexpected behaviour
         /// </summary>
         public static float Map(float value, float inMin, float inMax, float outMin, float outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+        /// <inheritdoc cref="Map(float,float,float,float,float)"/>
+        public static double Map(double value, double inMin, double inMax, double outMin, double outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+        /// <inheritdoc cref="Map(float,float,float,float,float)"/>
+        public static int Map(int value, int inMin, int inMax, int outMin, int outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 
         /// <summary>
         ///     Maps the given value from (-1 ~ 1) to (0 ~ 1)
@@ -72,14 +79,18 @@ namespace CXUtils.Common
         public static float MapNeg11To01(float value) => value * .5f + .5f;
 
         public static float Clamp(float value, float min, float max) => value < min ? min : value > max ? max : value;
+        public static double Clamp(double value, double min, double max) => value < min ? min : value > max ? max : value;
+        public static int Clamp(int value, int min, int max) => value < min ? min : value > max ? max : value;
 
         public static float Clamp01(float value) => Clamp(value, 0f, 1f);
+        public static double Clamp01(double value) => Clamp(value, 0f, 1f);
 
         #endregion
 
         #region Other
 
         public static float RoundOnStep(float value, float step) => (float)Math.Round(value / step) * step;
+        public static double RoundOnStep(double value, double step) => Math.Round(value / step) * step;
 
         #endregion
     }

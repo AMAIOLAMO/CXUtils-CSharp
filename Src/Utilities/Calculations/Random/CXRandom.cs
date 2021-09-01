@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace CXUtils.Common
 {
     /// <summary>
     ///     An extension for the system random
     /// </summary>
-    public static class CxRandomExtension
+    public static class CxRandomExtensions
     {
         /// <summary>
-        ///     Gives a random number between <see cref="float.MinValue"/> ~ <see cref="float.MaxValue">
+        ///     Gives a random number between <see cref="float.MinValue"/> ~ <see cref="float.MaxValue" />
         /// </summary>
         public static float NextFloat(this Random random)
         {

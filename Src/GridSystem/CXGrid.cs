@@ -10,7 +10,7 @@ namespace CXUtils.Grid
         public GridBase( Float2 cellSize, Float2 origin = default ) => ( Origin, CellSize ) = ( origin, cellSize );
 
         public Float2 CellSize { get; }
-        public Float2 Origin { get; }
+        public Float2 Origin   { get; }
 
         public abstract T this[ int x, int y ] { get; set; }
         public abstract T this[ Int2 cellPosition ] { get; set; }
@@ -164,7 +164,7 @@ namespace CXUtils.Grid
 
         public bool CellExists( int x, int y ) => CellExists( new Int2( x, y ) );
 
-        public ReadOnlyDictionary<Int2, T> GetAllCells() => new ReadOnlyDictionary<Int2, T>( _gridDictionary );
+        public ReadOnlyDictionary<Int2, T> GetAllCells() => new( _gridDictionary );
     }
 
     /// <summary>
@@ -195,8 +195,8 @@ namespace CXUtils.Grid
         #region Fields
 
         readonly T[,] _gridArray;
-        public int Width { get; }
-        public int Height { get; }
+        public   int  Width  { get; }
+        public   int  Height { get; }
 
         public override T this[ int x, int y ]
         {
@@ -219,7 +219,7 @@ namespace CXUtils.Grid
         /// <summary>
         ///     The whole <see cref="BoundGrid{T}" />'s size
         /// </summary>
-        public Int2 GridSize => new Int2( Width, Height );
+        public Int2 GridSize => new( Width, Height );
 
         #endregion
 
@@ -340,7 +340,7 @@ namespace CXUtils.Grid
         ///     Get grid's bounds on grid position
         /// </summary>
         public AABBFloat2 GetLocalBounds() =>
-            new AABBFloat2( (Float2)0f, (Float2)GridSize );
+            new( (Float2)0f, (Float2)GridSize );
 
         #endregion
     }
