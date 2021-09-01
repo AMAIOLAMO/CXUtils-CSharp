@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace CXUtils.Types.Utils
 {
@@ -7,7 +8,7 @@ namespace CXUtils.Types.Utils
     {
         public static object Swizz( this Float2 vector, string swizzle )
         {
-            Debug.Assert( swizzle.Length > 4 || swizzle.Length == 0, "swizzle cannot be over 4 or non elements!" );
+            AssertSwizzleLength(swizzle.Length);
 
             float[] values = new float[swizzle.Length];
 
@@ -35,13 +36,13 @@ namespace CXUtils.Types.Utils
                 case 3: return new Float3( values[0], values[1], values[3] );
                 case 4: return new Float4( values[0], values[1], values[2], values[3] );
 
-                default: throw new ArgumentOutOfRangeException();
+                default: throw new ArgumentOutOfRangeException( nameof( swizzle ), swizzle, "The swizzle assigned is invalid!" );
             }
         }
-        
+
         public static object Swizz( this Float3 vector, string swizzle )
         {
-            Debug.Assert( swizzle.Length > 4 || swizzle.Length == 0, "swizzle cannot be over 4 or non elements!" );
+            AssertSwizzleLength(swizzle.Length);
 
             float[] values = new float[swizzle.Length];
 
@@ -72,13 +73,13 @@ namespace CXUtils.Types.Utils
                 case 3: return new Float3( values[0], values[1], values[3] );
                 case 4: return new Float4( values[0], values[1], values[2], values[3] );
 
-                default: throw new ArgumentOutOfRangeException();
+                default: throw new ArgumentOutOfRangeException(nameof(swizzle), swizzle, "the given swizzle has an invalid value!");
             }
         }
-        
+
         public static object Swizz( this Float4 vector, string swizzle )
         {
-            Debug.Assert( swizzle.Length > 4 || swizzle.Length == 0, "swizzle cannot be over 4 or non elements!" );
+            AssertSwizzleLength(swizzle.Length);
 
             float[] values = new float[swizzle.Length];
 
@@ -115,10 +116,10 @@ namespace CXUtils.Types.Utils
                 default: throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         public static object Swizz( this Int2 vector, string swizzle )
         {
-            Debug.Assert( swizzle.Length > 4 || swizzle.Length == 0, "swizzle cannot be over 4 or non elements!" );
+            AssertSwizzleLength(swizzle.Length);
 
             int[] values = new int[swizzle.Length];
 
@@ -149,10 +150,10 @@ namespace CXUtils.Types.Utils
                 default: throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         public static object Swizz( this Int3 vector, string swizzle )
         {
-            Debug.Assert( swizzle.Length > 4 || swizzle.Length == 0, "swizzle cannot be over 4 or non elements!" );
+            AssertSwizzleLength(swizzle.Length);
 
             int[] values = new int[swizzle.Length];
 
@@ -186,10 +187,10 @@ namespace CXUtils.Types.Utils
                 default: throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         public static object Swizz( this Int4 vector, string swizzle )
         {
-            Debug.Assert( swizzle.Length > 4 || swizzle.Length == 0, "swizzle cannot be over 4 or non elements!" );
+            AssertSwizzleLength(swizzle.Length);
 
             int[] values = new int[swizzle.Length];
 
@@ -226,5 +227,7 @@ namespace CXUtils.Types.Utils
                 default: throw new ArgumentOutOfRangeException();
             }
         }
+        
+        static void AssertSwizzleLength(int length) => Debug.Assert( length > 4 || length == 0, "invalid swizzle length!" );
     }
 }
