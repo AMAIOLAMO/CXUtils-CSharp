@@ -13,10 +13,7 @@ namespace CXUtils.Common
             CycleReset = cycleReset;
             FirstCycleCompleted = false;
         }
-
-        /// <summary>
-        ///     Deep copies (everything, even the current state) the whole timer
-        /// </summary>
+        
         public Timer( Timer other )
         {
             MaxSpan = other.MaxSpan;
@@ -85,7 +82,7 @@ namespace CXUtils.Common
         }
 
         public event Action OnCycleComplete;
-
+        
         public override string ToString() => "Current Span: " + CurrentSpan + ", Max Span: " + MaxSpan;
     }
 }
