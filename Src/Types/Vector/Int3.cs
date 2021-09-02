@@ -21,6 +21,13 @@ namespace CXUtils.Types
         {
             get
             {
+                #if CXUTILS_UNSAFE
+                unsafe
+                {
+                    Debug.Assert(index >= 0 && index < 3, nameof( index )+ " is out of range!");
+                    return ((int*)x)[index];
+                }
+                #else
                 switch ( index )
                 {
                     case 0:
@@ -33,6 +40,7 @@ namespace CXUtils.Types
                     default:
                         throw new IndexOutOfRangeException();
                 }
+                #endif
             }
         }
 
