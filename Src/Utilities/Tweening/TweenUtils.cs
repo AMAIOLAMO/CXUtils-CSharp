@@ -1,4 +1,5 @@
 ﻿using System;
+using CXUtils.Mathematics;
 using CXUtils.Types;
 
 namespace CXUtils.Common
@@ -34,9 +35,9 @@ namespace CXUtils.Common
 
         #region Easing
 
-        public static float EaseInSine(float t) => 1f - (float)Math.Cos(t * MathUtils.PI * .5f);
-        public static float EaseOutSine(float t) => (float)Math.Sin(t * MathUtils.PI * .5f);
-        public static float EaseInOutSine(float t) => -((float)Math.Cos(MathUtils.PI * t) - 1f) * .5f;
+        public static float EaseInSine(float t) => 1f - (float)Math.Cos(t * Constants.PI * .5f);
+        public static float EaseOutSine(float t) => (float)Math.Sin(t * Constants.PI * .5f);
+        public static float EaseInOutSine(float t) => -((float)Math.Cos(Constants.PI * t) - 1f) * .5f;
 
         public static float EaseInQuad(float t) => t * t;
         public static float EaseOutQuad(float t) => 1f - (1f - t) * (1f - t);
@@ -72,8 +73,8 @@ namespace CXUtils.Common
             ? (float)Math.Pow(2f * t, 2f) * ((BACK_C2 + 1f) * 2f * t - BACK_C2) * .5f
             : ((float)Math.Pow(2f * t - 2f, 2f) * ((BACK_C2 + 1f) * (t * 2f - 2f) + BACK_C2) + 2f) * .5f;
 
-        const float ELASTIC_C1 = 2f * MathUtils.PI / 3f;
-        const float ELASTIC_C2 = 2f * MathUtils.PI / 4.5f;
+        const float ELASTIC_C1 = 2f * Constants.PI / 3f;
+        const float ELASTIC_C2 = 2f * Constants.PI / 4.5f;
 
         public static float EaseInElastic(float t) => t == 0f
             ? 0f
@@ -175,7 +176,7 @@ namespace CXUtils.Common
                 return EaseInOutBounce(t);
 
                 default:
-                throw ExceptionUtils.Error.NotAccessible;
+                throw ExceptionUtils.NotAccessible;
             }
         }
 

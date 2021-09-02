@@ -41,10 +41,7 @@ namespace CXUtils.Types
             return hash;
         }
 
-        public void UnRegisterModifier( int value )
-        {
-            ModifierDict.Remove( value );
-        }
+        public void UnRegisterModifier( int value ) => ModifierDict.Remove( value );
 
         public bool TryUnRegisterModifier( int value )
         {

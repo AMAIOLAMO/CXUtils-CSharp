@@ -1,4 +1,5 @@
 using System;
+using CXUtils.Mathematics;
 
 namespace CXUtils.Common
 {
@@ -7,18 +8,6 @@ namespace CXUtils.Common
     /// </summary>
     public static class MathUtils
     {
-        /// <summary>
-        ///     Is half TAU
-        /// </summary>
-        public const float PI = 3.14159265358979f;
-
-        /// <summary>
-        ///     Is double PI
-        /// </summary>
-        public const float TAU = 6.28318530717958f;
-
-        public const float E = 2.71828182845905f;
-
         public static float Floor(this float value) => FloorInt(value);
 
         public static float Ceil(this float value) => CeilInt(value);
@@ -37,12 +26,11 @@ namespace CXUtils.Common
             return value > valueInt ? valueInt + 1 : valueInt;
         }
 
-
         /// <summary>
-        ///     This will map the whole real Number line into the range of 0 - 1
-        ///     <para>using calculation 1f / (Math.Pow(Math.E, -x)); </para>
+        ///     This will map the whole real Number line into the range of 0 - 1 <br/>
+        ///     using calculation 1f / (Math.Pow(Math.E, -x));
         /// </summary>
-        public static float Sigmoid(float x) => 1f / (float)Math.Pow(E, -x);
+        public static float Sigmoid(float x) => 1f / (float)Math.Pow(Constants.E, -x);
 
         public static bool IsApproximate(this float value, float x, float precision = float.Epsilon) => Math.Abs(value - x) < precision;
 

@@ -74,7 +74,7 @@ namespace CXUtils.Common
 
             }
 
-            throw ExceptionUtils.Error.NotAccessible;
+            throw ExceptionUtils.NotAccessible;
         }
     }
 }

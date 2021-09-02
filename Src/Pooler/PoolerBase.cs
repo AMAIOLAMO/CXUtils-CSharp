@@ -5,33 +5,6 @@ using System.Collections.Generic;
 namespace CXUtils.Common
 {
     /// <summary>
-    ///     A wrapper around the pooled object so that it could be disposed
-    /// </summary>
-    public class PoolObject<T> : IDisposable
-    {
-        readonly T _pooledObject;
-        readonly PoolerBase<T> _rootPooler;
-
-        public bool IsDisposed { get; private set; }
-
-        public PoolObject(T pooledObject, PoolerBase<T> root)
-        {
-            _pooledObject = pooledObject;
-            _rootPooler = root;
-        }
-
-        public T Get() => _pooledObject;
-
-        public virtual void Dispose()
-        {
-            if ( IsDisposed ) return;
-
-            IsDisposed = true;
-            _rootPooler.Free(this);
-        }
-    }
-
-    /// <summary>
     ///     A basic pooling class that uses <see cref="IDisposable"/> with <see cref="PoolObject{T}"/>
     /// </summary>
     public class PoolerBase<T>
@@ -47,10 +20,10 @@ namespace CXUtils.Common
             occupiedObjects = new HashSet<PoolObject<T>>();
         }
 
-        public PoolerBase(int capacity, Func<int, T> initializeFunction) : this()
+        public PoolerBase(int capacity, Func<int, T> initFunc) : this()
         {
-            Debug.Assert(initializeFunction != null, nameof(initializeFunction) + " cannot be null!");
-            for(int i = 0; i < capacity; ++i ) poolObjects.Enqueue(initializeFunction(i));
+            Debug.Assert(initFunc != null, nameof(initFunc) + " cannot be null!");
+            for(int i = 0; i < capacity; ++i ) poolObjects.Enqueue(initFunc(i));
         }
 
         public virtual PoolObject<T> Pop()
@@ -72,6 +45,12 @@ namespace CXUtils.Common
             occupiedObjects.Remove(poolObject);
             //then put in pool
             poolObjects.Enqueue(poolObject.Get());
+        }
+
+        public virtual void FreeAll()
+        {
+            foreach ( var poolObject in occupiedObjects ) poolObjects.Enqueue( poolObject.Get() );
+            occupiedObjects.Clear();
         }
     }
 }

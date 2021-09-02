@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using CXUtils.Common;
+#if CXUTILS_UNSAFE
+using System.Diagnostics;
+#endif
 
 namespace CXUtils.Types
 {
