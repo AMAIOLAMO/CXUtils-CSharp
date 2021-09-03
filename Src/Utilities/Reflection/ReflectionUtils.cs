@@ -1,14 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace CXUtils.Common
+namespace CXUtils.Utilities.Reflection
 {
     ///<summary> A simple reflection helper </summary>
     public class ReflectionUtils
     {
-        #region GetInfos
-
         #region MethodInfo
 
         ///<summary> Get's a method according to the method that is given </summary>
@@ -24,8 +24,6 @@ namespace CXUtils.Common
 
             return member.Method;
         }
-
-        #endregion
 
         #endregion
     }

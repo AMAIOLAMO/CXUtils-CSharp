@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Text;
 using CXUtils.Common;
 
 namespace CXUtils.Types
@@ -145,13 +144,22 @@ namespace CXUtils.Types
             Debug.Assert( data.Length == _data.Length, nameof( data ) + " doesn't match the current matrix's dimensions!" );
             _data = data;
         }
+
+        public float[] GetDiagonal()
+        {
+            float[] result = new float[Math.Min( row, column )];
+
+            for ( int i = 0; i < result.Length; i++ ) result[i] = this[i, i];
+
+            return result;
+        }
+        
         protected bool Equals( MatrixFloat other ) => column == other.column && row == other.row && Equals( _data, other._data );
         public override bool Equals( object obj )
         {
             if ( ReferenceEquals( null, obj ) ) return false;
             if ( ReferenceEquals( this, obj ) ) return true;
             return obj.GetType() == this.GetType() && Equals( (MatrixFloat)obj );
-
         }
         public override int GetHashCode() => HashCode.Combine( column, row );
 
@@ -204,8 +212,11 @@ namespace CXUtils.Types
 
             return result;
         }
-
+        
         public static MatrixFloat BuildDimension( MatrixFloat other ) => new MatrixFloat( other.row, other.column );
+
+        public static MatrixFloat BuildSquare( int side ) => Build( side, side );
+        public static MatrixFloat BuildSquare( int side, Func<int, int, float> initializeFunc ) => Build( side, side, initializeFunc );
 
         public static MatrixFloat BuildScalar( int row, int column, float scalar )
         {
@@ -238,10 +249,12 @@ namespace CXUtils.Types
         }
 
         [Conditional( "DEBUG" )]
-        static void AssertMultiplyDimensions( MatrixFloat a, MatrixFloat b ) => Debug.Assert( a.row == b.column, nameof( b ) + "'s column count doesn't match the current matrix's row count!" );
+        static void AssertMultiplyDimensions( MatrixFloat a, MatrixFloat b ) =>
+            Debug.Assert( a.row == b.column, $"{nameof(b)}'s column count doesn't match the current matrix's row count!" );
 
         [Conditional( "DEBUG" )]
-        static void AssertEqualDimensions( MatrixFloat a, MatrixFloat b ) => Debug.Assert( a.IsEqualDimension( b ), nameof( b ) + " doesn't match the current matrix's dimensions!" );
+        static void AssertEqualDimensions( MatrixFloat a, MatrixFloat b ) =>
+            Debug.Assert( a.IsEqualDimension( b ), $"{nameof(b)} doesn't match the current matrix's dimensions!" );
 
         #endregion
     }
