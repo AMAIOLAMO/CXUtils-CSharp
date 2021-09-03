@@ -1,15 +1,17 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using CXUtils.Common;
 using CXUtils.Types.Utils;
 
-namespace CXUtils.Types.Matrix
+namespace CXUtils.Types
 {
     /// <summary>
     ///     Represents a 2x2 floating point matrix
     /// </summary>
     [StructLayout( LayoutKind.Explicit )]
-    public readonly struct Float2X2 : IEquatable<Float2X2>
+    public readonly struct Float2X2 : IEquatable<Float2X2>, IFormattable
     {
         /// <summary>
         ///     Left Column
@@ -70,14 +72,33 @@ namespace CXUtils.Types.Matrix
 
         public Float2X2 GetInverse()
         {
-            Debug.Assert( IsSingular, "Cannot get the inverse of a singular matrix!" );
+            Debug.Assert( !IsSingular, "Cannot get the inverse of a singular matrix!" );
             float scalar = 1f / Determinant;
             return new Float2X2( new Float2( jHat.y * scalar, -iHat.y * scalar ), new Float2( -jHat.x * scalar, iHat.x * scalar ) );
         }
 
         public bool Equals( Float2X2 other ) => iHat.Equals( other.iHat ) && jHat.Equals( other.jHat );
-        public override bool Equals( object obj ) => obj is Float2X2 other && Equals( other );
+        public override bool Equals( object? obj ) => obj is Float2X2 other && Equals( other );
         public override int GetHashCode() => HashCode.Combine( iHat, jHat );
+        public override string ToString() => "(I Hat: " + iHat + ", J Hat: " + jHat + ")";
+        public string ToString( string? format, IFormatProvider? formatProvider ) =>
+            "(I Hat: " + iHat.ToString( format, formatProvider ) + ", J Hat: " + jHat.ToString( format, formatProvider ) + ")";
+
+        public string ToString( MatrixFormat format )
+        {
+            switch ( format )
+            {
+                case MatrixFormat.Compact:
+                    return "(" + iHat.x + ", " + iHat.y + ", " + jHat.x + ", " + jHat.y + ')'; 
+                
+                case MatrixFormat.Mathematical:
+                    return
+                        "|" + iHat.x + ' ' + jHat.x + "|\n" +
+                        '|' + iHat.y + ' ' + jHat.y + '|';
+                
+                default: throw ExceptionUtils.PossibilityNotImplemented;
+            }
+        }
 
         #endregion
 
