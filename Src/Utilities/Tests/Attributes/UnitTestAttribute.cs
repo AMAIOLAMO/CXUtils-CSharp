@@ -3,10 +3,10 @@
 namespace CXUtils.Utilities.Tests
 {
     /// <summary>
-    ///     An attribute for quick Stopwatch testing purposes
+    ///     An attribute for unit testing
     /// </summary>
     [AttributeUsage( AttributeTargets.Method )]
-    public sealed class StopWatchTestAttribute : Attribute
+    public sealed class UnitTestAttribute : Attribute
     {
     }
 }

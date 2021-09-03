@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -10,43 +11,41 @@ namespace CXUtils.Utilities.Tests
     /// </summary>
     public static class TestUtils
     {
+        const BindingFlags TEST_ATTRIBUTE_METHOD_FLAGS = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+
         /// <summary>
         ///     Runs all the test attribute bounded methods
         /// </summary>
         public static void RunTests()
         {
             var methods =
-            (
-                from type in Assembly.GetCallingAssembly().GetTypes()
-                from method in type.GetMethods( BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic )
-                from attribute in method.GetCustomAttributes<TestAttribute>()
-                select method
-            ).ToArray();
+                ( from type in Assembly.GetCallingAssembly().GetTypes()
+                    from method in type.GetMethods( TEST_ATTRIBUTE_METHOD_FLAGS )
+                    from attribute in method.GetCustomAttributes<TestAttribute>()
+                    select method ).ToArray();
 
             if ( methods.Length == 0 )
-                throw new Exception( $"There's no {nameof( TestAttribute )} in the Executing Assembly, cannot Run Tests!" );
+                throw new Exception( $"There's no {nameof( TestAttribute )} in the Calling Assembly, cannot Run Tests!" );
             //else
 
             foreach ( var method in methods ) method.Invoke( null, null );
         }
 
-        public static long[] RunStopWatchTests()
+        public static IEnumerable<StopWatchTestResult> RunStopWatchTests()
         {
             var methods =
-            (
-                from type in Assembly.GetCallingAssembly().GetTypes()
-                from method in type.GetMethods( BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic )
-                from attribute in method.GetCustomAttributes<StopWatchTestAttribute>()
-                select method
-            ).ToArray();
+                ( from type in Assembly.GetCallingAssembly().GetTypes()
+                    from method in type.GetMethods( TEST_ATTRIBUTE_METHOD_FLAGS )
+                    from attribute in method.GetCustomAttributes<StopWatchTestAttribute>()
+                    select method ).ToArray();
 
             if ( methods.Length == 0 )
-                throw new Exception( $"There's no {nameof( StopWatchTestAttribute )} in the Executing Assembly, cannot Run StopWatch tests!" );
+                throw new Exception( $"There's no {nameof( StopWatchTestAttribute )} in the Calling Assembly, cannot Run StopWatch tests!" );
             //else
 
             var stopWatch = new Stopwatch();
 
-            long[] elapsedTimes = new long[methods.Length];
+            var results = new StopWatchTestResult[methods.Length];
 
             for ( int i = 0; i < methods.Length; ++i )
             {
@@ -55,10 +54,31 @@ namespace CXUtils.Utilities.Tests
                 method.Invoke( null, null );
                 stopWatch.Stop();
 
-                elapsedTimes[i] = stopWatch.ElapsedMilliseconds;
+                results[i] = new StopWatchTestResult( methods[i], stopWatch.ElapsedMilliseconds );
             }
 
-            return elapsedTimes;
+            return results;
+        }
+
+        public static UnitTestResult[] RunUnitTests()
+        {
+            var methods =
+                ( from type in Assembly.GetCallingAssembly().GetTypes()
+                    from method in type.GetMethods( TEST_ATTRIBUTE_METHOD_FLAGS )
+                    where method.ReturnType == typeof( bool )
+                    from attribute in method.GetCustomAttributes<UnitTestAttribute>()
+                    select method ).ToArray();
+
+            if ( methods.Length == 0 )
+                throw new Exception( $"There's no {nameof( UnitTestAttribute )} in the Calling Assembly, cannot Run Unit tests!" );
+
+            //else
+            var results = new UnitTestResult[methods.Length];
+
+            for ( int i = 0; i < methods.Length; ++i ) results[i] = new UnitTestResult( methods[i], (bool)methods[i].Invoke( null, null ) );
+
+            return results;
         }
     }
+
 }

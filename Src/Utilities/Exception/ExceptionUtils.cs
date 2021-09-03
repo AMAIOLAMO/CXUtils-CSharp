@@ -31,7 +31,6 @@ namespace CXUtils.Common
         ///     Error type: The enum is not implemented.
         /// </summary>
         public static NotImplementedException EnumNotImplemented => new NotImplementedException( ERROR_ENUM_NOT_IMPLEMENTED );
-
         public static NotImplementedException PossibilityNotImplemented => new NotImplementedException( ERROR_POSSIBILITY_NOT_IMPLEMENTED );
 
         /// <summary>

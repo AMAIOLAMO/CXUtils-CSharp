@@ -26,5 +26,18 @@ namespace CXUtils.Utilities.Reflection
         }
 
         #endregion
+
+        #region Attributes
+
+        public static IEnumerable<MethodInfo> GetMethodsFromCallingAssemblyWithAttributesOf<T>( BindingFlags flags ) where T : Attribute
+        {
+            return
+                from type in Assembly.GetCallingAssembly().GetTypes()
+                from method in type.GetMethods( flags )
+                from attribute in method.GetCustomAttributes<T>()
+                select method;
+        }
+
+        #endregion
     }
 }
