@@ -93,6 +93,6 @@ namespace CXUtils.Grid
 
         public bool CellExists( int x, int y ) => CellExists( new Int2( x, y ) );
 
-        public ReadOnlyDictionary<Int2, T> GetAllCells() => new( _gridDictionary );
+        public ReadOnlyDictionary<Int2, T> GetAllCells() => new ReadOnlyDictionary<Int2, T>( _gridDictionary );
     }
 }

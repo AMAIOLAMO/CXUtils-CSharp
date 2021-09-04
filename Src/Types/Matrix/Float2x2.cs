@@ -79,7 +79,10 @@ namespace CXUtils.Types
 
         public bool Equals( Float2X2 other ) => iHat.Equals( other.iHat ) && jHat.Equals( other.jHat );
         public override bool Equals( object? obj ) => obj is Float2X2 other && Equals( other );
-        public override int GetHashCode() => HashCode.Combine( iHat, jHat );
+        public override int GetHashCode()
+        {
+            unchecked { return ( iHat.GetHashCode() * 397 ) ^ jHat.GetHashCode(); }
+        }
         public override string ToString() => "(I Hat: " + iHat + ", J Hat: " + jHat + ")";
         public string ToString( string? format, IFormatProvider? formatProvider ) =>
             "(I Hat: " + iHat.ToString( format, formatProvider ) + ", J Hat: " + jHat.ToString( format, formatProvider ) + ")";

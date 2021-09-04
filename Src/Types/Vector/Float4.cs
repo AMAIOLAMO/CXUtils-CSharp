@@ -58,18 +58,18 @@ namespace CXUtils.Types
         public static Float4 Half    => (Float4).5f;
         public static Float4 Quarter => (Float4).25f;
 
-        public static Float4 PosY => new( y: 1f );
-        public static Float4 NegY => new( y: -1f );
-        public static Float4 NegX => new( -1f );
-        public static Float4 PosX => new( 1f );
-        public static Float4 PosZ => new( z: 1f );
-        public static Float4 NegZ => new( z: -1f );
+        public static Float4 PosY => new Float4( y: 1f );
+        public static Float4 NegY => new Float4( y: -1f );
+        public static Float4 NegX => new Float4( -1f );
+        public static Float4 PosX => new Float4( 1f );
+        public static Float4 PosZ => new Float4( z: 1f );
+        public static Float4 NegZ => new Float4( z: -1f );
 
-        public Int4 FloorInt => new( x.FloorInt(), y.FloorInt(), z.FloorInt(), w.FloorInt() );
-        public Int4 CeilInt  => new( x.CeilInt(), y.CeilInt(), z.CeilInt(), w.CeilInt() );
+        public Int4 FloorInt => new Int4( x.FloorInt(), y.FloorInt(), z.FloorInt(), w.FloorInt() );
+        public Int4 CeilInt  => new Int4( x.CeilInt(), y.CeilInt(), z.CeilInt(), w.CeilInt() );
 
-        public Float4 Floor => new( x.Floor(), y.Floor(), z.Floor(), w.Floor() );
-        public Float4 Ceil  => new( x.Ceil(), y.Ceil(), z.Ceil(), w.Floor() );
+        public Float4 Floor => new Float4( x.Floor(), y.Floor(), z.Floor(), w.Floor() );
+        public Float4 Ceil  => new Float4( x.Ceil(), y.Ceil(), z.Ceil(), w.Floor() );
         public Float4 Halve => this * .5f;
 
         public float SqrMagnitude => x * x + y * y + z * z;
@@ -79,35 +79,35 @@ namespace CXUtils.Types
 
         #region Operator overloading
 
-        public static Float4 operator +( Float4 a, Float4 b ) => new( a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w );
-        public static Float4 operator -( Float4 a, Float4 b ) => new( a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w );
-        public static Float4 operator *( Float4 a, Float4 b ) => new( a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w );
-        public static Float4 operator /( Float4 a, Float4 b ) => new( a.x / b.x, a.y / b.y, a.x / b.x, a.w / b.w );
-        public static Float4 operator *( Float4 a, float value ) => new( a.x * value, a.y * value, a.z * value, a.w * value );
-        public static Float4 operator /( Float4 a, float value ) => new( a.x / value, a.y / value, a.z / value, a.w / value );
+        public static Float4 operator +( Float4 a, Float4 b ) => new Float4( a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w );
+        public static Float4 operator -( Float4 a, Float4 b ) => new Float4( a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w );
+        public static Float4 operator *( Float4 a, Float4 b ) => new Float4( a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w );
+        public static Float4 operator /( Float4 a, Float4 b ) => new Float4( a.x / b.x, a.y / b.y, a.x / b.x, a.w / b.w );
+        public static Float4 operator *( Float4 a, float value ) => new Float4( a.x * value, a.y * value, a.z * value, a.w * value );
+        public static Float4 operator /( Float4 a, float value ) => new Float4( a.x / value, a.y / value, a.z / value, a.w / value );
         public static Float4 operator *( float value, Float4 a ) => a * value;
         public static Float4 operator /( float value, Float4 a ) => a / value;
-        public static Float4 operator -( Float4 a ) => new( -a.x, -a.y, -a.z, -a.w );
+        public static Float4 operator -( Float4 a ) => new Float4( -a.x, -a.y, -a.z, -a.w );
 
         public static bool operator ==( Float4 a, Float4 b ) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
         public static bool operator !=( Float4 a, Float4 b ) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
 
-        public static explicit operator Float4( float value ) => new( value, value, value, value );
-        public static implicit operator Float4( Float3 value ) => new( value.x, value.y, value.z );
-        public static implicit operator Float4( Float2 value ) => new( value.x, value.y );
+        public static explicit operator Float4( float value ) => new Float4( value, value, value, value );
+        public static implicit operator Float4( Float3 value ) => new Float4( value.x, value.y, value.z );
+        public static implicit operator Float4( Float2 value ) => new Float4( value.x, value.y );
 
         #endregion
 
         #region Utility
 
-        public Float4 Min( Float4 other ) => new( Math.Min( x, other.x ), Math.Min( y, other.y ), Math.Min( z, other.z ), Math.Min( w, other.w ) );
-        public Float4 Max( Float4 other ) => new( Math.Max( x, other.x ), Math.Max( y, other.y ), Math.Max( z, other.z ), Math.Max( w, other.w ) );
+        public Float4 Min( Float4 other ) => new Float4( Math.Min( x, other.x ), Math.Min( y, other.y ), Math.Min( z, other.z ), Math.Min( w, other.w ) );
+        public Float4 Max( Float4 other ) => new Float4( Math.Max( x, other.x ), Math.Max( y, other.y ), Math.Max( z, other.z ), Math.Max( w, other.w ) );
 
         public float Dot( Float2 other ) => x * other.x + y * other.y;
         public float Dot( Float3 other ) => x * other.x + y * other.y + z * other.z;
         public float Dot( Float4 other ) => x * other.x + y * other.y + z * other.z + w * other.w;
 
-        public Float4 Cross( Float4 other ) => new(
+        public Float4 Cross( Float4 other ) => new Float4(
             y * other.z - z * other.y,
             z * other.x - x * other.z,
             x * other.y - y * other.x,
@@ -118,10 +118,10 @@ namespace CXUtils.Types
 
 
         /// <summary>
-        ///     returns a new Float3 with a direction of this and a specified target magnitude
+        ///     returns a new Float4 with a direction of this and a specified target magnitude
         /// </summary>
         public Float4 MagnitudeOf( float magnitude ) => Normalized * magnitude;
-        public Float4 MapAxis( Func<float, float> mapFunction ) => new( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
+        public Float4 MapAxis( Func<float, float> mapFunction ) => new Float4( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
 
         public string ToString( string format, IFormatProvider formatProvider ) =>
             "(" + x.ToString( format, formatProvider ) + ", " + y.ToString( format, formatProvider ) + ", " + z.ToString( format, formatProvider ) + ", " + w.ToString( format, formatProvider ) + ")";

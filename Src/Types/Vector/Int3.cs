@@ -53,41 +53,41 @@ namespace CXUtils.Types
         public static Int3 Zero => (Int3)0;
         public static Int3 One  => (Int3)1;
 
-        public static Int3 PosY => new( y: 1 );
-        public static Int3 NegY => new( y: -1 );
-        public static Int3 NegX => new( -1 );
-        public static Int3 PosX => new( 1 );
-        public static Int3 PosZ => new( z: 1 );
-        public static Int3 NegZ => new( z: -1 );
+        public static Int3 PosY => new Int3( y: 1 );
+        public static Int3 NegY => new Int3( y: -1 );
+        public static Int3 NegX => new Int3( -1 );
+        public static Int3 PosX => new Int3( 1 );
+        public static Int3 PosZ => new Int3( z: 1 );
+        public static Int3 NegZ => new Int3( z: -1 );
 
         #region Operator overloading
 
-        public static Int3 operator +( Int3 a, Int3 b ) => new( a.x + b.x, a.y + b.y, a.z + b.z );
-        public static Int3 operator -( Int3 a, Int3 b ) => new( a.x - b.x, a.y - b.y, a.z - b.z );
-        public static Int3 operator *( Int3 a, Int3 b ) => new( a.x * b.x, a.y * b.y, a.z * b.z );
-        public static Int3 operator /( Int3 a, Int3 b ) => new( a.x / b.x, a.y / b.y, a.z / b.z );
-        public static Int3 operator *( Int3 a, int value ) => new( a.x * value, a.y * value, a.z * value );
-        public static Int3 operator /( Int3 a, int value ) => new( a.x / value, a.y / value, a.z / value );
-        public static Int3 operator %( Int3 a, int value ) => new( a.x % value, a.y % value, a.z % value );
+        public static Int3 operator +( Int3 a, Int3 b ) => new Int3( a.x + b.x, a.y + b.y, a.z + b.z );
+        public static Int3 operator -( Int3 a, Int3 b ) => new Int3( a.x - b.x, a.y - b.y, a.z - b.z );
+        public static Int3 operator *( Int3 a, Int3 b ) => new Int3( a.x * b.x, a.y * b.y, a.z * b.z );
+        public static Int3 operator /( Int3 a, Int3 b ) => new Int3( a.x / b.x, a.y / b.y, a.z / b.z );
+        public static Int3 operator *( Int3 a, int value ) => new Int3( a.x * value, a.y * value, a.z * value );
+        public static Int3 operator /( Int3 a, int value ) => new Int3( a.x / value, a.y / value, a.z / value );
+        public static Int3 operator %( Int3 a, int value ) => new Int3( a.x % value, a.y % value, a.z % value );
         public static Int3 operator *( int value, Int3 a ) => a * value;
         public static Int3 operator /( int value, Int3 a ) => a / value;
-        public static Int3 operator -( Int3 a ) => new( -a.x, -a.y, -a.z );
+        public static Int3 operator -( Int3 a ) => new Int3( -a.x, -a.y, -a.z );
         public static bool operator ==( Int3 a, Int3 b ) => a.x == b.x && a.y == b.y && a.z == b.z;
         public static bool operator !=( Int3 a, Int3 b ) => a.x != b.x || a.y != b.y || a.z == b.z;
-        public static explicit operator Int3( int value ) => new( value, value, value );
-        public static implicit operator Int3( Int2 value ) => new( value.x, value.y );
+        public static explicit operator Int3( int value ) => new Int3( value, value, value );
+        public static implicit operator Int3( Int2 value ) => new Int3( value.x, value.y );
 
         #endregion
 
         #region Utility
 
-        public Int3 Min( Int3 other ) => new( Math.Min( x, other.x ), Math.Min( y, other.y ), Math.Min( z, other.z ) );
-        public Int3 Max( Int3 other ) => new( Math.Max( x, other.x ), Math.Max( y, other.y ), Math.Max( z, other.z ) );
+        public Int3 Min( Int3 other ) => new Int3( Math.Min( x, other.x ), Math.Min( y, other.y ), Math.Min( z, other.z ) );
+        public Int3 Max( Int3 other ) => new Int3( Math.Max( x, other.x ), Math.Max( y, other.y ), Math.Max( z, other.z ) );
 
         public int Dot( Int2 other ) => x * other.x + y * other.y;
         public int Dot( Int3 other ) => x * other.x + y * other.y + z * other.z;
 
-        public Int3 MapAxis( Func<int, int> mapFunction ) => new( mapFunction( x ), mapFunction( y ), mapFunction( z ) );
+        public Int3 MapAxis( Func<int, int> mapFunction ) => new Int3( mapFunction( x ), mapFunction( y ), mapFunction( z ) );
 
         public string ToString( string format, IFormatProvider formatProvider ) =>
             "(" + x.ToString( format, formatProvider ) + ", " + y.ToString( format, formatProvider ) + ", " + z.ToString( format, formatProvider ) + ")";

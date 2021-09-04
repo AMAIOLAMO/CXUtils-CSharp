@@ -51,44 +51,44 @@ namespace CXUtils.Types
         public static Int4 Zero => (Int4)0;
         public static Int4 One  => (Int4)1;
 
-        public static Int4 PosY => new( y: 1 );
-        public static Int4 NegY => new( y: -1 );
-        public static Int4 NegX => new( -1 );
-        public static Int4 PosX => new( 1 );
+        public static Int4 PosY => new Int4( y: 1 );
+        public static Int4 NegY => new Int4( y: -1 );
+        public static Int4 NegX => new Int4( -1 );
+        public static Int4 PosX => new Int4( 1 );
 
-        public static Int4 PosZ => new( z: 1 );
-        public static Int4 NegZ => new( z: -1 );
+        public static Int4 PosZ => new Int4( z: 1 );
+        public static Int4 NegZ => new Int4( z: -1 );
 
         #region Operator overloading
 
-        public static Int4 operator +( Int4 a, Int4 b ) => new( a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w );
-        public static Int4 operator -( Int4 a, Int4 b ) => new( a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w );
-        public static Int4 operator *( Int4 a, Int4 b ) => new( a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w );
-        public static Int4 operator /( Int4 a, Int4 b ) => new( a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w );
-        public static Int4 operator *( Int4 a, int value ) => new( a.x * value, a.y * value, a.z * value, a.w * value );
-        public static Int4 operator /( Int4 a, int value ) => new( a.x / value, a.y / value, a.z / value, a.w / value );
-        public static Int4 operator %( Int4 a, int value ) => new( a.x % value, a.y % value, a.z % value, a.w % value );
+        public static Int4 operator +( Int4 a, Int4 b ) => new Int4( a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w );
+        public static Int4 operator -( Int4 a, Int4 b ) => new Int4( a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w );
+        public static Int4 operator *( Int4 a, Int4 b ) => new Int4( a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w );
+        public static Int4 operator /( Int4 a, Int4 b ) => new Int4( a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w );
+        public static Int4 operator *( Int4 a, int value ) => new Int4( a.x * value, a.y * value, a.z * value, a.w * value );
+        public static Int4 operator /( Int4 a, int value ) => new Int4( a.x / value, a.y / value, a.z / value, a.w / value );
+        public static Int4 operator %( Int4 a, int value ) => new Int4( a.x % value, a.y % value, a.z % value, a.w % value );
         public static Int4 operator *( int value, Int4 a ) => a * value;
         public static Int4 operator /( int value, Int4 a ) => a / value;
-        public static Int4 operator -( Int4 a ) => new( -a.x, -a.y, -a.z, -a.w );
+        public static Int4 operator -( Int4 a ) => new Int4( -a.x, -a.y, -a.z, -a.w );
         public static bool operator ==( Int4 a, Int4 b ) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
         public static bool operator !=( Int4 a, Int4 b ) => a.x != b.x || a.y != b.y || a.z == b.z || a.w != b.w;
-        public static explicit operator Int4( int value ) => new( value, value, value, value );
-        public static implicit operator Int4( Int2 value ) => new( value.x, value.y );
-        public static implicit operator Int4( Int3 value ) => new( value.x, value.y, value.z );
+        public static explicit operator Int4( int value ) => new Int4( value, value, value, value );
+        public static implicit operator Int4( Int2 value ) => new Int4( value.x, value.y );
+        public static implicit operator Int4( Int3 value ) => new Int4( value.x, value.y, value.z );
 
         #endregion
 
         #region Utility
 
-        public Int4 Min( Int4 other ) => new( Math.Min( x, other.x ), Math.Min( y, other.y ), Math.Min( z, other.z ), Math.Min( w, other.w ) );
-        public Int4 Max( Int4 other ) => new( Math.Max( x, other.x ), Math.Max( y, other.y ), Math.Max( z, other.z ), Math.Min( w, other.w ) );
+        public Int4 Min( Int4 other ) => new Int4( Math.Min( x, other.x ), Math.Min( y, other.y ), Math.Min( z, other.z ), Math.Min( w, other.w ) );
+        public Int4 Max( Int4 other ) => new Int4( Math.Max( x, other.x ), Math.Max( y, other.y ), Math.Max( z, other.z ), Math.Min( w, other.w ) );
 
         public int Dot( Int2 other ) => x * other.x + y * other.y;
         public int Dot( Int3 other ) => x * other.x + y * other.y + z * other.z;
         public int Dot( Int4 other ) => x * other.x + y * other.y + z * other.z + w * other.w;
 
-        public Int4 MapAxis( Func<int, int> mapFunction ) => new( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
+        public Int4 MapAxis( Func<int, int> mapFunction ) => new Int4( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
 
         public string ToString( string format, IFormatProvider formatProvider ) =>
             "(" + x.ToString( format, formatProvider ) + ", " + y.ToString( format, formatProvider ) + ", " +

@@ -56,7 +56,7 @@ namespace CXUtils.Grid
         /// <summary>
         ///     The whole <see cref="BoundGrid{T}" />'s size
         /// </summary>
-        public Int2 GridSize => new( Width, Height );
+        public Int2 GridSize => new Int2( Width, Height );
 
         #endregion
 
@@ -177,7 +177,7 @@ namespace CXUtils.Grid
         ///     Get grid's bounds on grid position
         /// </summary>
         public AABBFloat2 GetLocalBounds() =>
-            new( (Float2)0f, (Float2)GridSize );
+            new AABBFloat2( (Float2)0f, (Float2)GridSize );
 
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CXUtils.Common
 {
@@ -34,7 +35,15 @@ namespace CXUtils.Common
 
             return obj.GetType() == GetType() && Equals( (PoolObject<T>)obj );
         }
-
-        public override int GetHashCode() => HashCode.Combine( _pooledObject, _rootPool );
+        
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = EqualityComparer<T>.Default.GetHashCode( _pooledObject );
+                hashCode = ( hashCode * 397 ) ^ ( _rootPool != null ? _rootPool.GetHashCode() : 0 );
+                return hashCode;
+            }
+        }
     }
 }

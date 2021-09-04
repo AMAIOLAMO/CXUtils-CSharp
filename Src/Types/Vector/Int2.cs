@@ -49,39 +49,39 @@ namespace CXUtils.Types
         public static Int2 Zero => (Int2)0;
         public static Int2 One  => (Int2)1;
 
-        public static Int2 PosY => new( y: 1 );
-        public static Int2 NegY => new( y: -1 );
-        public static Int2 NegX => new( -1 );
-        public static Int2 PosX => new( 1 );
+        public static Int2 PosY => new Int2( y: 1 );
+        public static Int2 NegY => new Int2( y: -1 );
+        public static Int2 NegX => new Int2( -1 );
+        public static Int2 PosX => new Int2( 1 );
 
         #region Operator overloading
 
-        public static Int2 operator +( Int2 a, Int2 b ) => new( a.x + b.x, a.y + b.y );
-        public static Int2 operator -( Int2 a, Int2 b ) => new( a.x - b.x, a.y - b.y );
-        public static Int2 operator *( Int2 a, Int2 b ) => new( a.x * b.x, a.y * b.y );
-        public static Int2 operator /( Int2 a, Int2 b ) => new( a.x / b.x, a.y / b.y );
-        public static Int2 operator *( Int2 a, int value ) => new( a.x * value, a.y * value );
-        public static Int2 operator /( Int2 a, int value ) => new( a.x / value, a.y / value );
-        public static Int2 operator %( Int2 a, int value ) => new( a.x % value, a.y % value );
+        public static Int2 operator +( Int2 a, Int2 b ) => new Int2( a.x + b.x, a.y + b.y );
+        public static Int2 operator -( Int2 a, Int2 b ) => new Int2( a.x - b.x, a.y - b.y );
+        public static Int2 operator *( Int2 a, Int2 b ) => new Int2( a.x * b.x, a.y * b.y );
+        public static Int2 operator /( Int2 a, Int2 b ) => new Int2( a.x / b.x, a.y / b.y );
+        public static Int2 operator *( Int2 a, int value ) => new Int2( a.x * value, a.y * value );
+        public static Int2 operator /( Int2 a, int value ) => new Int2( a.x / value, a.y / value );
+        public static Int2 operator %( Int2 a, int value ) => new Int2( a.x % value, a.y % value );
         public static Int2 operator *( int value, Int2 a ) => a * value;
         public static Int2 operator /( int value, Int2 a ) => a / value;
-        public static Int2 operator -( Int2 a ) => new( -a.x, -a.y );
+        public static Int2 operator -( Int2 a ) => new Int2( -a.x, -a.y );
         public static bool operator ==( Int2 a, Int2 b ) => a.x == b.x && a.y == b.y;
         public static bool operator !=( Int2 a, Int2 b ) => a.x != b.x || a.y != b.y;
 
-        public static explicit operator Int2( Int3 value ) => new( value.x, value.y );
-        public static explicit operator Int2( int value ) => new( value, value );
+        public static explicit operator Int2( Int3 value ) => new Int2( value.x, value.y );
+        public static explicit operator Int2( int value ) => new Int2( value, value );
 
         #endregion
 
         #region Utility
 
-        public Int2 Min( Int2 other ) => new( Math.Min( x, other.x ), Math.Min( y, other.y ) );
-        public Int2 Max( Int2 other ) => new( Math.Max( x, other.x ), Math.Max( y, other.y ) );
+        public Int2 Min( Int2 other ) => new Int2( Math.Min( x, other.x ), Math.Min( y, other.y ) );
+        public Int2 Max( Int2 other ) => new Int2( Math.Max( x, other.x ), Math.Max( y, other.y ) );
 
         public int Dot( Int2 other ) => x * other.x + y * other.y;
 
-        public Int2 MapAxis( Func<int, int> mapFunction ) => new( mapFunction( x ), mapFunction( y ) );
+        public Int2 MapAxis( Func<int, int> mapFunction ) => new Int2( mapFunction( x ), mapFunction( y ) );
 
         public bool Equals( Int2 other ) => x == other.x && y == other.y;
 

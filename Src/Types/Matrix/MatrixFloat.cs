@@ -162,7 +162,15 @@ namespace CXUtils.Types
 
             return obj.GetType() == GetType() && Equals( (MatrixFloat)obj );
         }
-        public override int GetHashCode() => HashCode.Combine( column, row );
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = column;
+                hashCode = ( hashCode * 397 ) ^ row;
+                return hashCode;
+            }
+        }
 
         public override string ToString()
         {
