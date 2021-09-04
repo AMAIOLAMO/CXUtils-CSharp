@@ -5,14 +5,14 @@ namespace CXUtils.Common.Generic
     /// <summary>
     ///     A simple heap
     /// </summary>
-    public class Heap<T> : ICloneable where T : class, IHeapItem<T>
+    public sealed class Heap<T> : ICloneable where T : class, IHeapItem<T>
     {
         T[] _items;
 
         public Heap( int heapSize ) => _items = new T[heapSize];
 
         /// <summary>
-        ///     Total length of this heap
+        ///     Total length of not null items in this Heap
         /// </summary>
         public int Count { get; private set; }
 

@@ -1,5 +1,6 @@
-using System.Diagnostics;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace CXUtils.Common
 {
@@ -19,6 +20,16 @@ namespace CXUtils.Common
 
         public int Count => poolObjects.Count;
 
+        #if DEBUG
+        ~PoolBase()
+        {
+            if ( occupiedObjects.Count == 0 ) return;
+            //else
+
+            throw ExceptionUtils.MemoryNotReleased;
+        }
+        #endif
+
         public PoolObject<T> Pop()
         {
             Debug.Assert( poolObjects.Count != 0, "cannot pop from an empty pool!" );
@@ -27,7 +38,7 @@ namespace CXUtils.Common
             return poolObject;
         }
 
-        protected void Push(T obj) => poolObjects.Enqueue(obj);
+        protected void Push( T obj ) => poolObjects.Enqueue( obj );
 
         public void Free( PoolObject<T> poolObject )
         {

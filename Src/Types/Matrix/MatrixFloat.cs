@@ -108,10 +108,10 @@ namespace CXUtils.Types
         {
             if ( a == null && b == null ) return true;
             if ( a == null || b == null || !a.IsEqualDimension( b ) ) return false;
-            
+
             for ( int i = 0; i < a._data.Length; ++i )
             {
-                if(a._data[i] == b._data[i]) continue;
+                if ( a._data[i] == b._data[i] ) continue;
 
                 return false;
             }
@@ -122,10 +122,10 @@ namespace CXUtils.Types
         {
             if ( a == null && b == null ) return false;
             if ( a == null || b == null || !a.IsEqualDimension( b ) ) return true;
-            
+
             for ( int i = 0; i < a._data.Length; ++i )
             {
-                if(a._data[i] != b._data[i]) continue;
+                if ( a._data[i] != b._data[i] ) continue;
 
                 return true;
             }
@@ -153,33 +153,31 @@ namespace CXUtils.Types
 
             return result;
         }
-        
+
         protected bool Equals( MatrixFloat other ) => column == other.column && row == other.row && Equals( _data, other._data );
         public override bool Equals( object obj )
         {
             if ( ReferenceEquals( null, obj ) ) return false;
             if ( ReferenceEquals( this, obj ) ) return true;
-            return obj.GetType() == this.GetType() && Equals( (MatrixFloat)obj );
+
+            return obj.GetType() == GetType() && Equals( (MatrixFloat)obj );
         }
         public override int GetHashCode() => HashCode.Combine( column, row );
 
         public override string ToString()
         {
             using var poolObject = CommonPools.StringBuilder.Pop();
-            
+
             var sb = poolObject.Get();
-                
+
             for ( int y = 0; y < row; ++y )
             {
                 sb.Append( '|' );
-                for ( int x = 0; x < column - 1; ++x )
-                {
-                    sb.Append(this[x, y] + " ");
-                }
+                for ( int x = 0; x < column - 1; ++x ) sb.Append( this[x, y] + " " );
 
                 //last
-                sb.Append(this[column - 1, y]);
-                
+                sb.Append( this[column - 1, y] );
+
                 sb.Append( "|\n" );
             }
 
@@ -212,7 +210,7 @@ namespace CXUtils.Types
 
             return result;
         }
-        
+
         public static MatrixFloat BuildDimension( MatrixFloat other ) => new MatrixFloat( other.row, other.column );
 
         public static MatrixFloat BuildSquare( int side ) => Build( side, side );
@@ -250,11 +248,11 @@ namespace CXUtils.Types
 
         [Conditional( "DEBUG" )]
         static void AssertMultiplyDimensions( MatrixFloat a, MatrixFloat b ) =>
-            Debug.Assert( a.row == b.column, $"{nameof(b)}'s column count doesn't match the current matrix's row count!" );
+            Debug.Assert( a.row == b.column, $"{nameof( b )}'s column count doesn't match the current matrix's row count!" );
 
         [Conditional( "DEBUG" )]
         static void AssertEqualDimensions( MatrixFloat a, MatrixFloat b ) =>
-            Debug.Assert( a.IsEqualDimension( b ), $"{nameof(b)} doesn't match the current matrix's dimensions!" );
+            Debug.Assert( a.IsEqualDimension( b ), $"{nameof( b )} doesn't match the current matrix's dimensions!" );
 
         #endregion
     }

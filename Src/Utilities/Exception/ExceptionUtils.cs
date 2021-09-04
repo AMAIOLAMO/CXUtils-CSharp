@@ -16,6 +16,7 @@ namespace CXUtils.Common
         const string ERROR_NOT_ACCESSIBLE              = "The code here is been accessed but it should not be accessed!";
         const string ERROR_ENUM_NOT_IMPLEMENTED        = "The enum case is not implemented!";
         const string ERROR_POSSIBILITY_NOT_IMPLEMENTED = "The possibility here is not implemented!";
+        const string ERROR_NOT_RELEASED                = "The memory here is not released!";
 
         //Invalid
         const string INVALID_VALUE_INVALID      = "The value that is been modified is Invalid!";
@@ -26,6 +27,11 @@ namespace CXUtils.Common
         ///     Error type: The code logic is not accessible here.
         /// </summary>
         public static Exception NotAccessible => new Exception( ERROR_NOT_ACCESSIBLE );
+
+        /// <summary>
+        ///     Error type: The memory here is not released.
+        /// </summary>
+        public static Exception MemoryNotReleased => new Exception( ERROR_NOT_RELEASED );
 
         /// <summary>
         ///     Error type: The enum is not implemented.
@@ -51,8 +57,7 @@ namespace CXUtils.Common
 
             switch ( type )
             {
-                case InvalidType.InvalidValue: return new Exception( "The value: " + valueName + " is an invalid value!" + resultInvalidReason );
-
+                case InvalidType.InvalidValue:    return new Exception( "The value: " + valueName + " is an invalid value!" + resultInvalidReason );
                 case InvalidType.ValueOutOfRange: return new Exception( "The value: " + valueName + " is out of range!" + resultInvalidReason );
 
                 default: throw NotAccessible;

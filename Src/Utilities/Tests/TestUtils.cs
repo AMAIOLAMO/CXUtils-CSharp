@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace CXUtils.Utilities.Tests
 {
@@ -80,5 +80,4 @@ namespace CXUtils.Utilities.Tests
             return results;
         }
     }
-
 }
