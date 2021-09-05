@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -45,7 +44,9 @@ namespace CXUtils.Common
             //remove from occupied objects
             occupiedObjects.Remove( poolObject );
             //then put in pool
-            poolObjects.Enqueue( poolObject.Get() );
+            poolObjects.Enqueue( ItemRelease( poolObject.Get() ) );
         }
+
+        protected abstract T ItemRelease( T value );
     }
 }
