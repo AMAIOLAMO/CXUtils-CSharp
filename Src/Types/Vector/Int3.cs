@@ -28,7 +28,7 @@ namespace CXUtils.Types
                 unsafe
                 {
                     Debug.Assert(index >= 0 && index < 3, nameof( index )+ " is out of range!");
-                    return ((int*)x)[index];
+                    fixed ( int* ptr = &x ) return ptr[index];
                 }
                 #else
                 switch ( index )

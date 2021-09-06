@@ -16,6 +16,7 @@ namespace CXUtils.Types
         [FieldOffset( 0 )] public readonly float x;
         [FieldOffset( 4 )] public readonly float y;
         [FieldOffset( 8 )] public readonly float z;
+        
         public Float3( float x = .0f, float y = .0f, float z = .0f ) => ( this.x, this.y, this.z ) = ( x, y, z );
         public Float3( Float3 other ) => ( x, y, z ) = ( other.x, other.y, other.z );
 
@@ -27,7 +28,7 @@ namespace CXUtils.Types
                 unsafe
                 {
                     Debug.Assert(index >= 0 && index < 3, nameof( index )+ " is out of range!");
-                    return ((int*)x)[index];
+                    fixed ( float* ptr = &x ) return ptr[index];
                 }
                 #else
                 switch ( index )
