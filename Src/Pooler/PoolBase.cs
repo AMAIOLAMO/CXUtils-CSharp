@@ -1,5 +1,6 @@
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 
 namespace CXUtils.Common
 {
@@ -11,16 +12,20 @@ namespace CXUtils.Common
         protected readonly HashSet<PoolObject<T>> occupiedObjects;
         protected readonly Queue<T>               poolObjects;
 
+        readonly object _lockObj;
+
         protected PoolBase()
         {
             poolObjects = new Queue<T>();
             occupiedObjects = new HashSet<PoolObject<T>>();
+
+            _lockObj = new object();
         }
 
         public int Count => poolObjects.Count;
 
         #if DEBUG
-        
+
         ~PoolBase()
         {
             if ( occupiedObjects.Count == 0 ) return;
@@ -28,14 +33,16 @@ namespace CXUtils.Common
 
             throw ExceptionUtils.MemoryNotReleased;
         }
-        
+
         #endif
 
         public PoolObject<T> Pop()
         {
             Debug.Assert( poolObjects.Count != 0, "cannot pop from an empty pool!" );
-            var poolObject = new PoolObject<T>( poolObjects.Dequeue(), this );
-            occupiedObjects.Add( poolObject );
+            PoolObject<T> poolObject;
+            
+            lock ( _lockObj ) occupiedObjects.Add( poolObject = new PoolObject<T>( poolObjects.Dequeue(), this ) );
+            
             return poolObject;
         }
 
