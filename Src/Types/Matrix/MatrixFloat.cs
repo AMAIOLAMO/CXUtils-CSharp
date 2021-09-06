@@ -174,9 +174,7 @@ namespace CXUtils.Types
 
         public override string ToString()
         {
-            using var poolObject = CommonPools.StringBuilder.Pop();
-
-            var sb = poolObject.Get();
+            using var poolObject = CommonPools.StringBuilder.Pop( out var sb );
 
             for ( int y = 0; y < row; ++y )
             {

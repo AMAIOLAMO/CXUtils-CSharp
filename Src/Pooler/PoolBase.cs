@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace CXUtils.Common
 {
@@ -20,6 +20,7 @@ namespace CXUtils.Common
         public int Count => poolObjects.Count;
 
         #if DEBUG
+        
         ~PoolBase()
         {
             if ( occupiedObjects.Count == 0 ) return;
@@ -27,6 +28,7 @@ namespace CXUtils.Common
 
             throw ExceptionUtils.MemoryNotReleased;
         }
+        
         #endif
 
         public PoolObject<T> Pop()
@@ -37,16 +39,29 @@ namespace CXUtils.Common
             return poolObject;
         }
 
-        protected void Push( T obj ) => poolObjects.Enqueue( obj );
+        public PoolObject<T> Pop( out T item )
+        {
+            var poolObj = Pop();
+            item = poolObj.Get();
+            return poolObj;
+        }
 
         public void Free( PoolObject<T> poolObject )
         {
             //remove from occupied objects
             occupiedObjects.Remove( poolObject );
             //then put in pool
-            poolObjects.Enqueue( ItemRelease( poolObject.Get() ) );
+            poolObjects.Enqueue( ItemReleaseFactory( poolObject.Get() ) );
         }
 
-        protected abstract T ItemRelease( T value );
+        protected void Push( T item ) => poolObjects.Enqueue( item );
+
+        protected void Populate( int amount )
+        {
+            for ( int i = 0; i < amount; ++i ) Push( CreateItemFactory() );
+        }
+
+        protected virtual T CreateItemFactory() => default;
+        protected virtual T ItemReleaseFactory( T item ) => item;
     }
 }

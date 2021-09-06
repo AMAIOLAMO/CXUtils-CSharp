@@ -2,10 +2,10 @@
 
 namespace CXUtils.Common
 {
-    public sealed class StringBuilderPool : CapacityPool<StringBuilder>
+    public sealed class StringBuilderPool : CapacityPoolBase<StringBuilder>
     {
-        public StringBuilderPool( int capacity ) : base( capacity, MakeObject, ReleaseObject ) { }
-        static StringBuilder MakeObject() => new StringBuilder();
-        static StringBuilder ReleaseObject( StringBuilder item ) => item.Clear();
+        public StringBuilderPool( int capacity ) : base( capacity ) { Populate( capacity ); }
+        protected override StringBuilder CreateItemFactory() => new StringBuilder();
+        protected override StringBuilder ItemReleaseFactory( StringBuilder item ) => item.Clear();
     }
 }

@@ -2,21 +2,20 @@
 
 namespace CXUtils.Common
 {
-    public class CapacityPool<T> : PoolBase<T>
+    public class CapacityPool<T> : CapacityPoolBase<T>
     {
+        readonly Func<T>    _createFactory;
         readonly Func<T, T> _releaseFactory;
 
-        public CapacityPool( int capacity, Func<T> factory, Func<T, T> releaseFactory = null )
+        public CapacityPool( int capacity, Func<T> createFactory = null, Func<T, T> releaseFactory = null ) : base( capacity )
         {
-            Capacity = capacity;
-            for ( int i = 0; i < capacity; ++i ) Push( factory() );
-            _releaseFactory = releaseFactory ?? DefaultItemReleaseFactory;
+            _createFactory = createFactory ?? base.CreateItemFactory;
+            _releaseFactory = releaseFactory ?? base.ItemReleaseFactory;
+
+            Populate( capacity );
         }
-        
-        public int Capacity { get; protected set; }
 
-        protected override T ItemRelease( T value ) => _releaseFactory( value );
-
-        T DefaultItemReleaseFactory( T value ) => value;
+        protected override T CreateItemFactory() => _createFactory();
+        protected override T ItemReleaseFactory( T item ) => _releaseFactory( item );
     }
 }
