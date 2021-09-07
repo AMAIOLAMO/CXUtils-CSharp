@@ -101,7 +101,7 @@ namespace CXUtils.Common
             #if NETCOREAPP2_0_OR_GREATER
             return MathF.CopySign( value, sign );
             #else
-            return (float)Math.CopySign( value, sign );
+            return Math.Abs( value ) * Math.Sign( sign );
             #endif
         }
 
