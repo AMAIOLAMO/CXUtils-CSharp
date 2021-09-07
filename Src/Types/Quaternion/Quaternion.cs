@@ -31,6 +31,8 @@ namespace CXUtils.Types.Quaternion
         public float SqrMagnitude => values.SqrMagnitude;
         public float Magnitude    => values.Magnitude;
 
+        public Quaternion Conjugate => new Quaternion( -values.x, -values.y, -values.z, values.w );
+
         public Float3 EulerAngles
         {
             get
@@ -69,12 +71,9 @@ namespace CXUtils.Types.Quaternion
         #region Methods
 
         /// <summary>
-        ///     Rotates the given <paramref name="vector"/>
+        ///     Rotates the given <paramref name="vector" />
         /// </summary>
-        public Float3 Rotate( Float3 vector )
-        {
-            throw new NotImplementedException();
-        }
+        public Float3 Rotate( Float3 vector ) => throw new NotImplementedException();
 
         public override string ToString() => values.ToString();
         public string ToString( string? format, IFormatProvider? formatProvider ) => values.ToString( format, formatProvider );
@@ -89,6 +88,10 @@ namespace CXUtils.Types.Quaternion
 
         #region Static methods
 
+        /// <summary>
+        ///     Converts from the given euler angles into <see cref="Quaternion"/> <br/>
+        ///     Note that Euler angles is in radians
+        /// </summary>
         public static Quaternion FromEulerAngles( Float3 rotation )
         {
             float cx = MathUtils.Cos( rotation.x * .5f );
