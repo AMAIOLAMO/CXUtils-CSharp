@@ -123,7 +123,6 @@ namespace CXUtils.Types
 
         public Float3 Reflect( Float3 normal ) => this - 2f * Dot( normal ) * normal;
 
-
         public Float3 MagnitudeOf( float magnitude ) => Normalized * magnitude;
         public Float3 MapAxis( Func<float, float> mapFunction ) => new Float3( mapFunction( x ), mapFunction( y ), mapFunction( z ) );
 

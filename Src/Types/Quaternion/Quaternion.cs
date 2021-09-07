@@ -5,7 +5,7 @@ using System.Diagnostics.Contracts;
 using CXUtils.Common;
 using CXUtils.Mathematics;
 
-namespace CXUtils.Types.Quaternion
+namespace CXUtils.Types
 {
     /// <summary>
     ///     Four floating points that represents a physical rotation in 3D
@@ -29,10 +29,13 @@ namespace CXUtils.Types.Quaternion
         public static Quaternion Identity => new Quaternion( w: 1f );
         public static Quaternion Zero     => new Quaternion();
 
-        [Pure] public float SqrMagnitude => values.SqrMagnitude;
-        [Pure] public float Magnitude    => values.Magnitude;
+        public float SqrMagnitude => values.SqrMagnitude;
+        public float Magnitude    => values.Magnitude;
 
-        [Pure] public Quaternion Conjugate => new Quaternion( -values.x, -values.y, -values.z, values.w );
+        public Float3 Vector => new Float3( values.x, values.y, values.z );
+        public float  Scalar => values.w;
+
+        public Quaternion Conjugate => new Quaternion( -values.x, -values.y, -values.z, values.w );
 
         [Pure]
         public Float3 EulerAngles
@@ -63,6 +66,20 @@ namespace CXUtils.Types.Quaternion
         public static Quaternion operator +( Quaternion a, Quaternion b ) => new Quaternion( a.values + b.values );
         public static Quaternion operator -( Quaternion a, Quaternion b ) => new Quaternion( a.values - b.values );
 
+        public static Quaternion operator *( Quaternion a, Quaternion b )
+        {
+            float aScalar = a.Scalar;
+            float bScalar = b.Scalar;
+
+            var aVector = a.Vector;
+            var bVector = b.Vector;
+
+            return new Quaternion(
+                bScalar * aVector + aScalar * bVector + aVector.Cross( bVector ),
+                aScalar * bScalar - aVector.Dot( bVector )
+            );
+        }
+
         public static Quaternion operator -( Quaternion value ) => new Quaternion( -value.values.x, -value.values.y, -value.values.z, -value.values.w + Constants.TAU );
 
         public static bool operator ==( Quaternion left, Quaternion right ) => left.values == right.values;
@@ -73,10 +90,17 @@ namespace CXUtils.Types.Quaternion
         #region Methods
 
         /// <summary>
-        ///     Rotates the given <paramref name="vector" />
+        ///     Rotates the given <paramref name="point" />
         /// </summary>
         [Pure]
-        public Float3 Rotate( Float3 vector ) => throw new NotImplementedException();
+        public Float3 Rotate( Float3 point )
+        {
+            var vectorPart = Vector;
+
+            var vPartCrossVector = vectorPart.Cross( point );
+
+            return point + vPartCrossVector * ( 2f * Scalar ) + 2f * vectorPart.Cross( vPartCrossVector );
+        }
 
         public override string ToString() => values.ToString();
         public string ToString( string? format, IFormatProvider? formatProvider ) => values.ToString( format, formatProvider );
@@ -112,7 +136,7 @@ namespace CXUtils.Types.Quaternion
                 sx * cy * cz - cx * sy * sz, // i
                 cx * sy * cz + sx * cy * sz, // j
                 cx * cy * sz - sx * sy * cz, // k
-                cx * cy * cz + sx * sy * sz  //Scalar
+                cx * cy * cz + sx * sy * sz //Scalar
             );
         }
 
