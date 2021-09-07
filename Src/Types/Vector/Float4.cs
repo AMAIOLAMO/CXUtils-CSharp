@@ -58,12 +58,14 @@ namespace CXUtils.Types
         public static Float4 Half    => (Float4).5f;
         public static Float4 Quarter => (Float4).25f;
 
-        public static Float4 PosY => new Float4( y: 1f );
-        public static Float4 NegY => new Float4( y: -1f );
-        public static Float4 NegX => new Float4( -1f );
-        public static Float4 PosX => new Float4( 1f );
-        public static Float4 PosZ => new Float4( z: 1f );
-        public static Float4 NegZ => new Float4( z: -1f );
+        public static Float4 UnitY    => new Float4( y: 1f );
+        public static Float4 NegUnitY => new Float4( y: -1f );
+        public static Float4 UnitX    => new Float4( 1f );
+        public static Float4 NegUnitX => new Float4( -1f );
+        public static Float4 UnitZ    => new Float4( z: 1f );
+        public static Float4 NegUnitZ => new Float4( z: -1f );
+        public static Float4 UnitW    => new Float4( w: 1f );
+        public static Float4 NegUnitW => new Float4( w: -1f );
 
         public Int4 FloorInt => new Int4( x.FloorInt(), y.FloorInt(), z.FloorInt(), w.FloorInt() );
         public Int4 CeilInt  => new Int4( x.CeilInt(), y.CeilInt(), z.CeilInt(), w.CeilInt() );

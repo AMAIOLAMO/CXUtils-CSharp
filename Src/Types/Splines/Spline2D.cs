@@ -11,10 +11,10 @@ namespace CXUtils.Types
 
         public Spline2D( Float2 center, bool isLoop = false )
         {
-            points.Add( center + Float2.NegX );
-            points.Add( center + ( Float2.NegX + Float2.PosY ).Halve );
-            points.Add( center + ( Float2.PosX + Float2.NegY ).Halve );
-            points.Add( center + Float2.PosX );
+            points.Add( center + Float2.NegUnitX );
+            points.Add( center + ( Float2.NegUnitX + Float2.UnitY ).Halve );
+            points.Add( center + ( Float2.UnitX + Float2.NegUnitY ).Halve );
+            points.Add( center + Float2.UnitX );
 
             SetLoop( isLoop );
         }
@@ -60,7 +60,7 @@ namespace CXUtils.Types
         }
 
         public override void InsertAnchor( Float2 anchor, int segmentIndex ) =>
-            points.InsertRange( segmentIndex * 3 + 2, new[] { anchor + Float2.NegX, anchor, anchor + Float2.PosX } );
+            points.InsertRange( segmentIndex * 3 + 2, new[] { anchor + Float2.NegUnitX, anchor, anchor + Float2.UnitX } );
 
         protected override void DoLoopChanged()
         {

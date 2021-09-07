@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using System;
+using System.Diagnostics.Contracts;
 using CXUtils.Common;
 using CXUtils.Mathematics;
 
@@ -28,11 +29,12 @@ namespace CXUtils.Types.Quaternion
         public static Quaternion Identity => new Quaternion( w: 1f );
         public static Quaternion Zero     => new Quaternion();
 
-        public float SqrMagnitude => values.SqrMagnitude;
-        public float Magnitude    => values.Magnitude;
+        [Pure] public float SqrMagnitude => values.SqrMagnitude;
+        [Pure] public float Magnitude    => values.Magnitude;
 
-        public Quaternion Conjugate => new Quaternion( -values.x, -values.y, -values.z, values.w );
+        [Pure] public Quaternion Conjugate => new Quaternion( -values.x, -values.y, -values.z, values.w );
 
+        [Pure]
         public Float3 EulerAngles
         {
             get
@@ -73,11 +75,13 @@ namespace CXUtils.Types.Quaternion
         /// <summary>
         ///     Rotates the given <paramref name="vector" />
         /// </summary>
+        [Pure]
         public Float3 Rotate( Float3 vector ) => throw new NotImplementedException();
 
         public override string ToString() => values.ToString();
         public string ToString( string? format, IFormatProvider? formatProvider ) => values.ToString( format, formatProvider );
 
+        [Pure]
         public string ToDetailedString() => "( scalar: " + values.w + ", vector: { " + values.x + "i, " + values.y + "j, " + values.z + "k } )";
 
         public bool Equals( Quaternion other ) => values == other.values;
@@ -89,9 +93,10 @@ namespace CXUtils.Types.Quaternion
         #region Static methods
 
         /// <summary>
-        ///     Converts from the given euler angles into <see cref="Quaternion"/> <br/>
+        ///     Converts from the given euler angles into <see cref="Quaternion" /> <br />
         ///     Note that Euler angles is in radians
         /// </summary>
+        [Pure]
         public static Quaternion FromEulerAngles( Float3 rotation )
         {
             float cx = MathUtils.Cos( rotation.x * .5f );
@@ -104,10 +109,10 @@ namespace CXUtils.Types.Quaternion
             float sz = MathUtils.Sin( rotation.z * .5f );
 
             return new Quaternion(
-                sx * cy * cz - cx * sy * sz,
-                cx * sy * cz + sx * cy * sz,
-                cx * cy * sz - sx * sy * cz,
-                cx * cy * cz + sx * sy * sz
+                sx * cy * cz - cx * sy * sz, // i
+                cx * sy * cz + sx * cy * sz, // j
+                cx * cy * sz - sx * sy * cz, // k
+                cx * cy * cz + sx * sy * sz  //Scalar
             );
         }
 
@@ -115,12 +120,8 @@ namespace CXUtils.Types.Quaternion
         ///     Creates a <see cref="Quaternion" /> using <paramref name="axis" /> with an angle of <see cref="angle" /> <br />
         ///     Note: <paramref name="axis" /> must be a Unit / Normalized Vector
         /// </summary>
-        public static Quaternion FromAxis( Float3 axis, float angle )
-        {
-            float vectorScalar = MathUtils.Sin( angle );
-
-            return new Quaternion( axis * vectorScalar, MathUtils.Cos( angle ) );
-        }
+        [Pure]
+        public static Quaternion FromAxis( Float3 axis, float angle ) => new Quaternion( axis * MathUtils.Sin( angle ), MathUtils.Cos( angle ) );
 
         #endregion
     }

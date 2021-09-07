@@ -10,25 +10,32 @@ namespace CXUtils.Common
     /// </summary>
     public class Sequencer : IEnumerable<Action>
     {
-        readonly List<Action> _sequenceTriggerList;
+        readonly Queue<Action> _actionList;
 
-        public Sequencer() => _sequenceTriggerList = new List<Action>();
-        public IEnumerator<Action> GetEnumerator() => new SequencerEnumerator( _sequenceTriggerList );
+        public Sequencer() => _actionList = new Queue<Action>();
+        public IEnumerator<Action> GetEnumerator() => new SequencerEnumerator( _actionList );
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public Sequencer Append( Action trigger )
+        public Sequencer Append( Action action )
         {
-            _sequenceTriggerList.Add( trigger );
+            _actionList.Enqueue( action );
             return this;
+        }
+
+        public IEnumerator<Action> Enumerate()
+        {
+            var sequenceQueue = new Queue<Action>( _actionList );
+            
+            while ( sequenceQueue.Count != 0 ) yield return sequenceQueue.Dequeue();
         }
 
         class SequencerEnumerator : IEnumerator<Action>
         {
-            readonly ReadOnlyCollection<Action> _actionCollection;
-            Queue<Action> _actionQueue;
-            public SequencerEnumerator( IList<Action> actions )
+            readonly Queue<Action> _originalQueue;
+            Queue<Action>          _actionQueue;
+            public SequencerEnumerator( Queue<Action> actions )
             {
-                _actionCollection = new ReadOnlyCollection<Action>( actions );
+                _originalQueue = actions;
                 _actionQueue = new Queue<Action>( actions );
             }
             public bool MoveNext()
@@ -37,9 +44,8 @@ namespace CXUtils.Common
 
                 Current = _actionQueue.Dequeue();
                 return true;
-
             }
-            public void Reset() => _actionQueue = new Queue<Action>( _actionCollection );
+            public void Reset() => _actionQueue = new Queue<Action>( _originalQueue );
             public Action Current { get; private set; }
             object IEnumerator.Current => Current;
             public void Dispose() { }

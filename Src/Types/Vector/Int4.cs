@@ -51,13 +51,14 @@ namespace CXUtils.Types
         public static Int4 Zero => (Int4)0;
         public static Int4 One  => (Int4)1;
 
-        public static Int4 PosY => new Int4( y: 1 );
-        public static Int4 NegY => new Int4( y: -1 );
-        public static Int4 NegX => new Int4( -1 );
-        public static Int4 PosX => new Int4( 1 );
-
-        public static Int4 PosZ => new Int4( z: 1 );
-        public static Int4 NegZ => new Int4( z: -1 );
+        public static Int4 UnitY    => new Int4( y: 1 );
+        public static Int4 NegUnitY => new Int4( y: -1 );
+        public static Int4 UnitX    => new Int4( 1 );
+        public static Int4 NegUnitX => new Int4( -1 );
+        public static Int4 UnitZ    => new Int4( z: 1 );
+        public static Int4 NegUnitZ => new Int4( z: -1 );
+        public static Int4 UnitW    => new Int4( w: 1 );
+        public static Int4 NegUnitW => new Int4( w: -1 );
 
         #region Operator overloading
 

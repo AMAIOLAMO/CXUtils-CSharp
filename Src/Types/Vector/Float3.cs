@@ -16,7 +16,7 @@ namespace CXUtils.Types
         [FieldOffset( 0 )] public readonly float x;
         [FieldOffset( 4 )] public readonly float y;
         [FieldOffset( 8 )] public readonly float z;
-        
+
         public Float3( float x = .0f, float y = .0f, float z = .0f ) => ( this.x, this.y, this.z ) = ( x, y, z );
         public Float3( Float3 other ) => ( x, y, z ) = ( other.x, other.y, other.z );
 
@@ -56,12 +56,12 @@ namespace CXUtils.Types
         public static Float3 Half    => (Float3).5f;
         public static Float3 Quarter => (Float3).25f;
 
-        public static Float3 PosY => new Float3( y: 1f );
-        public static Float3 NegY => new Float3( y: -1f );
-        public static Float3 NegX => new Float3( -1f );
-        public static Float3 PosX => new Float3( 1f );
-        public static Float3 PosZ => new Float3( z: 1f );
-        public static Float3 NegZ => new Float3( z: -1f );
+        public static Float3 UnitY    => new Float3( y: 1f );
+        public static Float3 NegUnitY => new Float3( y: -1f );
+        public static Float3 UnitX    => new Float3( 1f );
+        public static Float3 NegUnitX => new Float3( -1f );
+        public static Float3 UnitZ    => new Float3( z: 1f );
+        public static Float3 NegUnitZ => new Float3( z: -1f );
 
         public Int3 FloorInt => new Int3( x.FloorInt(), y.FloorInt(), z.FloorInt() );
         public Int3 CeilInt  => new Int3( x.CeilInt(), y.CeilInt(), z.CeilInt() );

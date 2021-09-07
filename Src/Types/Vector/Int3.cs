@@ -53,12 +53,12 @@ namespace CXUtils.Types
         public static Int3 Zero => (Int3)0;
         public static Int3 One  => (Int3)1;
 
-        public static Int3 PosY => new Int3( y: 1 );
-        public static Int3 NegY => new Int3( y: -1 );
-        public static Int3 NegX => new Int3( -1 );
-        public static Int3 PosX => new Int3( 1 );
-        public static Int3 PosZ => new Int3( z: 1 );
-        public static Int3 NegZ => new Int3( z: -1 );
+        public static Int3 UnitY    => new Int3( y: 1 );
+        public static Int3 NegUnitY => new Int3( y: -1 );
+        public static Int3 UnitX    => new Int3( 1 );
+        public static Int3 NegUnitX => new Int3( -1 );
+        public static Int3 UnitZ    => new Int3( z: 1 );
+        public static Int3 NegUnitZ => new Int3( z: -1 );
 
         #region Operator overloading
 

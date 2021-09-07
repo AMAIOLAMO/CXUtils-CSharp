@@ -49,10 +49,10 @@ namespace CXUtils.Types
         public static Int2 Zero => (Int2)0;
         public static Int2 One  => (Int2)1;
 
-        public static Int2 PosY => new Int2( y: 1 );
-        public static Int2 NegY => new Int2( y: -1 );
-        public static Int2 NegX => new Int2( -1 );
-        public static Int2 PosX => new Int2( 1 );
+        public static Int2 UnitY    => new Int2( y: 1 );
+        public static Int2 NegUnitY => new Int2( y: -1 );
+        public static Int2 UnitX    => new Int2( 1 );
+        public static Int2 NegUnitX => new Int2( -1 );
 
         #region Operator overloading
 
