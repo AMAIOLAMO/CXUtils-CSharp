@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using CXUtils.Common;
+using CXUtils.Debugging;
 using CXUtils.Types;
 
 namespace CXUtils.Utilities
@@ -25,17 +25,8 @@ namespace CXUtils.Utilities
         /// </summary>
         public float NextFloat( float max ) => NextFloat() * max;
 
-        /// <summary>
-        ///     Randomly decides and returns a boolean <br />
-        ///     NOTE: excludes threshold (value > threshold)
-        /// </summary>
-        public bool Choose( double threshold = .5f ) => NextDouble() > threshold;
 
-        /// <summary>
-        ///     Randomly decides between two items <br />
-        ///     NOTE: excludes threshold (value > threshold)
-        /// </summary>
-        public T Choose<T>( T t1, T t2, double threshold = .5d ) => Choose( threshold ) ? t1 : t2;
+        #region Evaluation & Choose
 
         /// <summary>
         ///     Randomly decides between these items <br />
@@ -43,16 +34,24 @@ namespace CXUtils.Utilities
         /// </summary>
         public T Choose<T>( params T[] items ) => items[Next( 0, items.Length )];
 
-        public int EvaluateWeights( params int[] itemWeights )
+        /// <summary>
+        ///     Randomly decides and returns a boolean <br />
+        ///     NOTE: excludes threshold (value > threshold)
+        /// </summary>
+        public bool EvaluateWeight( double threshold = .5f ) => NextDouble() > threshold;
+
+        /// <summary>
+        ///     Randomly decides between two items <br />
+        ///     NOTE: excludes threshold (value > threshold)
+        /// </summary>
+        public T EvaluateWeight<T>( T t1, T t2, double threshold = .5d ) => EvaluateWeight( threshold ) ? t1 : t2;
+
+        public int EvaluateWeights( int totalWeight, params int[] itemWeights )
         {
-            Debug.Assert( itemWeights.Length != 0, nameof( itemWeights ) + " array length is 0!" );
+            Assertion.AssertInvalid( itemWeights.Length != 0, nameof( itemWeights ), InvalidReason.LengthZero );
+            //assume weights are correct
 
-            int total = 0;
-
-            //get total
-            foreach ( int weight in itemWeights ) total += weight;
-
-            int rand = Next( 0, total + 1 );
+            int rand = Next( 0, totalWeight + 1 );
 
             //get probability
             for ( int i = 0; i < itemWeights.Length; ++i )
@@ -63,7 +62,19 @@ namespace CXUtils.Utilities
                 rand -= itemWeights[i];
             }
 
-            throw ExceptionUtils.NotAccessible;
+            throw ExceptionUtils.Get( nameof( totalWeight ), totalWeight, InvalidReason.InvalidValue, $"the given {nameof( totalWeight )} is not the correct weight!" );
+        }
+
+        public int EvaluateWeights( params int[] itemWeights )
+        {
+            Assertion.AssertInvalid( itemWeights.Length != 0, nameof( itemWeights ), itemWeights, InvalidReason.LengthZero );
+
+            int total = 0;
+
+            //get total
+            foreach ( int weight in itemWeights ) total += weight;
+
+            return EvaluateWeights( total, itemWeights );
         }
 
         /// <summary>
@@ -72,6 +83,9 @@ namespace CXUtils.Utilities
         /// </summary>
         public bool TryEvaluateWeights( out int index, params int[] itemWeights )
         {
+            index = default;
+            if ( itemWeights.Length == 0 ) return false;
+
             int total = 0;
 
             //get total
@@ -96,6 +110,11 @@ namespace CXUtils.Utilities
 
             throw ExceptionUtils.NotAccessible;
         }
+
+        public T EvaluateWeights<T>( T[] array, params int[] itemWeights ) => array[EvaluateWeights( itemWeights )];
+
+        #endregion
+
 
         #region Vectors
 
