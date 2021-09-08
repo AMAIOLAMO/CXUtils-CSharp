@@ -17,6 +17,8 @@ namespace CXUtils.Types
         [FieldOffset( 4 )]  public readonly float y;
         [FieldOffset( 8 )]  public readonly float z;
         [FieldOffset( 12 )] public readonly float w;
+
+
         public Float4( float x = .0f, float y = .0f, float z = .0f, float w = .0f ) => ( this.x, this.y, this.z, this.w ) = ( x, y, z, w );
         public Float4( Float4 other ) => ( x, y, z, w ) = ( other.x, other.y, other.z, other.w );
 

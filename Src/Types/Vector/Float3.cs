@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using CXUtils.Common;
 #if CXUTILS_UNSAFE
@@ -17,7 +18,8 @@ namespace CXUtils.Types
         [FieldOffset( 4 )] public readonly float y;
         [FieldOffset( 8 )] public readonly float z;
 
-        public Float3( float x = .0f, float y = .0f, float z = .0f ) => ( this.x, this.y, this.z ) = ( x, y, z );
+        public Float3( float x = 0f, float y = 0f, float z = 0f ) => ( this.x, this.y, this.z ) = ( x, y, z );
+
         public Float3( Float3 other ) => ( x, y, z ) = ( other.x, other.y, other.z );
 
         public float this[ int index ]
@@ -63,6 +65,8 @@ namespace CXUtils.Types
         public static Float3 UnitZ    => new Float3( z: 1f );
         public static Float3 NegUnitZ => new Float3( z: -1f );
 
+        public Float2 LeftFloat2  => new Float2( x, y );
+        public Float2 RightFloat2 => new Float2( y, z );
         public Int3 FloorInt => new Int3( x.FloorInt(), y.FloorInt(), z.FloorInt() );
         public Int3 CeilInt  => new Int3( x.CeilInt(), y.CeilInt(), z.CeilInt() );
 

@@ -55,7 +55,7 @@ namespace CXUtils.Types
 
                 return new Float3(
                     MathUtils.Atan2( sinXCosY, cosXCosY ),
-                    Math.Abs( sinY ) >= 1f ? MathUtils.CopySign( Constants.HalfPI, sinY ) : MathUtils.Asin( sinY ),
+                    Math.Abs( sinY ) >= 1f ? MathUtils.CopySign( Constants.HALF_PI, sinY ) : MathUtils.Asin( sinY ),
                     MathUtils.Atan2( sinZCosY, cosZCosY )
                 );
             }

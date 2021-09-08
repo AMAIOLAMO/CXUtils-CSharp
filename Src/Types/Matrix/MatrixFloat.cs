@@ -65,8 +65,8 @@ namespace CXUtils.Types
         public static MatrixFloat operator *( MatrixFloat a, MatrixFloat b )
         {
             AssertMultiplyDimensions( a, b );
-            var result = new MatrixFloat( a.row, b.column );
 
+            var result = new MatrixFloat( a.row, b.column );
             for ( int y = 0; y < result.row; ++y )
             {
                 for ( int x = 0; x < result.column; ++x )

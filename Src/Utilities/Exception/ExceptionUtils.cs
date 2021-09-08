@@ -3,65 +3,75 @@
 namespace CXUtils.Common
 {
     /// <summary>
-    ///     A utility for handling Exceptions
+    ///     A utility for throwing / handling exceptions
     /// </summary>
     public static class ExceptionUtils
     {
-        public enum InvalidType
+        //Process
+        const string NOT_ACCESSIBLE              = "The code here is been accessed but it should not be accessed.";
+        const string ENUM_NOT_IMPLEMENTED        = "The enum case is not implemented.";
+        const string POSSIBILITY_NOT_IMPLEMENTED = "The possibility here is not implemented.";
+        const string NOT_RELEASED                = "The memory here is not released.";
+
+        //Value
+        const string VALUE_INVALID        = "The value that is been modified is Invalid.";
+        const string VALUE_OUT_OF_RANGE   = "The value is out of range.";
+        const string VALUE_LENGTH_INVALID = "The given length is invalid.";
+        const string VALUE_ELEMENT_EMPTY  = "The given collection has no elements.";
+        const string VALUE_LENGTH_ZERO    = "The given Length shouldn't be empty";
+
+        /// <summary>
+        ///     The code logic is not accessible here.
+        /// </summary>
+        public static Exception NotAccessible => new Exception( NOT_ACCESSIBLE );
+
+        /// <summary>
+        ///     The memory here is not released.
+        /// </summary>
+        public static Exception MemoryNotReleased => new Exception( NOT_RELEASED );
+
+        /// <summary>
+        ///     The enum is not implemented.
+        /// </summary>
+        public static NotImplementedException EnumNotImplemented => new NotImplementedException( ENUM_NOT_IMPLEMENTED );
+        public static NotImplementedException PossibilityNotImplemented => new NotImplementedException( POSSIBILITY_NOT_IMPLEMENTED );
+
+        /// <summary>
+        ///     The value is invalid.
+        /// </summary>
+        public static Exception InvalidValue => new Exception( VALUE_INVALID );
+
+        public static Exception OutOfRange => new Exception( VALUE_OUT_OF_RANGE );
+        /// <summary>
+        ///     The value is out of range.
+        /// </summary>
+        public static Exception InvalidLength => new Exception( VALUE_LENGTH_INVALID );
+        public static Exception ElementEmpty => new Exception( VALUE_ELEMENT_EMPTY );
+        public static Exception LengthZero   => new Exception( VALUE_LENGTH_ZERO );
+
+        public static Exception Get( string valueName, object value, InvalidReason reason, string detail = default ) =>
+            throw new Exception( $"{valueName} of value {value} is invalid. [Reason: {reason}] {detail}" ); // valueName + " of value: " + value + " is invalid. [ Reason: " + GetReasonString( reason ) + " ] " + detail );
+
+        public static Exception Get( string valueName, InvalidReason reason, string detail = default ) =>
+            throw new Exception( $"{valueName} is invalid. [Reason: {reason}] {detail}"  );
+
+        static string GetReasonString( InvalidReason reason )
         {
-            InvalidValue, ValueOutOfRange
-        }
-
-        //Error
-        const string ERROR_NOT_ACCESSIBLE              = "The code here is been accessed but it should not be accessed!";
-        const string ERROR_ENUM_NOT_IMPLEMENTED        = "The enum case is not implemented!";
-        const string ERROR_POSSIBILITY_NOT_IMPLEMENTED = "The possibility here is not implemented!";
-        const string ERROR_NOT_RELEASED                = "The memory here is not released!";
-
-        //Invalid
-        const string INVALID_VALUE_INVALID      = "The value that is been modified is Invalid!";
-        const string INVALID_VALUE_OUT_OF_RANGE = "The value is out of range!";
-
-
-        /// <summary>
-        ///     Error type: The code logic is not accessible here.
-        /// </summary>
-        public static Exception NotAccessible => new Exception( ERROR_NOT_ACCESSIBLE );
-
-        /// <summary>
-        ///     Error type: The memory here is not released.
-        /// </summary>
-        public static Exception MemoryNotReleased => new Exception( ERROR_NOT_RELEASED );
-
-        /// <summary>
-        ///     Error type: The enum is not implemented.
-        /// </summary>
-        public static NotImplementedException EnumNotImplemented => new NotImplementedException( ERROR_ENUM_NOT_IMPLEMENTED );
-        public static NotImplementedException PossibilityNotImplemented => new NotImplementedException( ERROR_POSSIBILITY_NOT_IMPLEMENTED );
-
-        /// <summary>
-        ///     Invalid type: The value is invalid.
-        /// </summary>
-        public static Exception InvalidValue => new Exception( INVALID_VALUE_INVALID );
-        /// <summary>
-        ///     Invalid type: The value is out of range.
-        /// </summary>
-        public static Exception ValueOutOfRange => new Exception( INVALID_VALUE_OUT_OF_RANGE );
-
-        /// <summary>
-        ///     Get's a <see cref="InvalidType" /> exception
-        /// </summary>
-        public static Exception GetInvalid( string valueName, InvalidType type, string reason = null )
-        {
-            string resultInvalidReason = reason == null ? null : " reason: " + reason;
-
-            switch ( type )
+            switch ( reason )
             {
-                case InvalidType.InvalidValue:    return new Exception( "The value: " + valueName + " is an invalid value!" + resultInvalidReason );
-                case InvalidType.ValueOutOfRange: return new Exception( "The value: " + valueName + " is out of range!" + resultInvalidReason );
+                case InvalidReason.InvalidValue:    return VALUE_INVALID;
+                case InvalidReason.ValueOutOfRange: return VALUE_OUT_OF_RANGE;
+                case InvalidReason.LengthInvalid:   return VALUE_LENGTH_INVALID;
+                case InvalidReason.ElementEmpty:    return VALUE_ELEMENT_EMPTY;
+                case InvalidReason.LengthZero:      return VALUE_LENGTH_ZERO;
 
-                default: throw NotAccessible;
+                default: throw PossibilityNotImplemented;
             }
         }
+    }
+
+    public enum InvalidReason
+    {
+        InvalidValue, ValueOutOfRange, LengthInvalid, ElementEmpty, LengthZero
     }
 }

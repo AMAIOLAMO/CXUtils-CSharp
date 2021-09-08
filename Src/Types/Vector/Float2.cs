@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using CXUtils.Common;
 #if CXUTILS_UNSAFE
-using System.Diagnostics;
+using CXUtils.Debugging;
 #endif
 
 namespace CXUtils.Types
@@ -15,6 +15,7 @@ namespace CXUtils.Types
     {
         [FieldOffset( 0 )] public readonly float x;
         [FieldOffset( 4 )] public readonly float y;
+
         public Float2( float x = .0f, float y = .0f ) => ( this.x, this.y ) = ( x, y );
         public Float2( Float2 other ) => ( x, y ) = ( other.x, other.y );
 
@@ -27,9 +28,9 @@ namespace CXUtils.Types
         public static Float2 Half    => (Float2).5f;
         public static Float2 Quarter => (Float2).25f;
 
-        public static Float2 UnitY => new Float2( y: 1f );
+        public static Float2 UnitY    => new Float2( y: 1f );
         public static Float2 NegUnitY => new Float2( y: -1f );
-        public static Float2 UnitX => new Float2( 1f );
+        public static Float2 UnitX    => new Float2( 1f );
         public static Float2 NegUnitX => new Float2( -1f );
 
         public float this[ int index ]
@@ -39,8 +40,11 @@ namespace CXUtils.Types
                 #if CXUTILS_UNSAFE
                 unsafe
                 {
-                    Debug.Assert(index >= 0 && index < 2, nameof( index )+ " is out of range!");
-                    fixed ( float* ptr = &x ) return ptr[index];
+                    Assertion.AssertInvalid( index >= 0 && index < 2, nameof( index ), index, InvalidReason.ValueOutOfRange );
+                    fixed ( float* ptr = &x )
+                    {
+                        return ptr[index];
+                    }
                 }
                 #else
                 switch ( index )

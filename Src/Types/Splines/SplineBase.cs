@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using CXUtils.Common;
+using CXUtils.Debugging;
 
 namespace CXUtils.Types
 {
@@ -12,7 +14,7 @@ namespace CXUtils.Types
         protected readonly List<T> points;
         protected SplineBase( List<T> points, bool isLoop = false )
         {
-            Debug.Assert( points.Count > 3, nameof( points ) + " must have at least 4 points to create a spline!" );
+            Assertion.AssertInvalid( points.Count > 3, nameof( points ), InvalidReason.ValueOutOfRange );
 
             this.points = points;
             SetLoop( isLoop );
@@ -23,7 +25,7 @@ namespace CXUtils.Types
         public bool IsLoop { get; private set; }
 
         public virtual T this[ int index ] => points[index];
-        public int Count => points.Count;
+        public int Count        => points.Count;
         public int SegmentCount => points.Count / 3;
 
         public void SetLoop( bool isLoop )
