@@ -107,15 +107,6 @@ namespace CXUtils.Common
             #endif
         }
 
-        public static float Acosh( float angle )
-        {
-            #if NETCOREAPP2_0_OR_GREATER
-            return MathF.Acosh( angle );
-            #else
-            return (float)Math.Acosh( angle );
-            #endif
-        }
-
         public static float Sin( float angle )
         {
             #if NETCOREAPP2_0_OR_GREATER
@@ -134,14 +125,11 @@ namespace CXUtils.Common
             #endif
         }
 
-        public static float Asinh( float angle )
-        {
-            #if NETCOREAPP2_0_OR_GREATER
-            return MathF.Asinh( angle );
-            #else
-            return (float)Math.Asinh( angle );
-            #endif
-        }
+        #if NETCOREAPP2_0_OR_GREATER
+        public static float Acosh( float angle ) => MathF.Acosh( angle );
+        public static float Asinh( float angle ) => MathF.Asinh( angle );
+        public static float ATanh( float angle ) => MathF.Atanh( angle );
+        #endif
 
         public static float Tan( float angle )
         {
@@ -158,15 +146,6 @@ namespace CXUtils.Common
             return MathF.Atan( angle );
             #else
             return (float)Math.Atan( angle );
-            #endif
-        }
-
-        public static float ATanh( float angle )
-        {
-            #if NETCOREAPP2_0_OR_GREATER
-            return MathF.Atanh( angle );
-            #else
-            return (float)Math.Atanh( angle );
             #endif
         }
 

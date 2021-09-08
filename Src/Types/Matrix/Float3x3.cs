@@ -93,9 +93,18 @@ namespace CXUtils.Types
         }
         
         public override bool Equals( object? obj ) => obj is Float3x3 other && Equals( other );
-        
-        public override int GetHashCode() => HashCode.Combine( iHat, jHat, kHat );
 
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = iHat.GetHashCode();
+                hashCode = ( hashCode * 397 ) ^ jHat.GetHashCode();
+                hashCode = ( hashCode * 397 ) ^ kHat.GetHashCode();
+                return hashCode;
+            }
+        }
+        
         #endregion
 
         #region Static Methods
