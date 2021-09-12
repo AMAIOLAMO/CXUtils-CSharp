@@ -30,6 +30,7 @@ namespace CXUtils.Types
             new Float2( v00, v01 ),
             new Float2( v10, v11 )
         );
+        
         public Float2x2( Float2 iHat, Float2 jHat ) => ( this.iHat, this.jHat ) = ( iHat, jHat );
 
         public Float2x2 Transposed  => new Float2x2( new Float2( iHat.x, jHat.x ), new Float2( iHat.y, jHat.y ) );
