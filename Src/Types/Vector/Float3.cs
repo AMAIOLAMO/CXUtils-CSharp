@@ -11,6 +11,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     represents three floats
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct Float3 : ITypeVectorFloat<Float3>
     {

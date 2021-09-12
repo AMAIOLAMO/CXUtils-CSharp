@@ -10,6 +10,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     represents four floats
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct Float4 : ITypeVectorFloat<Float4>
     {

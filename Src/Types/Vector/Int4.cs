@@ -9,6 +9,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     represents four integers
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct Int4 : ITypeVectorInt<Int4>
     {

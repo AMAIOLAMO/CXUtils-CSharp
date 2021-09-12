@@ -9,6 +9,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     represents two integers
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct Int2 : ITypeVectorInt<Int2>
     {

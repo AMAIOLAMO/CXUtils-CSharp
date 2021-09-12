@@ -10,6 +10,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     represents three integers
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct Int3 : ITypeVectorInt<Int3>
     {

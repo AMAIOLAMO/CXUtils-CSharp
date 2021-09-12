@@ -10,6 +10,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     represents two floats
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct Float2 : ITypeVectorFloat<Float2>
     {
