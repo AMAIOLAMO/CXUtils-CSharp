@@ -83,6 +83,9 @@ namespace CXUtils.Types
 
         public Int2 MapAxis( Func<int, int> mapFunction ) => new Int2( mapFunction( x ), mapFunction( y ) );
 
+        public Int2 OffsetX( int value ) => new Int2( x + value, y );
+        public Int2 OffsetY( int value ) => new Int2( x, y + value );
+
         public bool Equals( Int2 other ) => x == other.x && y == other.y;
 
         public string ToString( string format, IFormatProvider formatProvider ) =>

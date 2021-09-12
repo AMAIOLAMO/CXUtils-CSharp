@@ -90,6 +90,11 @@ namespace CXUtils.Types
         public int Dot( Int4 other ) => x * other.x + y * other.y + z * other.z + w * other.w;
 
         public Int4 MapAxis( Func<int, int> mapFunction ) => new Int4( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
+        
+        public Int4 OffsetX( int value ) => new Int4( x + value, y, z, w );
+        public Int4 OffsetY( int value ) => new Int4( x, y + value, z, w );
+        public Int4 OffsetZ( int value ) => new Int4( x, y, z + value, w );
+        public Int4 OffsetW( int value ) => new Int4( x, y, z, w + value );
 
         public string ToString( string format, IFormatProvider formatProvider ) =>
             "(" + x.ToString( format, formatProvider ) + ", " + y.ToString( format, formatProvider ) + ", " +

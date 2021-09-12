@@ -127,6 +127,11 @@ namespace CXUtils.Types
         public Float4 MagnitudeOf( float magnitude ) => Normalized * magnitude;
         public Float4 MapAxis( Func<float, float> mapFunction ) => new Float4( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
 
+        public Float4 OffsetX( float value ) => new Float4( x + value, y, z, w );
+        public Float4 OffsetY( float value ) => new Float4( x, y + value, z, w );
+        public Float4 OffsetZ( float value ) => new Float4( x, y, z + value, w );
+        public Float4 OffsetW( float value ) => new Float4( x, y, z, w + value );
+
         public string ToString( string format, IFormatProvider formatProvider ) =>
             "(" + x.ToString( format, formatProvider ) + ", " + y.ToString( format, formatProvider ) + ", " + z.ToString( format, formatProvider ) + ", " + w.ToString( format, formatProvider ) + ")";
 

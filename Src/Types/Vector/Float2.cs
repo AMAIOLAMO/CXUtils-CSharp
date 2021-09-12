@@ -122,6 +122,9 @@ namespace CXUtils.Types
         public Float2 MagnitudeOf( float magnitude ) => Normalized * magnitude;
         public Float2 MapAxis( Func<float, float> mapFunction ) => new Float2( mapFunction( x ), mapFunction( y ) );
 
+        public Float2 OffsetX( float value ) => new Float2( x + value, y );
+        public Float2 OffsetY( float value ) => new Float2( x, y + value );
+
         public override string ToString() => "(" + x + ", " + y + ")";
         public string ToString( string format ) => "(" + x.ToString( format ) + ", " + y.ToString( format ) + ")";
         public string ToString( string format, IFormatProvider formatProvider ) =>

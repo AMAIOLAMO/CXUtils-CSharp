@@ -130,6 +130,10 @@ namespace CXUtils.Types
         public Float3 MagnitudeOf( float magnitude ) => Normalized * magnitude;
         public Float3 MapAxis( Func<float, float> mapFunction ) => new Float3( mapFunction( x ), mapFunction( y ), mapFunction( z ) );
 
+        public Float3 OffsetX( float value ) => new Float3( x + value, y, z );
+        public Float3 OffsetY( float value ) => new Float3( x, y + value, z );
+        public Float3 OffsetZ( float value ) => new Float3( x, y, z + value );
+
         public string ToString( string format, IFormatProvider formatProvider ) =>
             "(" + x.ToString( format, formatProvider ) + ", " + y.ToString( format, formatProvider ) + ", " + z.ToString( format, formatProvider ) + ")";
         public override string ToString() => "(" + x + ", " + y + ", " + z + ")";
