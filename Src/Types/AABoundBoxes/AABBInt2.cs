@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace CXUtils.Types
 {
@@ -9,13 +11,15 @@ namespace CXUtils.Types
     ///     the size is also the full width and full height of the bounding box; <br />
     ///     Also it's worth to note that the origin is <see cref="Float2" />
     /// </summary>
+    [Serializable]
+    [StructLayout( LayoutKind.Explicit )]
     public readonly struct AABBInt2 : IEnumerable<Float2>
     {
         public AABBInt2( Float2 origin, Int2 size ) => ( this.origin, this.size ) = ( origin, size );
         public AABBInt2( AABBInt2 other ) => ( origin, size ) = ( other.origin, other.size );
 
-        public readonly Float2 origin;
-        public readonly Int2   size;
+        [FieldOffset( 0 )] public readonly Float2 origin;
+        [FieldOffset( 8 )] public readonly Int2   size;
 
         public float  HalfXSize => size.x / 2f;
         public float  HalfYSize => size.y / 2f;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Runtime.InteropServices;
 
 namespace CXUtils.Types
@@ -8,7 +9,7 @@ namespace CXUtils.Types
     /// </summary>
     [Serializable]
     [StructLayout( LayoutKind.Explicit )]
-    public readonly struct ColorAByte
+    public readonly struct ColorAByte : IColor<ColorAByte>
     {
         [FieldOffset( 0 )] public readonly byte r;
         [FieldOffset( 1 )] public readonly byte g;
@@ -20,9 +21,39 @@ namespace CXUtils.Types
 
         #region Operator Overloading
 
+        public static bool operator ==( ColorAByte a, ColorAByte b ) => !( a.r != b.r || a.g != b.g || a.b != b.b || a.a != b.a );
+        public static bool operator !=( ColorAByte a, ColorAByte b ) => a.r != b.r && a.g != b.g && a.b != b.b && a.a != b.a;
+
         public static implicit operator ColorByte( ColorAByte value ) => new ColorByte( value.r, value.g, value.b );
 
         #endregion
+
+        #region Methods
+
+        public bool Equals( ColorAByte other ) => this == other;
+        public override string ToString() => "( r:" + r + ", g:" + g + ", b:" + b + ", a:" + a + " )";
+        public string ToString( string? format, IFormatProvider? formatProvider ) =>
+            "( r:" + r.ToString( format, formatProvider ) +
+            ", g:" + g.ToString( format, formatProvider ) +
+            ", b:" + b.ToString( format, formatProvider ) +
+            ", a:" + a.ToString( format, formatProvider ) + " )";
+
+        public override bool Equals( object? obj ) => obj is ColorAByte value && Equals( value );
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = r.GetHashCode();
+                hashCode = ( hashCode * 397 ) ^ g.GetHashCode();
+                hashCode = ( hashCode * 397 ) ^ b.GetHashCode();
+                hashCode = ( hashCode * 397 ) ^ a.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        #endregion
+
     }
 
 }

@@ -1,16 +1,22 @@
-﻿namespace CXUtils.Types
+﻿using System;
+using System.Runtime.InteropServices;
+
+namespace CXUtils.Types
 {
     /// <summary>
     ///     An axis aligned bounding box using Float2 <br />
     ///     NOTE: the <see cref="origin" /> is in the center of the bounding box,
     ///     the size is also the full width and full height of the bounding box
     /// </summary>
+    [Serializable]
+    [StructLayout( LayoutKind.Explicit )]
     public readonly struct AABBFloat2
     {
         public AABBFloat2( Float2 origin, Float2 size ) => ( this.origin, this.size ) = ( origin, size );
         public AABBFloat2( AABBFloat2 other ) => ( origin, size ) = ( other.origin, other.size );
 
-        public readonly Float2 origin, size;
+        [FieldOffset( 0 )] public readonly Float2 origin;
+        [FieldOffset( 8 )] public readonly Float2 size;
 
         public float  HalfXSize => size.x / 2f;
         public float  HalfYSize => size.y / 2f;

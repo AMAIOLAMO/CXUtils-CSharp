@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Runtime.InteropServices;
 
 namespace CXUtils.Types
@@ -8,7 +9,7 @@ namespace CXUtils.Types
     /// </summary>
     [Serializable]
     [StructLayout( LayoutKind.Explicit )]
-    public readonly struct ColorAInt
+    public readonly struct ColorAInt // : IColor<ColorAInt>
     {
         [FieldOffset( 0 )]  public readonly int r;
         [FieldOffset( 4 )]  public readonly int g;
@@ -29,7 +30,38 @@ namespace CXUtils.Types
         public static ColorAInt operator *( ColorAInt a, int b ) => new ColorAInt( a.r * b, a.g * b, a.b * b, a.a * b );
         public static ColorAInt operator /( ColorAInt a, int b ) => new ColorAInt( a.r / b, a.g / b, a.b / b, a.a / b );
 
+        public static bool operator ==( ColorAInt a, ColorAInt b ) => !( a.r != b.r || a.g != b.g || a.b != b.b || a.a != b.a );
+
+        public static bool operator !=( ColorAInt a, ColorAInt b ) => a.r != b.r && a.g != b.g && a.b != b.b && a.a != b.a;
         public static implicit operator ColorInt( ColorAInt value ) => new ColorInt( value.r, value.g, value.b );
+
+        #endregion
+
+        #region Methods
+
+        public bool Equals( ColorAInt other ) => this == other;
+
+        public override string ToString() => "( r:" + r + ", g:" + g + ", b:" + b + ", a:" + a + " )";
+        public string ToString( string? format, IFormatProvider? formatProvider ) =>
+            "( r:" + r.ToString( format, formatProvider ) +
+            ", g:" + g.ToString( format, formatProvider ) +
+            ", b:" + b.ToString( format, formatProvider ) +
+            ", a:" + a.ToString( format, formatProvider ) + " )";
+
+        public override bool Equals( object? obj ) => obj is ColorAInt value && Equals( value );
+
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = r.GetHashCode();
+                hashCode = ( hashCode * 397 ) ^ g.GetHashCode();
+                hashCode = ( hashCode * 397 ) ^ b.GetHashCode();
+                hashCode = ( hashCode * 397 ) ^ a.GetHashCode();
+                return hashCode;
+            }
+        }
 
         #endregion
 
