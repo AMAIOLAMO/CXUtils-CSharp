@@ -10,6 +10,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     Represents a 2x2 floating point matrix
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct Float2x2 : IEquatable<Float2x2>, IFormattable
     {

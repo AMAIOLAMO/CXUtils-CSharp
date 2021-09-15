@@ -6,7 +6,7 @@ namespace CXUtils.Utilities.Tests
     ///     An attribute for quick testing purposes
     /// </summary>
     [AttributeUsage( AttributeTargets.Method )]
-    public class TestAttribute : Attribute
+    public sealed class TestAttribute : Attribute
     {
     }
 }

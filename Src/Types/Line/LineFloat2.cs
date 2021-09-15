@@ -1,13 +1,18 @@
-﻿using CXUtils.Common;
+﻿using System;
+using System.Runtime.InteropServices;
+using CXUtils.Common;
 
 namespace CXUtils.Types
 {
     /// <summary>
     ///     Represents a single line in 2D
     /// </summary>
+    [Serializable]
+    [StructLayout( LayoutKind.Explicit )]
     public readonly struct LineFloat2
     {
-        public readonly Float2 positionA, positionB;
+        [FieldOffset( 0 )] public readonly Float2 positionA;
+        [FieldOffset( 8 )] public readonly Float2 positionB;
         public LineFloat2( Float2 positionA, Float2 positionB ) => ( this.positionA, this.positionB ) = ( positionA, positionB );
 
         /// <summary>

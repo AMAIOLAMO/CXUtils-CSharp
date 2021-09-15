@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices;
 
 namespace CXUtils.Types
@@ -6,6 +7,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     Represents a Cuboid using integer
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct CuboidInt
     {

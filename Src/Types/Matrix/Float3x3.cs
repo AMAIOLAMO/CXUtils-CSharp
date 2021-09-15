@@ -8,6 +8,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     Represents a 3x3 floating point matrix
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct Float3x3 : IEquatable<Float3x3>, IFormattable
     {

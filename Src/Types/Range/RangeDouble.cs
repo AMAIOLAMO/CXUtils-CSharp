@@ -1,8 +1,10 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using CXUtils.Common;
 
 namespace CXUtils.Types.Range
 {
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct RangeDouble : IRangeType<double>
     {

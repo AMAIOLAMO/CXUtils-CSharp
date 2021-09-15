@@ -10,6 +10,7 @@ namespace CXUtils.Types
     /// <summary>
     ///     Four floating points that represents a physical rotation in 3D
     /// </summary>
+    [Serializable]
     public readonly struct Quaternion : IEquatable<Quaternion>, IFormattable
     {
         /// <summary>

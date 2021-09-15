@@ -1,10 +1,12 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace CXUtils.Types
 {
     /// <summary>
     ///     Represents a rectangle using float
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct RectFloat
     {

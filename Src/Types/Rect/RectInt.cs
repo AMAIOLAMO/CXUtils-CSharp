@@ -1,10 +1,12 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace CXUtils.Types
 {
     /// <summary>
     ///     Represents a rectangle using integer
     /// </summary>
+    [Serializable]
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct RectInt
     {
