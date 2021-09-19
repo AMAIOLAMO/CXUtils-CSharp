@@ -21,7 +21,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( float ) * 2 );
 
-            return new Float2( BitConverter.ToSingle( buffer ),
+            return new Float2( BitConverter.ToSingle( buffer, 0 ),
                 BitConverter.ToSingle( buffer, 4 ) );
         }
 
@@ -29,7 +29,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( float ) * 3 );
 
-            return new Float3( BitConverter.ToSingle( buffer ),
+            return new Float3( BitConverter.ToSingle( buffer, 0 ),
                 BitConverter.ToSingle( buffer, 4 ),
                 BitConverter.ToSingle( buffer, 8 ) );
         }
@@ -38,7 +38,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( float ) * 4 );
 
-            return new Float4( BitConverter.ToSingle( buffer ),
+            return new Float4( BitConverter.ToSingle( buffer, 0 ),
                 BitConverter.ToSingle( buffer, 4 ),
                 BitConverter.ToSingle( buffer, 8 ),
                 BitConverter.ToSingle( buffer, 12 ) );
@@ -48,7 +48,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( int ) * 2 );
 
-            return new Int2( BitConverter.ToInt32( buffer ),
+            return new Int2( BitConverter.ToInt32( buffer, 0 ),
                 BitConverter.ToInt32( buffer, 4 ) );
         }
 
@@ -56,7 +56,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( int ) * 3 );
 
-            return new Int3( BitConverter.ToInt32( buffer ),
+            return new Int3( BitConverter.ToInt32( buffer, 0 ),
                 BitConverter.ToInt32( buffer, 4 ),
                 BitConverter.ToInt32( buffer, 8 ) );
         }
@@ -65,7 +65,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( int ) * 4 );
 
-            return new Int4( BitConverter.ToInt32( buffer ),
+            return new Int4( BitConverter.ToInt32( buffer, 0 ),
                 BitConverter.ToInt32( buffer, 4 ),
                 BitConverter.ToInt32( buffer, 8 ),
                 BitConverter.ToInt32( buffer, 12 ) );
@@ -85,7 +85,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( float ) * 4 );
 
-            return new ColorAFloat( BitConverter.ToSingle( buffer ),
+            return new ColorAFloat( BitConverter.ToSingle( buffer, 0 ),
                 BitConverter.ToSingle( buffer, 4 ),
                 BitConverter.ToSingle( buffer, 8 ),
                 BitConverter.ToSingle( buffer, 12 ) );
@@ -95,7 +95,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( int ) * 4 );
 
-            return new ColorAInt( BitConverter.ToInt32( buffer ),
+            return new ColorAInt( BitConverter.ToInt32( buffer, 0 ),
                 BitConverter.ToInt32( buffer, 4 ),
                 BitConverter.ToInt32( buffer, 8 ),
                 BitConverter.ToInt32( buffer, 12 ) );
@@ -110,7 +110,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( float ) * 3 );
 
-            return new ColorFloat( BitConverter.ToSingle( buffer ),
+            return new ColorFloat( BitConverter.ToSingle( buffer, 0 ),
                 BitConverter.ToSingle( buffer, 4 ),
                 BitConverter.ToSingle( buffer, 8 ) );
         }
@@ -119,7 +119,7 @@ namespace CXUtils.IO
         {
             byte[] buffer = ReadBytes( sizeof( int ) * 3 );
 
-            return new ColorAInt( BitConverter.ToInt32( buffer ),
+            return new ColorAInt( BitConverter.ToInt32( buffer, 0 ),
                 BitConverter.ToInt32( buffer, 4 ),
                 BitConverter.ToInt32( buffer, 8 ) );
         }
