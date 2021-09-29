@@ -48,7 +48,7 @@ namespace CXUtils.Types
                 float cosXCosY = 1f - 2f * ( values.x * values.x + values.y * values.y );
 
                 // Y
-                float sinY = 2 * ( values.w * values.y - values.z * values.x );
+                float sinY = 2f * ( values.w * values.y - values.z * values.x );
 
                 // Z
                 float sinZCosY = 2f * ( values.w * values.z + values.x * values.y );

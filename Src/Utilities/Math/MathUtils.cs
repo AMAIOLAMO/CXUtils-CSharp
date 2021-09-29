@@ -74,8 +74,8 @@ namespace CXUtils.Common
         public static double Frac( this double value ) => value - Math.Floor( value );
 
         /// <summary>
-        ///     Loops the <paramref name="value" /> back to 0 when <paramref name="value" /> is a multiple of
-        ///     <paramref name="amount" />
+        ///     Loops the <paramref name="value" /> back to 0 when <paramref name="value" />
+        ///     is a multiple of <paramref name="amount" />
         /// </summary>
         public static float Loop( this float value, float amount ) => value - Floor( value / amount ) * amount;
 
@@ -182,6 +182,24 @@ namespace CXUtils.Common
             return MathF.Pow( value, power );
             #else
             return (float)Math.Pow( value, power );
+            #endif
+        }
+
+        public static float Log( float a, float newBase )
+        {
+            #if NETCOREAPP2_0_OR_GREATER
+            return MathF.Log( a, newBase );
+            #else
+            return (float)Math.Log( a, newBase );
+            #endif
+        }
+
+        public static float Log10( float a )
+        {
+            #if NETCOREAPP2_0_OR_GREATER
+            return MathF.Log10( a );
+            #else
+            return (float)Math.Log10( a );
             #endif
         }
 
