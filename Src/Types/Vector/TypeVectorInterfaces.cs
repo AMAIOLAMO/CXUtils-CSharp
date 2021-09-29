@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CXUtils.Types
 {
@@ -14,7 +15,7 @@ namespace CXUtils.Types
         TValue Dot( T other );
     }
 
-    public interface ITypeVectorInt<T> : ITypeVector<T, int>
+    public interface ITypeVectorInt<T> : ITypeVector<T, int>, IEnumerable<T>
     {
     }
 

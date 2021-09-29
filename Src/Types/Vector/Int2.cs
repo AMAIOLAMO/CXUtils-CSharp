@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 #if CXUTILS_UNSAFE
 using System.Diagnostics;
@@ -102,6 +104,13 @@ namespace CXUtils.Types
         }
 
         public override string ToString() => "(" + x + ", " + y + ")";
+        public IEnumerator<Int2> GetEnumerator()
+        {
+            for ( int x = 0; x < this.x; ++x )
+                for ( int y = 0; y < this.y; ++y )
+                    yield return new Int2( x, y );
+        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         public string ToString( string format ) => "(" + x.ToString( format ) + ", " + y.ToString( format ) + ")";
 
         #endregion

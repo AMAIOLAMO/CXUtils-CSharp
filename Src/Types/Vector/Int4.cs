@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 #if CXUTILS_UNSAFE
 using System.Diagnostics;
@@ -91,7 +93,7 @@ namespace CXUtils.Types
         public int Dot( Int4 other ) => x * other.x + y * other.y + z * other.z + w * other.w;
 
         public Int4 MapAxis( Func<int, int> mapFunction ) => new Int4( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
-        
+
         public Int4 OffsetX( int value ) => new Int4( x + value, y, z, w );
         public Int4 OffsetY( int value ) => new Int4( x, y + value, z, w );
         public Int4 OffsetZ( int value ) => new Int4( x, y, z + value, w );
@@ -102,11 +104,20 @@ namespace CXUtils.Types
             z.ToString( format, formatProvider ) + ", " + w.ToString( format, formatProvider ) + ")";
 
         public override string ToString() => "(" + x + ", " + y + ", " + z + ", " + w + ")";
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public string ToString( string format ) => "(" + x.ToString( format ) + ", " + y.ToString( format ) +
                                                    ", " + z.ToString( format ) + ", " + w.ToString( format ) + ")";
 
         public bool Equals( Int4 other ) => x == other.x && y == other.y && z == other.z && w == other.w;
+        public IEnumerator<Int4> GetEnumerator()
+        {
+            for ( int x = 0; x < this.x; ++x )
+                for ( int y = 0; y < this.y; ++y )
+                    for ( int z = 0; z < this.z; z++ )
+                        for ( int w = 0; w < this.w; ++w )
+                            yield return new Int3( x, y, z );
+        }
         public override bool Equals( object obj ) => obj is Int4 other && Equals( other );
 
         public override int GetHashCode()

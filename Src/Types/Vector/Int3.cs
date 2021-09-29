@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 #if CXUTILS_UNSAFE
 using System.Diagnostics;
@@ -89,7 +91,7 @@ namespace CXUtils.Types
         public int Dot( Int3 other ) => x * other.x + y * other.y + z * other.z;
 
         public Int3 MapAxis( Func<int, int> mapFunction ) => new Int3( mapFunction( x ), mapFunction( y ), mapFunction( z ) );
-        
+
         public Int3 OffsetX( int value ) => new Int3( x + value, y, z );
         public Int3 OffsetY( int value ) => new Int3( x, y + value, z );
         public Int3 OffsetZ( int value ) => new Int3( x, y, z + value );
@@ -100,6 +102,14 @@ namespace CXUtils.Types
         public string ToString( string format ) => "(" + x.ToString( format ) + ", " + y.ToString( format ) + ", " + z.ToString( format ) + ")";
 
         public bool Equals( Int3 other ) => x == other.x && y == other.y && z == other.z;
+        public IEnumerator<Int3> GetEnumerator()
+        {
+            for ( int x = 0; x < this.x; ++x )
+                for ( int y = 0; y < this.y; ++y )
+                    for ( int z = 0; z < this.z; z++ )
+                        yield return new Int3( x, y, z );
+        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         public override bool Equals( object obj ) => obj is Int3 other && Equals( other );
         public override int GetHashCode()
         {
