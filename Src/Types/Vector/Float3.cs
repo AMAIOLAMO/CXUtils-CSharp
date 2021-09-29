@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using CXUtils.Common;
 #if CXUTILS_UNSAFE
@@ -68,8 +67,8 @@ namespace CXUtils.Types
 
         public Float2 LeftFloat2  => new Float2( x, y );
         public Float2 RightFloat2 => new Float2( y, z );
-        public Int3 FloorInt => new Int3( x.FloorInt(), y.FloorInt(), z.FloorInt() );
-        public Int3 CeilInt  => new Int3( x.CeilInt(), y.CeilInt(), z.CeilInt() );
+        public Int3   FloorInt    => new Int3( x.FloorInt(), y.FloorInt(), z.FloorInt() );
+        public Int3   CeilInt     => new Int3( x.CeilInt(), y.CeilInt(), z.CeilInt() );
 
         public float SqrMagnitude => x * x + y * y + z * z;
         public float Magnitude    => (float)Math.Sqrt( SqrMagnitude );
@@ -79,7 +78,6 @@ namespace CXUtils.Types
         public Float3 Floor => new Float3( x.Floor(), y.Floor(), z.Floor() );
         public Float3 Ceil  => new Float3( x.Ceil(), y.Ceil(), z.Ceil() );
         public Float3 Halve => this * .5f;
-
 
         #region Operator overloading
 
