@@ -15,7 +15,7 @@ namespace CXUtils.Utilities
         public static T If<T>( T value, bool condition, string message )
         {
             #if DEBUG
-            if ( condition ) throw new Exception( message );
+            if ( !condition ) throw new Exception( message );
             #endif
 
             return value;
