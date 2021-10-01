@@ -8,6 +8,17 @@ namespace CXUtils.Utilities
     /// </summary>
     public static class Guard
     {
+        #region Generic
+
+        public static T If<T>( T value, bool condition, string message )
+        {
+            if ( condition ) throw new Exception( message );
+
+            return value;
+        }
+
+        #endregion
+        
         #region Array & Collection
 
         public static T[] LengthZero<T>( T[] value, string nameOfValue )
@@ -30,7 +41,7 @@ namespace CXUtils.Utilities
 
             return value;
         }
-        
+
 
         public static T LengthZero<T>( T value, string nameOfValue ) where T : ICollection
         {
@@ -186,5 +197,4 @@ namespace CXUtils.Utilities
 
         #endregion
     }
-
 }

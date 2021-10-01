@@ -1,5 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+#if DEBUG
+using System;
+#endif
 
 namespace CXUtils.Utilities
 {
@@ -8,6 +10,19 @@ namespace CXUtils.Utilities
     /// </summary>
     public static class AssertGuard
     {
+        #region Generic
+
+        public static T If<T>( T value, bool condition, string message )
+        {
+            #if DEBUG
+            if ( condition ) throw new Exception( message );
+            #endif
+
+            return value;
+        }
+
+        #endregion
+
         #region Array & Collection
 
         public static T[] LengthZero<T>( T[] value, string nameOfValue )
