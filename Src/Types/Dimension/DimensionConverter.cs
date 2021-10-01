@@ -25,7 +25,7 @@ namespace CXUtils.PlaneSystem
                 case DimensionType.XZ: return planePosition.X_Y();
                 case DimensionType.YZ: return planePosition._XY();
 
-                default: throw ExceptionUtils.NotAccessible;
+                default: throw ExceptionUtils.PossibilityNotImplemented;
             }
         }
     }

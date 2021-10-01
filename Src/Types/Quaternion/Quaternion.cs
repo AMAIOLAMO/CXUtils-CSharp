@@ -22,8 +22,8 @@ namespace CXUtils.Types
         /// </summary>
         public readonly Float4 values;
 
-        public Quaternion( Float4 value ) => values = value;
         public Quaternion( float x = 0f, float y = 0f, float z = 0f, float w = 0f ) => values = new Float4( x, y, z, w );
+        public Quaternion( Float4 value ) => values = value;
 
         public Quaternion( Float3 vector, float scalar ) => values = new Float4( vector.x, vector.y, vector.z, scalar );
 

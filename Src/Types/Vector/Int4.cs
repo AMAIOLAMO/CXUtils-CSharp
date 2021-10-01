@@ -116,7 +116,7 @@ namespace CXUtils.Types
                 for ( int y = 0; y < this.y; ++y )
                     for ( int z = 0; z < this.z; z++ )
                         for ( int w = 0; w < this.w; ++w )
-                            yield return new Int3( x, y, z );
+                            yield return new Int4( x, y, z, w );
         }
         public override bool Equals( object obj ) => obj is Int4 other && Equals( other );
 

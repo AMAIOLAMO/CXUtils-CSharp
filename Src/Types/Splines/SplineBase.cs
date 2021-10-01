@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using CXUtils.Common;
-using CXUtils.Debugging;
 using CXUtils.Utilities;
 
 namespace CXUtils.Types
@@ -16,7 +14,7 @@ namespace CXUtils.Types
         protected SplineBase( List<T> points, bool isLoop = false )
         {
             this.points = Guard.LengthLess( points, 3, nameof( points ) );
-            
+
             SetLoop( isLoop );
         }
 

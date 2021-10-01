@@ -53,7 +53,7 @@ namespace CXUtils.Common
             throw new Exception( $"{valueName} of value {value} is invalid. [Reason: {reason}] {detail}" ); // valueName + " of value: " + value + " is invalid. [ Reason: " + GetReasonString( reason ) + " ] " + detail );
 
         public static Exception Get( string valueName, InvalidReason reason, string detail = default ) =>
-            throw new Exception( $"{valueName} is invalid. [Reason: {reason}] {detail}"  );
+            throw new Exception( $"{valueName} is invalid. [Reason: {reason}] {detail}" );
 
         static string GetReasonString( InvalidReason reason )
         {
