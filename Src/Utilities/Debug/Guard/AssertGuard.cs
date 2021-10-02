@@ -10,6 +10,7 @@ namespace CXUtils.Utilities
     /// </summary>
     public static class AssertGuard
     {
+
         #region Generic
 
         public static T If<T>( T value, bool condition, string message )
@@ -24,6 +25,8 @@ namespace CXUtils.Utilities
         #endregion
 
         #region Array & Collection
+
+        // == ARRAY == //
 
         public static T[] LengthZero<T>( T[] value, string nameOfValue )
         {
@@ -52,6 +55,35 @@ namespace CXUtils.Utilities
             return value;
         }
 
+        public static T[] LengthZero<T>( T[] value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value.Length == 0 ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static T[] LengthNotEqual<T>( T[] value, int length, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value.Length != length ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static T[] LengthLess<T>( T[] value, int length, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value.Length < length ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        // == COLLECTION == //
+
         public static T LengthZero<T>( T value, string nameOfValue ) where T : ICollection
         {
             #if DEBUG
@@ -79,9 +111,38 @@ namespace CXUtils.Utilities
             return value;
         }
 
+        public static T LengthZero<T>( T value, string nameOfValue, string customMessage ) where T : ICollection
+        {
+            #if DEBUG
+            if ( value.Count == 0 ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static T LengthNotEqual<T>( T value, int length, string nameOfValue, string customMessage ) where T : ICollection
+        {
+            #if DEBUG
+            if ( value.Count != length ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static T LengthLess<T>( T value, int length, string nameOfValue, string customMessage ) where T : ICollection
+        {
+            #if DEBUG
+            if ( value.Count < length ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
         #endregion
 
         #region Value Type
+
+        // == INT == //
 
         public static int NegativeOrZero( int value, string nameOfValue )
         {
@@ -110,6 +171,36 @@ namespace CXUtils.Utilities
             return value;
         }
 
+        public static int NegativeOrZero( int value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value <= 0 ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static int Negative( int value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value < 0 ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static int Zero( int value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value == 0 ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+
+        // == FLOAT == //
+
         public static float NegativeOrZero( float value, string nameOfValue )
         {
             #if DEBUG
@@ -136,6 +227,35 @@ namespace CXUtils.Utilities
 
             return value;
         }
+
+        public static float NegativeOrZero( float value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value <= 0f ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static float Negative( float value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value < 0f ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static float Zero( float value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value == 0f ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        // == DOUBLE == //
 
         public static double NegativeOrZero( double value, string nameOfValue )
         {
@@ -164,6 +284,33 @@ namespace CXUtils.Utilities
             return value;
         }
 
+        public static double NegativeOrZero( double value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value <= 0d ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static double Negative( double value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value < 0d ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static double Zero( double value, string nameOfValue, string customMessage )
+        {
+            #if DEBUG
+            if ( value == 0d ) throw new ArgumentException( customMessage, nameOfValue );
+            #endif
+
+            return value;
+        }
+
         #endregion
 
         #region Reference Type
@@ -181,6 +328,24 @@ namespace CXUtils.Utilities
         {
             #if DEBUG
             if ( value == null ) throw new ArgumentNullException( nameOfValue, customMessage );
+            #endif
+
+            return value;
+        }
+
+        public static T RefNull<T>( T value, string nameOfValue ) where T : class
+        {
+            #if DEBUG
+            if ( value is null ) throw new ArgumentNullException( nameOfValue );
+            #endif
+
+            return value;
+        }
+
+        public static T RefNull<T>( T value, string nameOfValue, string customMessage ) where T : class
+        {
+            #if DEBUG
+            if ( value is null ) throw new ArgumentNullException( nameOfValue, customMessage );
             #endif
 
             return value;
