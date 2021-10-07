@@ -22,6 +22,7 @@ namespace CXUtils.Utilities.Reflection
 
         #region MethodInfo
 
+        #if NETCOREAPP2_0_OR_GREATER
         ///<summary> Get's a method according to the method that is given </summary>
         public static MethodInfo GetMethodInfo<T>( Expression<Action<T>> exp ) => GetMethodInfo<Action<T>>( exp );
 
@@ -32,6 +33,7 @@ namespace CXUtils.Utilities.Reflection
 
             return member.Method;
         }
+        #endif
 
         #endregion
     }

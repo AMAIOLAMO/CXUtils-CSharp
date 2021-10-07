@@ -1,11 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using CXUtils.Common;
+﻿using CXUtils.Common;
 
 namespace CXUtils.Utilities.Array
 {
     public static class ArrayUtils
     {
-        public static string ToString<T>( [NotNull] this T[] array, string between = ", " )
+        public static string ToString<T>( this T[] array, string between = ", " )
         {
             using var poolObj = CommonPools.StringBuilder.Pop( out var builder );
 
