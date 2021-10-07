@@ -1,4 +1,4 @@
-﻿namespace CXUtils.Types.Utils
+﻿namespace CXUtils.Domain.Types.Utils
 {
     public static class CxFloatSwizzleUtils
     {

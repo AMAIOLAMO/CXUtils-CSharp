@@ -10,7 +10,6 @@ namespace CXUtils.Utilities
     /// </summary>
     public static class AssertGuard
     {
-
         #region Generic
 
         public static T If<T>( T value, bool condition, string message )

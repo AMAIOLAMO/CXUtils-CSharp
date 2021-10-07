@@ -12,15 +12,15 @@ namespace CXUtils.Debugging
         [Conditional( "DEBUG" )]
         public static void Assert( bool condition, string message )
         {
-            if ( !condition ) return;
+            if ( condition ) return;
 
             throw new Exception( message );
         }
-        
+
         [Conditional( "DEBUG" )]
         public static void AssertError( bool condition, Exception exception )
         {
-            if ( !condition ) return;
+            if ( condition ) return;
 
             throw exception;
         }
@@ -28,7 +28,7 @@ namespace CXUtils.Debugging
         [Conditional( "DEBUG" )]
         public static void AssertInvalid( bool condition, string valueName, object value, InvalidReason reason ) =>
             AssertError( condition, ExceptionUtils.Get( valueName, value, reason ) );
-        
+
         [Conditional( "DEBUG" )]
         public static void AssertInvalid( bool condition, string valueName, InvalidReason reason ) =>
             AssertError( condition, ExceptionUtils.Get( valueName, reason ) );

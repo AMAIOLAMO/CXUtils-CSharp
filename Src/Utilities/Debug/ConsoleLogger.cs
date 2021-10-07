@@ -3,11 +3,11 @@
 namespace CXUtils.Debugging
 {
     /// <summary>
-    ///     Basic logger class
+    ///     Basic console logger class
     /// </summary>
     public class ConsoleLogger : ILogger
     {
-        public void Log( object obj ) => Console.WriteLine( obj );
-        public void Log( params object[] objs ) => Console.WriteLine( objs );
+        public void Log<T>( T obj ) => Console.WriteLine( obj );
+        public void Log<T>( params T[] objs ) => Console.WriteLine( objs );
     }
 }

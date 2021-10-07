@@ -1,4 +1,4 @@
-﻿using CXUtils.Types;
+﻿using CXUtils.Domain.Types;
 using System;
 
 namespace CXUtils.Common

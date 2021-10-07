@@ -1,7 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
-using CXUtils.Types;
+using CXUtils.Domain.Types;
 
 namespace CXUtils.IO
 {

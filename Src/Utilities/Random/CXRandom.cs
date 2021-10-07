@@ -1,7 +1,7 @@
 ﻿using System;
 using CXUtils.Common;
 using CXUtils.Debugging;
-using CXUtils.Types;
+using CXUtils.Domain.Types;
 
 namespace CXUtils.Utilities
 {

@@ -1,5 +1,5 @@
 ﻿using CXUtils.Mathematics;
-using CXUtils.Types;
+using CXUtils.Domain.Types;
 
 namespace CXUtils.Common
 {
@@ -126,7 +126,7 @@ namespace CXUtils.Common
 
         #region EasingTypeEvaluation
 
-        public static float GetEasing( float a, float b, float t, TweenType type )
+        public static float Ease( float t, TweenType type )
         {
             switch ( type )
             {
