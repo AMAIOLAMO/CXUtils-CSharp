@@ -3,3 +3,4 @@ CXUtils.csproj
 obj
 .idea
 bin
+*.meta

@@ -10,6 +10,9 @@ namespace CXUtils.Utilities
     /// </summary>
     public class CxRandom : Random
     {
+        public CxRandom() { }
+        public CxRandom( int seed ) : base( seed ) { }
+        
         /// <summary>
         ///     Gives a random number between <see cref="float.MinValue" /> ~ <see cref="float.MaxValue" />
         /// </summary>
