@@ -14,7 +14,6 @@ namespace CXUtils.IO
         public CxBinaryReader( Stream input, Encoding encoding ) : base( input, encoding ) { }
         public CxBinaryReader( Stream input, Encoding encoding, bool leaveOpen ) : base( input, encoding, leaveOpen ) { }
 
-
         #region Vectors
 
         public Float2 ReadFloat2()

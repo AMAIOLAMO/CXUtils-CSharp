@@ -4,7 +4,7 @@ namespace CXUtils.Utilities.Array
 {
     public static class ArrayUtils
     {
-        public static string ToString<T>( this T[] array, string between = ", " )
+        public static string ToFormatString<T>( this T[] array, string between = ", " )
         {
             using var poolObj = CommonPools.StringBuilder.Pop( out var builder );
 
@@ -13,6 +13,7 @@ namespace CXUtils.Utilities.Array
                 builder.Append( array[i] );
                 builder.Append( between );
             }
+            
             //and last
             builder.Append( array[array.Length - 1] );
 

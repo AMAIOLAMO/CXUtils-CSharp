@@ -20,6 +20,7 @@ namespace CXUtils.Common
         ///     Equation: 1f / (Math.Pow(Math.E, -x));
         /// </summary>
         public static double Sigmoid( double x ) => 1f / Math.Pow( Constants.E, -x );
+        
         #region Extensions
 
         public static float Floor( this float value )
@@ -84,7 +85,7 @@ namespace CXUtils.Common
 
         /// <inheritdoc cref="Loop(float, float)" />
         public static double Loop( this double value, double amount ) => value - Math.Floor( value / amount ) * amount;
-
+        
         #endregion
 
         #region Math Functions

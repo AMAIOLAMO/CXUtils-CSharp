@@ -9,7 +9,6 @@ namespace CXUtils.Utilities.Reflection
     ///<summary> A simple reflection helper </summary>
     public class ReflectionUtils
     {
-
         #region Attributes
 
         public static IEnumerable<MethodInfo> GetMethodsFromCallingAssemblyWithAttributesOf<T>( BindingFlags flags ) where T : Attribute =>
