@@ -2,12 +2,8 @@
 using CXUtils.Domain.Types;
 using CXUtils.Domain.Types.Utils;
 
-namespace CXUtils.PlaneSystem
+namespace CXUtils.Utilities
 {
-    /// <summary>
-    ///     Options for Plane Dimensions
-    /// </summary>
-    public enum DimensionType { XY, XZ, YZ }
 
     /// <summary>
     ///     A data structure for converting plane axis to 3D axis

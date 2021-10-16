@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace CXUtils.Utilities.Reflection
+namespace CXUtils.Utilities
 {
     ///<summary> A simple reflection helper </summary>
     public class ReflectionUtils

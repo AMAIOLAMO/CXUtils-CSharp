@@ -5,7 +5,7 @@
     /// </summary>
     public interface ILogger
     {
-        void Log<T>( T obj );
-        void Log<T>( params T[] objs );
+        void Log<T>( T item );
+        void Log<T>( params T[] items );
     }
 }

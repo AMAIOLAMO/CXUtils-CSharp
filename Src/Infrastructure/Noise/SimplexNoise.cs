@@ -1,6 +1,7 @@
+using CXUtils.Common;
 using CXUtils.Domain.Types;
 
-namespace CXUtils.Common
+namespace CXUtils.Infrastructure
 {
     /*
      * Note: this code is based on https://weber.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf

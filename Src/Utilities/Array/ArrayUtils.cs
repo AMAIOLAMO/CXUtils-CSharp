@@ -13,7 +13,7 @@ namespace CXUtils.Utilities.Array
                 builder.Append( array[i] );
                 builder.Append( between );
             }
-            
+
             //and last
             builder.Append( array[array.Length - 1] );
 

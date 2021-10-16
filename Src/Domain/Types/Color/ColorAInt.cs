@@ -9,7 +9,7 @@ namespace CXUtils.Domain.Types
     /// </summary>
     [Serializable]
     [StructLayout( LayoutKind.Explicit )]
-    public readonly struct ColorAInt // : IColor<ColorAInt>
+    public readonly struct ColorAInt : IColor<ColorAInt>
     {
         [FieldOffset( 0 )]  public readonly int r;
         [FieldOffset( 4 )]  public readonly int g;

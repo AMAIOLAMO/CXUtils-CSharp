@@ -1,4 +1,5 @@
 ﻿using CXUtils.Common;
+using CXUtils.Utilities;
 
 namespace CXUtils.Domain.Types
 {
@@ -24,6 +25,6 @@ namespace CXUtils.Domain.Types
             _buffer = points;
         }
 
-        public Float2 Sample( float t ) => TweenUtils.CubicBezier( _buffer[0], _buffer[1], _buffer[2], _buffer[3], t );
+        public Float2 Sample( float t ) => Tween.CubicBezier( _buffer[0], _buffer[1], _buffer[2], _buffer[3], t );
     }
 }

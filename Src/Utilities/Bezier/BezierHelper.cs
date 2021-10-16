@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace CXUtils.Domain.Types
+namespace CXUtils.Utilities
 {
     public static class BezierHelper
     {

@@ -14,7 +14,7 @@ namespace CXUtils.Common
     /// <summary>
     ///     A basic tweening library
     /// </summary>
-    public static class TweenUtils
+    public static class Tween
     {
         #region Lerp
 

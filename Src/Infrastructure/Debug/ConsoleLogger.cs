@@ -7,7 +7,7 @@ namespace CXUtils.Debugging
     /// </summary>
     public class ConsoleLogger : ILogger
     {
-        public void Log<T>( T obj ) => Console.WriteLine( obj );
-        public void Log<T>( params T[] objs ) => Console.WriteLine( objs );
+        public void Log<T>( T item ) => Console.WriteLine( item );
+        public void Log<T>( params T[] items ) => Console.WriteLine( items );
     }
 }

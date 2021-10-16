@@ -1,7 +1,7 @@
 ﻿using CXUtils.Domain.Types;
 using System;
 
-namespace CXUtils.Common
+namespace CXUtils.Infrastructure
 {
     /// <summary>
     ///     Classic fractal brownian motion that uses <see cref="SimplexNoise"/>
