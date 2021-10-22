@@ -12,10 +12,14 @@ namespace CXUtils.Utilities
     {
         #region Generic
 
-        public static T If<T>( T value, bool condition, string message )
+        /// <summary>
+        ///     Guards against the given <paramref name="condition" /> <br />
+        ///     thus it will guard if condition is true
+        /// </summary>
+        public static T Against<T>( T value, bool condition, string message )
         {
             #if DEBUG
-            if ( !condition ) throw new Exception( message );
+            if ( condition ) throw new Exception( message );
             #endif
 
             return value;

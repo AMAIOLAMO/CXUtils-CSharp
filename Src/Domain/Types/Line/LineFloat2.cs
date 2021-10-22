@@ -32,15 +32,12 @@ namespace CXUtils.Domain.Types
                 y1My3 = positionA.y - other.positionA.y,
                 y3My4 = other.positionA.y - other.positionB.y;
 
-            //write the line intersection
             float tUp = x1Mx3 * y3My4 - y1My3 * x3Mx4;
             float uUp = -( x1Mx2 * y1My3 - y1My2 * x1Mx3 );
             float den = x1Mx2 * y3My4 - y1My2 * x3Mx4;
 
-            //calculate
             ( t, u ) = ( tUp / den, uUp / den );
 
-            //make boolean and check
             bool tBool, uBool;
             ( tBool, uBool ) = ( t >= 0f && t <= 1f, u >= 0f && u <= 1f );
 
