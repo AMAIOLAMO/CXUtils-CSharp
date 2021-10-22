@@ -16,7 +16,7 @@ namespace CXUtils.Utilities
         /// </summary>
         public static T Against<T>( T value, bool condition, string message )
         {
-            if ( !condition ) throw new Exception( message );
+            if ( condition ) throw new Exception( message );
 
             return value;
         }
