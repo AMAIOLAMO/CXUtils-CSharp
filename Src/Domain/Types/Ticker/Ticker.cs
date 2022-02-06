@@ -7,33 +7,35 @@ namespace CXUtils.Common
     /// </summary>
     public class Ticker : ITicker<float>
     {
-        public Ticker() => CurrentSpan = 0f;
+        public Ticker() => Span = 0f;
 
-        public Ticker(ITicker<float> other) => CurrentSpan = other.CurrentSpan;
+        public Ticker(ITicker<float> other) => Span = other.Span;
 
-        public float CurrentSpan { get; private set; }
+        public float Span { get; private set; }
 
         public bool Tick(float delta, float max)
         {
-            CurrentSpan += delta;
+            Span += delta;
 
             //if current Timer is not over max timer
-            if(CurrentSpan < max) return false;
+            if(Span < max) return false;
+
+            Span -= max;
 
             OnTriggered?.Invoke();
 
             return true;
         }
 
-        public void SetSpan(float span) => CurrentSpan = span;
+        public void SetSpan(float span) => Span = span;
 
-        public void Reset() => CurrentSpan = 0f;
+        public void Reset() => Span = 0f;
 
         public string ToString(string format, IFormatProvider formatProvider) =>
-            "Current Span: " + CurrentSpan.ToString(format, formatProvider);
+            "Current Span: " + Span.ToString(format, formatProvider);
 
         public event Action OnTriggered;
 
-        public override string ToString() => "Current Span: " + CurrentSpan;
+        public override string ToString() => "Current Span: " + Span;
     }
 }

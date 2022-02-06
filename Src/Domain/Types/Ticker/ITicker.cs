@@ -7,7 +7,7 @@ namespace CXUtils.Common
     /// </summary>
     public interface ITicker<TSpan> : IFormattable
     {
-        TSpan CurrentSpan { get; }
+        TSpan Span { get; }
 
         /// <summary>
         ///     Ticks the timer using the given <see cref="delta" /> <br />
@@ -20,7 +20,7 @@ namespace CXUtils.Common
         void SetSpan( TSpan span );
 
         /// <summary>
-        ///     reset's the <see cref="Ticker.CurrentSpan" /> back to initial value
+        ///     reset's the <see cref="Ticker.Span" /> back to initial value
         /// </summary>
         void Reset();
         event Action OnTriggered;
