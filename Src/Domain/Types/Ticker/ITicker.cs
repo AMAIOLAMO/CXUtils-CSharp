@@ -7,7 +7,6 @@ namespace CXUtils.Common
     /// </summary>
     public interface ITicker<TSpan> : IFormattable
     {
-        TSpan MaxSpan     { get; }
         TSpan CurrentSpan { get; }
 
         /// <summary>
@@ -16,7 +15,7 @@ namespace CXUtils.Common
         ///     or else when the timer is over it will trigger <see cref="Ticker.OnTriggered" /> every single
         ///     <see cref="Ticker.Tick" /> call
         /// </summary>
-        bool Tick( TSpan delta );
+        bool Tick( TSpan delta, TSpan max );
 
         void SetSpan( TSpan span );
 
