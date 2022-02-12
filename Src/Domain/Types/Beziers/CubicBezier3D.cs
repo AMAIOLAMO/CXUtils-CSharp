@@ -20,7 +20,7 @@ namespace CXUtils.Domain.Types
 
         public CubicBezier3D( Float3[] points )
         {
-            BezierHelper.AssertPoints(points);
+            BezierUtils.AssertPoints(points);
 
             _buffer = points;
         }

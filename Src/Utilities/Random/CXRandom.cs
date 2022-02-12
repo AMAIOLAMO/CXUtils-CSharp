@@ -118,7 +118,6 @@ namespace CXUtils.Utilities
 
         #endregion
 
-
         #region Vectors
 
         public Float2 NextFloat2() => new Float2( NextFloat(), NextFloat() );

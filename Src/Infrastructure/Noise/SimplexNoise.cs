@@ -177,10 +177,10 @@ namespace CXUtils.Infrastructure
 
             float s = (value.x + value.y + value.z + value.w) * F4; // Factor for 4D skewing
 
-            int i = MathUtils.FloorInt(value.x + s);
-            int j = MathUtils.FloorInt(value.y + s);
-            int k = MathUtils.FloorInt(value.z + s);
-            int l = MathUtils.FloorInt(value.w + s);
+            int i = (value.x + s).FloorInt();
+            int j = (value.y + s).FloorInt();
+            int k = (value.z + s).FloorInt();
+            int l = (value.w + s).FloorInt();
 
             float t = (i + j + k + l) * G4;
             float X0 = i - t,
@@ -192,51 +192,51 @@ namespace CXUtils.Infrastructure
                   z0 = value.z - Z0,
                   w0 = value.w - W0;
 
-            int rankx = 0,
-                ranky = 0,
-                rankz = 0,
-                rankw = 0;
+            int rankX = 0,
+                rankY = 0,
+                rankZ = 0,
+                rankW = 0;
 
-            if ( x0 > y0 ) ++rankx;
-            else ++ranky;
+            if ( x0 > y0 ) ++rankX;
+            else ++rankY;
 
-            if ( x0 > z0 ) ++rankx;
-            else ++rankz;
+            if ( x0 > z0 ) ++rankX;
+            else ++rankZ;
 
-            if ( x0 > w0 ) ++rankx;
-            else ++rankw;
+            if ( x0 > w0 ) ++rankX;
+            else ++rankW;
 
-            if ( y0 > z0 ) ++ranky;
-            else ++rankz;
+            if ( y0 > z0 ) ++rankY;
+            else ++rankZ;
 
-            if ( y0 > w0 ) ++ranky;
-            else ++rankw;
+            if ( y0 > w0 ) ++rankY;
+            else ++rankW;
 
-            if ( z0 > w0 ) ++rankz;
-            else ++rankw;
+            if ( z0 > w0 ) ++rankZ;
+            else ++rankW;
 
             int i1, j1, k1, l1;
             int i2, j2, k2, l2;
             int i3, j3, k3, l3;
 
-            i1 = rankx >= 3 ? 1 : 0;
-            j1 = ranky >= 3 ? 1 : 0;
-            k1 = rankz >= 3 ? 1 : 0;
-            l1 = rankw >= 3 ? 1 : 0;
+            i1 = rankX >= 3 ? 1 : 0;
+            j1 = rankY >= 3 ? 1 : 0;
+            k1 = rankZ >= 3 ? 1 : 0;
+            l1 = rankW >= 3 ? 1 : 0;
 
             // Rank 2 denotes the second largest coordinate.
 
-            i2 = rankx >= 2 ? 1 : 0;
-            j2 = ranky >= 2 ? 1 : 0;
-            k2 = rankz >= 2 ? 1 : 0;
-            l2 = rankw >= 2 ? 1 : 0;
+            i2 = rankX >= 2 ? 1 : 0;
+            j2 = rankY >= 2 ? 1 : 0;
+            k2 = rankZ >= 2 ? 1 : 0;
+            l2 = rankW >= 2 ? 1 : 0;
 
             // Rank 1 denotes the second smallest coordinate.
 
-            i3 = rankx >= 1 ? 1 : 0;
-            j3 = ranky >= 1 ? 1 : 0;
-            k3 = rankz >= 1 ? 1 : 0;
-            l3 = rankw >= 1 ? 1 : 0;
+            i3 = rankX >= 1 ? 1 : 0;
+            j3 = rankY >= 1 ? 1 : 0;
+            k3 = rankZ >= 1 ? 1 : 0;
+            l3 = rankW >= 1 ? 1 : 0;
 
             float x1 = x0 - i1 + G4; // Offsets for second corner in (x,y,z,w) coords
             float y1 = y0 - j1 + G4;

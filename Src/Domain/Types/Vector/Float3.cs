@@ -65,6 +65,16 @@ namespace CXUtils.Domain.Types
         public static Float3 UnitZ    => new Float3( z: 1f );
         public static Float3 NegUnitZ => new Float3( z: -1f );
 
+		public float Sum => x + y + z;
+
+		public float MaxPart => x > y ?
+			(x > z ? x : z) :
+			(y > z ? y : z);
+
+		public float MinPart => x < y ?
+			(x < z ? x : z) :
+			(y < z ? y : z);
+
         public Float2 LeftFloat2  => new Float2( x, y );
         public Float2 RightFloat2 => new Float2( y, z );
         public Int3   FloorInt    => new Int3( x.FloorInt(), y.FloorInt(), z.FloorInt() );

@@ -10,7 +10,7 @@
         /// </summary>
         public const float PI = 3.1415926535897932384626433f;
 
-        public const float HALF_PI = PI / 2f;
+        public const float HalfPI = PI / 2f;
 
         /// <summary>
         ///     Double PI
@@ -26,7 +26,7 @@
         /// <summary>
         ///     Constant for converting from degrees to radians
         /// </summary>
-        public const float DEG_TO_RAD = 0.01745329251994329576922f;
-        public const float RAD_TO_DEG = 57.2957795130823208768463f;
+        public const float DegToRad = 0.01745329251994329576922f;
+        public const float RadToDeg = 57.2957795130823208768463f;
     }
 }

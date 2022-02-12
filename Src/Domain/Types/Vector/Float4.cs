@@ -77,6 +77,16 @@ namespace CXUtils.Domain.Types
         public Float4 Ceil  => new Float4( x.Ceil(), y.Ceil(), z.Ceil(), w.Floor() );
         public Float4 Halve => this * .5f;
 
+		public float Sum => x + y + z + w;
+		
+		public float MaxPart => x > y ?
+			(x > z ? (x > w ? x : w) : (z > w ? z : w)) :
+			(y > z ? (y > w ? y : w) : (z > w ? z : w));
+
+		public float MinPart => x < y ?
+			(x < z ? (x < w ? x : w) : (z < w ? z : w)) :
+			(y < z ? (y < w ? y : w) : (z < w ? z : w));
+
         public float SqrMagnitude => x * x + y * y + z * z;
         public float Magnitude    => (float)Math.Sqrt( SqrMagnitude );
 

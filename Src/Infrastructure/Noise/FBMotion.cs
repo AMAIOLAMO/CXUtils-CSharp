@@ -11,7 +11,7 @@ namespace CXUtils.Infrastructure
         /// <summary>
         ///     Samples from a <paramref name="sampler"/> given using fractal brownian motion
         /// </summary>
-        public static float Sample(Float2 value, Func<Float2, float> sampler, float amplitude = .5f, int octaves = 2)
+        public static float Sample(Float2 value, in Func<Float2, float> sampler, float amplitude = .5f, int octaves = 2)
         {
             float result = 0f;
 

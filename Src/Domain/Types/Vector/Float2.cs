@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using CXUtils.Common;
+
 #if CXUTILS_UNSAFE
 using CXUtils.Debugging;
 #endif
@@ -28,12 +29,13 @@ namespace CXUtils.Domain.Types
         public static Float2 One     => (Float2)1f;
         public static Float2 Half    => (Float2).5f;
         public static Float2 Quarter => (Float2).25f;
-
-        public static Float2 UnitY    => new Float2( y: 1f );
+		
+		public static Float2 UnitY    => new Float2( y: 1f );
         public static Float2 NegUnitY => new Float2( y: -1f );
         public static Float2 UnitX    => new Float2( 1f );
         public static Float2 NegUnitX => new Float2( -1f );
 
+		
         public float this[ int index ]
         {
             get
@@ -58,6 +60,9 @@ namespace CXUtils.Domain.Types
                 #endif
             }
         }
+		public float Sum     => x + y;
+		public float MaxPart => x > y ? x : y;
+		public float MinPart => x < y ? x : y;
 
         public Int2 FloorInt => new Int2( x.FloorInt(), y.FloorInt() );
         public Int2 CeilInt  => new Int2( x.CeilInt(), y.CeilInt() );
@@ -109,7 +114,7 @@ namespace CXUtils.Domain.Types
         public float Dot( Float2 other ) => x * other.x + y * other.y;
 
         /// <summary>
-        ///     unlike the cross product of a vector 3, this gives the z length
+        ///     unlike the cross product of a Float3, this gives the z length
         /// </summary>
         public float Cross( Float2 other ) => x * other.y - y * other.x;
         public Float2 Reflect( Float2 normal ) => this - 2f * Dot( normal ) * normal;

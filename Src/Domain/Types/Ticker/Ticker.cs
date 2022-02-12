@@ -2,40 +2,40 @@ using System;
 
 namespace CXUtils.Common
 {
-    /// <summary>
-    ///     A floating point driven Ticker
-    /// </summary>
-    public class Ticker : ITicker<float>
-    {
-        public Ticker() => Span = 0f;
+	/// <summary>
+	///     A floating point driven Ticker
+	/// </summary>
+	public class Ticker : ITicker<float>
+	{
+		public Ticker() => Span = 0f;
 
-        public Ticker(ITicker<float> other) => Span = other.Span;
+		public Ticker(ITicker<float> other) => Span = other.Span;
 
-        public float Span { get; private set; }
+		public float Span { get; private set; }
 
-        public bool Tick(float delta, float max)
-        {
-            Span += delta;
+		public bool Tick(float delta, float max)
+		{
+			Span += delta;
 
-            //if current Timer is not over max timer
-            if(Span < max) return false;
+			//if current Timer is not over max timer
+			if (Span < max) return false;
 
-            Span -= max;
+			Span -= max;
 
-            OnTriggered?.Invoke();
+			MaxTicked?.Invoke();
 
-            return true;
-        }
+			return true;
+		}
 
-        public void SetSpan(float span) => Span = span;
+		public void SetSpan(float span) => Span = span;
 
-        public void Reset() => Span = 0f;
+		public void Reset() => Span = 0f;
 
-        public string ToString(string format, IFormatProvider formatProvider) =>
-            "Current Span: " + Span.ToString(format, formatProvider);
+		public string ToString(string format, IFormatProvider formatProvider) =>
+			"Current Span: " + Span.ToString(format, formatProvider);
 
-        public event Action OnTriggered;
+		public event Action MaxTicked;
 
-        public override string ToString() => "Current Span: " + Span;
-    }
+		public override string ToString() => "Current Span: " + Span;
+	}
 }
