@@ -13,7 +13,12 @@ namespace CXUtils.Common
 
 		public float Span { get; private set; }
 
-		public bool Tick(float delta, float max)
+		public void Tick(float delta)
+		{
+			Span += delta;
+		}
+		
+		public bool TickMax(float delta, float max)
 		{
 			Span += delta;
 

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using CXUtils.Domain;
-
 #if DEBUG
 using CXUtils.Common;
 #endif
@@ -13,42 +12,42 @@ namespace CXUtils.Infrastructure
 	/// </summary>
 	public abstract class PoolBase<T> : IPoolBase<T>
 	{
-		readonly IPoolItemFactory<T>   _itemFactory;
-		readonly IPoolObjectFactory<T> _poolObjectFactory;
+		readonly IPoolItemFactory<T>   itemFactory;
+		readonly IPoolObjectFactory<T> poolObjectFactory;
 
-		readonly object _lock = new();
+		readonly object @lock = new();
 
 		#if DEBUG
 		readonly HashSet<IPoolObject<T>> _occupiedObjects;
 		#endif
-		
-		readonly Queue<T> _poolObjects;
+
+		readonly Queue<T> poolObjects;
 
 		protected PoolBase(IPoolItemFactory<T> itemFactory, IPoolObjectFactory<T> poolObjectFactory)
 		{
-			_poolObjects = new Queue<T>();
+			poolObjects = new Queue<T>();
 			#if DEBUG
 			_occupiedObjects = new HashSet<IPoolObject<T>>();
 			#endif
 
-			_itemFactory = itemFactory;
-			_poolObjectFactory = poolObjectFactory;
+			this.itemFactory = itemFactory;
+			this.poolObjectFactory = poolObjectFactory;
 		}
 
-		public int Count => _poolObjects.Count;
+		public int Count => poolObjects.Count;
 
 		public IPoolObject<T> Pop()
 		{
-			Debug.Assert(_poolObjects.Count != 0, "cannot pop from an empty pool!");
+			Debug.Assert(poolObjects.Count != 0, "cannot pop from an empty pool!");
 
 			IPoolObject<T> poolObject;
 
-			lock (_lock)
+			lock (@lock)
 			{
 			#if DEBUG
 				_occupiedObjects.Add(poolObject = _poolObjectFactory.Create(_poolObjects.Dequeue(), this));
 			#else
-				poolObject = _poolObjectFactory.Create(_poolObjects.Dequeue(), this);
+				poolObject = poolObjectFactory.Create(poolObjects.Dequeue(), this);
 			#endif
 			}
 
@@ -69,10 +68,10 @@ namespace CXUtils.Infrastructure
 			_occupiedObjects.Remove(poolObject);
 			#endif
 			//then put in pool
-			_poolObjects.Enqueue(_itemFactory.Release(poolObject.Get()));
+			poolObjects.Enqueue(itemFactory.Release(poolObject.Get()));
 		}
 
-		void Push(T item) => _poolObjects.Enqueue(item);
+		void Push(T item) => poolObjects.Enqueue(item);
 
         #if DEBUG
         ~PoolBase()
@@ -84,9 +83,12 @@ namespace CXUtils.Infrastructure
         }
         #endif
 
+		/// <summary>
+		///     Populates the pool using <see cref="itemFactory" />
+		/// </summary>
 		protected void Populate(int amount)
 		{
-			for (int i = 0; i < amount; ++i) Push(_itemFactory.Create());
+			for (int i = 0; i < amount; ++i) Push(itemFactory.Create());
 		}
 	}
 }

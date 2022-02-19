@@ -11,15 +11,15 @@ namespace CXUtils.Domain.Types
     [StructLayout( LayoutKind.Explicit )]
     public readonly struct LineFloat3
     {
-        [FieldOffset( 0 )]  public readonly Float3 positionA;
-        [FieldOffset( 12 )] public readonly Float3 positionB;
-        public LineFloat3( Float3 positionA, Float3 positionB ) => ( this.positionA, this.positionB ) = ( positionA, positionB );
+        [FieldOffset( 0 )]  public readonly Float3 a;
+        [FieldOffset( 12 )] public readonly Float3 b;
+        public LineFloat3( Float3 a, Float3 b ) => ( this.a, this.b ) = ( a, b );
 
         /// <summary>
         ///     Samples a point in between the two points using <paramref name="t" />
         /// </summary>
-        public Float3 Sample( float t ) => positionA.Lerp( positionB, t );
+        public Float3 Sample( float t ) => a.Lerp( b, t );
 
-        public static implicit operator LineFloat3( LineFloat2 value ) => new LineFloat3( value.positionA, value.positionB );
+        public static implicit operator LineFloat3( LineFloat2 value ) => new LineFloat3( value.a, value.b );
     }
 }

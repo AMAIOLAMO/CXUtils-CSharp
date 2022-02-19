@@ -4,8 +4,8 @@ namespace CXUtils.Common
 {
     public static class CommonPools
     {
-        static StringBuilderPool _stringBuilderPool;
+        static StringBuilderPool stringBuilderPool;
 
-        public static StringBuilderPool StringBuilder => _stringBuilderPool ??= CommonPoolFactory.CreateStringBuilder();
+        public static StringBuilderPool StringBuilder => stringBuilderPool ??= CommonPoolFactory.CreateStringBuilder();
     }
 }

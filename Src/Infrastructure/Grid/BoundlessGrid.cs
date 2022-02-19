@@ -19,19 +19,19 @@ namespace CXUtils.Infrastructure
             get => this[new Int2( x, y )];
             set => this[new Int2( x, y )] = value;
         }
-        public override T this[ Int2 cellPosition ]
+        public override T this[ Int2 cell ]
         {
-            get => _gridDictionary[cellPosition];
+            get => _gridDictionary[cell];
             set
             {
-                if ( _gridDictionary.ContainsKey( cellPosition ) )
+                if ( _gridDictionary.ContainsKey( cell ) )
                 {
-                    _gridDictionary[cellPosition] = value;
+                    _gridDictionary[cell] = value;
                     return;
                 }
 
                 //else
-                _gridDictionary.Add( cellPosition, value );
+                _gridDictionary.Add( cell, value );
             }
         }
 

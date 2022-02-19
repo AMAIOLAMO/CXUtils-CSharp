@@ -32,20 +32,20 @@ namespace CXUtils.Infrastructure
 
         #region Fields
 
-        readonly T[,] _gridArray;
+        readonly T[,] data;
         public   int  Width  { get; }
         public   int  Height { get; }
 
         public override T this[ int x, int y ]
         {
-            get => _gridArray[x, y];
-            set => _gridArray[x, y] = value;
+            get => data[x, y];
+            set => data[x, y] = value;
         }
 
-        public override T this[ Int2 cellPosition ]
+        public override T this[ Int2 cell ]
         {
-            get => _gridArray[cellPosition.x, cellPosition.y];
-            set => _gridArray[cellPosition.x, cellPosition.y] = value;
+            get => data[cell.x, cell.y];
+            set => data[cell.x, cell.y] = value;
         }
 
 
@@ -66,13 +66,13 @@ namespace CXUtils.Infrastructure
         public BoundGrid( int width, int height, Float2 cellSize, Float2 origin = default ) : base( cellSize, origin )
         {
             ( Width, Height ) = ( width, height );
-            _gridArray = new T[Width, Height];
+            data = new T[Width, Height];
         }
 
         public BoundGrid( Int2 gridSize, Float2 cellSize, Float2 origin = default ) : base( cellSize, origin )
         {
             ( Width, Height ) = ( gridSize.x, gridSize.y );
-            _gridArray = new T[Width, Height];
+            data = new T[Width, Height];
         }
 
         #endregion
@@ -90,7 +90,7 @@ namespace CXUtils.Infrastructure
             if ( !CellValid( x, y ) )
                 return false;
 
-            _gridArray[x, y] = value;
+            data[x, y] = value;
             return true;
         }
 
@@ -112,7 +112,7 @@ namespace CXUtils.Infrastructure
         {
             if ( CellValid( x, y ) )
             {
-                value = _gridArray[x, y];
+                value = data[x, y];
                 return true;
             }
             value = default;
@@ -140,24 +140,24 @@ namespace CXUtils.Infrastructure
         {
             for ( int x = 0; x < Width; ++x )
                 for ( int y = 0; y < Height; ++y )
-                    _gridArray[x, y] = value;
+                    data[x, y] = value;
         }
 
-        public void Fill( Func<int, int, T> fillFunction )
+        public void Fill( in Func<int, int, T> fillFunc )
         {
             for ( int x = 0; x < Width; ++x )
                 for ( int y = 0; y < Height; ++y )
-                    _gridArray[x, y] = fillFunction( x, y );
+                    data[x, y] = fillFunc( x, y );
         }
 
         /// <summary>
         ///     Uses this function onto all the values on the grid
         /// </summary>
-        public void Map( Func<BoundGrid<T>, int, int, T> mapFunction )
+        public void Map( Func<BoundGrid<T>, int, int, T> mapFunc )
         {
             for ( int x = 0; x < Width; ++x )
                 for ( int y = 0; y < Height; ++y )
-                    _gridArray[x, y] = mapFunction.Invoke( this, x, y );
+                    data[x, y] = mapFunc.Invoke( this, x, y );
         }
 
         #endregion
@@ -165,13 +165,13 @@ namespace CXUtils.Infrastructure
         #region Bounds
 
         /// <summary>
-        ///     Get grid's bounds on world position
+        ///     Get grid's bounds on global position
         /// </summary>
-        public AABBFloat2 GetWorldBounds()
+        public AABBFloat2 GetGlobalBounds()
         {
-            var boundCenter = Origin + (Float2)GridSize * .5f;
+            Float2 center = Origin + (Float2)GridSize * .5f;
 
-            return new AABBFloat2( boundCenter, (Float2)GridSize );
+            return new AABBFloat2( center, (Float2)GridSize );
         }
 
         /// <summary>

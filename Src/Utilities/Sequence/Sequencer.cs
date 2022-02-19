@@ -1,54 +1,70 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace CXUtils.Common
 {
-    /// <summary>
-    ///     A class that is used to enumerate through triggers / <see cref="Action" />
-    /// </summary>
-    public class Sequencer : IEnumerable<Action>
-    {
-        readonly Queue<Action> _actionList;
+	/// <summary>
+	///     A class that is used to enumerate through a list of <see cref="Action" />
+	/// </summary>
+	public class Sequencer : IEnumerable<Action>
+	{
+		public Sequencer() =>
+			actions = new List<Action>();
+		public Sequencer(int capacity) =>
+			actions = new List<Action>(capacity);
+		public Sequencer(IEnumerable<Action> collection) =>
+			actions = new List<Action>(collection);
 
-        public Sequencer() => _actionList = new Queue<Action>();
-        public IEnumerator<Action> GetEnumerator() => new SequencerEnumerator( _actionList );
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+		public IEnumerator<Action> GetEnumerator() => new Enumerator(actions);
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public Sequencer Append( Action action )
-        {
-            _actionList.Enqueue( action );
-            return this;
-        }
+		public Sequencer Append(Action action)
+		{
+			actions.Add(action);
+			return this;
+		}
 
-        public IEnumerator<Action> Enumerate()
-        {
-            var sequenceQueue = new Queue<Action>( _actionList );
-            
-            while ( sequenceQueue.Count != 0 ) yield return sequenceQueue.Dequeue();
-        }
+		public Sequencer RemoveAt(int index)
+		{
+			actions.RemoveAt(index);
+			return this;
+		}
 
-        class SequencerEnumerator : IEnumerator<Action>
-        {
-            readonly Queue<Action> _originalQueue;
-            Queue<Action>          _actionQueue;
-            public SequencerEnumerator( Queue<Action> actions )
-            {
-                _originalQueue = actions;
-                _actionQueue = new Queue<Action>( actions );
-            }
-            public bool MoveNext()
-            {
-                if ( _actionQueue.Count == 0 ) return false;
+		public Action this[int index]
+		{
+			get => actions[index];
+			set => actions[index] = value;
+		}
 
-                Current = _actionQueue.Dequeue();
-                return true;
-            }
-            public void Reset() => _actionQueue = new Queue<Action>( _originalQueue );
-            public Action Current { get; private set; }
-            object IEnumerator.Current => Current;
-            public void Dispose() { }
-        }
-    }
+		public int Capacity => actions.Capacity;
+
+		public int Count => actions.Count;
+
+		readonly List<Action> actions;
+
+		class Enumerator : IEnumerator<Action>
+		{
+			public Enumerator(IReadOnlyList<Action> actions) => this.actions = actions;
+
+			public bool MoveNext()
+			{
+				index++;
+
+				return index < actions.Count;
+			}
+
+			public void Reset() => index = 0;
+
+			public Action Current => actions[index];
+
+			object IEnumerator.Current => Current;
+
+			public void Dispose() { }
+
+			readonly IReadOnlyList<Action> actions;
+
+			int index;
+		}
+	}
 }

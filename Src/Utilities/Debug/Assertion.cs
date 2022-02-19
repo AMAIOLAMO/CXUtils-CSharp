@@ -16,6 +16,14 @@ namespace CXUtils.Debugging
 
 			throw new Exception(message);
 		}
+		
+		[Conditional("DEBUG")]
+		public static void Assert(bool condition)
+		{
+			if (condition) return;
+
+			throw new Exception();
+		}
 
 		[Conditional("DEBUG")]
 		public static void AssertError(bool condition, Exception exception)

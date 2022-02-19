@@ -1,27 +1,42 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 using CXUtils.Common;
+using CXUtils.Debugging;
 
 namespace CXUtils.Domain.Types.Range
 {
-    [Serializable]
-    [StructLayout( LayoutKind.Explicit )]
-    public readonly struct RangeDouble : IRangeType<double>
-    {
-        public RangeDouble( double min, double max ) => ( Min, Max ) = ( min, max );
+	[Serializable]
+	[StructLayout(LayoutKind.Explicit)]
+	public readonly struct RangeDouble
+	{
+		public RangeDouble(double min, double max)
+		{
+			Assertion.Assert(max >= min);
+			(this.min, this.max) = (min, max);
+		}
 
-        [field: FieldOffset( 0 )] public double Min { get; }
-        [field: FieldOffset( 8 )] public double Max { get; }
+		[Pure] public double Clamp(double value) => MathUtils.Clamp(value, min, max);
+		[Pure] public bool Contains(double value) => !(value < min || value > max);
+		[Pure] public double Loop(double value) => (value - min).Loop(max - min);
 
-        public double Delta => Max - Min;
+		[Pure] public double Sample(double x) => Tween.Lerp(min, max, x);
 
-        public double Clamp( double value ) => MathUtils.Clamp( value, Min, Max );
-        public bool Intersect( double value ) => !( value < Min || value > Max );
-        public double Loop( double value ) => ( value - Min ).Loop( Max - Min );
+		[Pure] public double MapFrom(double value, RangeDouble inRange) =>
+			MathUtils.Map(value, inRange.min, inRange.max, min, max);
+		[Pure] public double MapFrom(double value, double inMin, double inMax) =>
+			MathUtils.Map(value, inMin, inMax, min, max);
+		[Pure] public double MapTo(double value, RangeDouble outRange) =>
+			MathUtils.Map(value, min, max, outRange.min, outRange.max);
+		[Pure] public double MapTo(double value, double outMin, double outMax) =>
+			MathUtils.Map(value, min, max, outMin, outMax);
 
-        public double MapFrom( double value, IRangeType<double> inRange ) => MathUtils.Map( value, inRange.Min, inRange.Max, Min, Max );
-        public double MapFrom( double value, double inMin, double inMax ) => MathUtils.Map( value, inMin, inMax, Min, Max );
-        public double MapTo( double value, IRangeType<double> outRange ) => MathUtils.Map( value, Min, Max, outRange.Min, outRange.Max );
-        public double MapTo( double value, double outMin, double outMax ) => MathUtils.Map( value, Min, Max, outMin, outMax );
-    }
+		[Pure] public static RangeDouble One      => new(0d, 1d);
+		[Pure] public static RangeDouble Polarity => new(-1d, 1d);
+
+		[Pure] public double Range => max - min;
+
+		[FieldOffset(0)] public readonly double min;
+		[FieldOffset(8)] public readonly double max;
+	}
 }

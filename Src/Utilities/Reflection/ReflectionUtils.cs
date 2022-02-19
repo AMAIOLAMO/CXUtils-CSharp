@@ -11,7 +11,7 @@ namespace CXUtils.Utilities
     {
         #region Attributes
 
-        public static IEnumerable<MethodInfo> GetMethodsFromCallingAssemblyWithAttributesOf<T>( BindingFlags flags ) where T : Attribute =>
+        public static IEnumerable<MethodInfo> GetMethodsFromCallingAssembly<T>( BindingFlags flags ) where T : Attribute =>
             from type in Assembly.GetCallingAssembly().GetTypes()
             from method in type.GetMethods( flags )
             from attribute in method.GetCustomAttributes<T>()

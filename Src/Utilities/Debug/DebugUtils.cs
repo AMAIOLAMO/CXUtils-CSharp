@@ -2,7 +2,8 @@
 {
 	public static class DebugUtils
 	{
-		static        ConsoleLogger _consoleLogger;
-		public static ConsoleLogger ConsoleLogger => _consoleLogger ??= new ConsoleLogger();
+		static ConsoleLogger consoleLogger;
+
+		public static ConsoleLogger ConsoleLogger => consoleLogger ??= new ConsoleLogger();
 	}
 }

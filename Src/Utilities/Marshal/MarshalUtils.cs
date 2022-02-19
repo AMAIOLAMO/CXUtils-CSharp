@@ -9,7 +9,7 @@ namespace CXUtils.Utilities
         /// </summary>
         public static T FromBytes<T>( byte[] bytes )
         {
-            var gcHandle = GCHandle.Alloc( bytes, GCHandleType.Pinned );
+            GCHandle gcHandle = GCHandle.Alloc( bytes, GCHandleType.Pinned );
             var structure = Marshal.PtrToStructure<T>( gcHandle.AddrOfPinnedObject() );
             gcHandle.Free();
             return structure;

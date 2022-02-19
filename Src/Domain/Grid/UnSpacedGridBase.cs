@@ -1,22 +1,24 @@
-﻿using CXUtils.Domain;
-using CXUtils.Domain.Types;
+﻿using CXUtils.Domain.Types;
 
 namespace CXUtils.Domain
 {
-    public abstract class UnSpacedGridBase<T> : GridBase<T>
-    {
-        protected UnSpacedGridBase( Float2 cellSize, Float2 origin = default ) : base( cellSize, origin ) { }
+	/// <summary>
+	///     Represents a grid where no space are in between
+	/// </summary>
+	public abstract class UnSpacedGridBase<T> : GridBase<T>
+	{
+		protected UnSpacedGridBase(Float2 cellSize, Float2 origin = default) : base(cellSize, origin) { }
 
-        public override Float2 CellToWorld( int x, int y ) => new Float2( x, y ) * CellSize + Origin;
-        public override Float2 CellToWorld( Int2 cellPosition ) => (Float2)cellPosition * CellSize + Origin;
+		public override Float2 CellToGlobal(int x, int y) => new Float2(x, y) * CellSize + Origin;
+		public override Float2 CellToGlobal(Int2 cell) => (Float2)cell * CellSize + Origin;
 
-        public override Int2 WorldToCell( float x, float y ) => ( WorldToLocal( x, y ) / CellSize ).FloorInt;
-        public override Int2 WorldToCell( Float2 worldPosition ) => ( WorldToLocal( worldPosition ) / CellSize ).FloorInt;
+		public override Int2 GlobalToCell(float x, float y) => (GlobalToLocal(x, y) / CellSize).FloorInt;
+		public override Int2 GlobalToCell(Float2 global) => (GlobalToLocal(global) / CellSize).FloorInt;
 
-        public override Float2 LocalToWorld( float x, float y ) => new Float2( x, y ) + Origin;
-        public override Float2 LocalToWorld( Float2 localPosition ) => localPosition + Origin;
+		public override Float2 LocalToGlobal(float x, float y) => new Float2(x, y) + Origin;
+		public override Float2 LocalToGlobal(Float2 local) => local + Origin;
 
-        public override Float2 WorldToLocal( float x, float y ) => new Float2( x, y ) - Origin;
-        public override Float2 WorldToLocal( Float2 worldPosition ) => worldPosition - Origin;
-    }
+		public override Float2 GlobalToLocal(float x, float y) => new Float2(x, y) - Origin;
+		public override Float2 GlobalToLocal(Float2 global) => global - Origin;
+	}
 }

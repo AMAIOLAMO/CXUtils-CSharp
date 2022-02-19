@@ -8,20 +8,20 @@
         /// <summary>
         ///     Half TAU
         /// </summary>
-        public const float PI = 3.1415926535897932384626433f;
+        public const float Pi = 3.1415926535897932384626433f;
 
-        public const float HalfPI = PI / 2f;
+        public const float HalfPi = Pi / 2f;
 
         /// <summary>
         ///     Double PI
         /// </summary>
-        public const float TAU = 6.28318530717958647692f;
+        public const float Tau = 6.28318530717958647692f;
 
         /// <summary>
         ///     Euler's number
         /// </summary>
         public const float E = 2.71828182845904523536f;
-        public const float PHI = 1.61803398874989484820f;
+        public const float Phi = 1.61803398874989484820f;
 
         /// <summary>
         ///     Constant for converting from degrees to radians

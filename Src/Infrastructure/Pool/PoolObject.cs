@@ -3,48 +3,48 @@ using CXUtils.Domain;
 
 namespace CXUtils.Infrastructure
 {
-    /// <summary>
-    ///     A wrapper around the pooled object so that it could be disposed
-    /// </summary>
-    public sealed class PoolObject<T> : IPoolObject<T>
-    {
-        readonly IPoolBase<T> _rootPool;
-        readonly T            _pooledObject;
+	/// <summary>
+	///     A wrapper around the pooled object so that it could be automatically disposed
+	/// </summary>
+	public sealed class PoolObject<T> : IPoolObject<T>
+	{
+		public PoolObject(T value, IPoolBase<T> root)
+		{
+			pooledObject = value;
+			rootPool = root;
+		}
 
-        bool _isDisposed;
+		public void Dispose()
+		{
+			if (disposed) return;
 
-        public PoolObject( T value, IPoolBase<T> root )
-        {
-            _pooledObject = value;
-            _rootPool = root;
-        }
+			disposed = true;
+			rootPool.Free(this);
+		}
 
-        public void Dispose()
-        {
-            if ( _isDisposed ) return;
+		public T Get() => pooledObject;
+		
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int hashCode = EqualityComparer<T>.Default.GetHashCode(pooledObject);
+				hashCode = (hashCode * 397) ^ (rootPool != null ? rootPool.GetHashCode() : 0);
+				return hashCode;
+			}
+		}
 
-            _isDisposed = true;
-            _rootPool.Free( this );
-        }
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
 
-        public T Get() => _pooledObject;
+			return obj.GetType() == GetType() && Equals((PoolObject<T>)obj);
+		}
+		readonly IPoolBase<T> rootPool;
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hashCode = EqualityComparer<T>.Default.GetHashCode( _pooledObject );
-                hashCode = ( hashCode * 397 ) ^ ( _rootPool != null ? _rootPool.GetHashCode() : 0 );
-                return hashCode;
-            }
-        }
-        
-        public override bool Equals( object obj )
-        {
-            if ( ReferenceEquals( null, obj ) ) return false;
-            if ( ReferenceEquals( this, obj ) ) return true;
+		readonly T pooledObject;
 
-            return obj.GetType() == GetType() && Equals( (PoolObject<T>)obj );
-        }
-    }
+		bool disposed;
+	}
 }

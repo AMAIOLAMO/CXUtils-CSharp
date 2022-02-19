@@ -13,9 +13,9 @@ namespace CXUtils.Common
         ///     Ticks the timer using the given <see cref="delta" /> <br />
         ///     NOTE: this method requires you to reset the timer yourself, <br />
         ///     or else when the timer is over it will trigger <see cref="Ticker.MaxTicked" /> every single
-        ///     <see cref="Ticker.Tick" /> call
+        ///     <see cref="Ticker.TickMax" /> call
         /// </summary>
-        bool Tick( TSpan delta, TSpan max );
+        bool TickMax( TSpan delta, TSpan max );
 
         void SetSpan( TSpan span );
 
