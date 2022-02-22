@@ -13,13 +13,13 @@ namespace CXUtils.Utilities
         /// <summary>
         ///     Samples a plane position and converts to a world position according to the plane
         /// </summary>
-        public static Float3 ToFloat3( Float2 planePosition, DimensionType type )
+        public static Float3 To( Float2 position, DimensionType type )
         {
             switch ( type )
             {
-                case DimensionType.XY: return planePosition;
-                case DimensionType.XZ: return planePosition.X_Y();
-                case DimensionType.YZ: return planePosition._XY();
+                case DimensionType.XY: return position;
+                case DimensionType.XZ: return position.X_Y();
+                case DimensionType.YZ: return position._XY();
 
                 default: throw ExceptionUtils.PossibilityNotImplemented;
             }

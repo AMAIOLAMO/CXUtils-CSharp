@@ -13,7 +13,7 @@ namespace CXUtils.Domain.Types
     /// </summary>
     [Serializable]
     [StructLayout( LayoutKind.Explicit )]
-    public readonly struct Float2 : ITypeVectorFloat<Float2>
+    public readonly struct Float2 : IVectorFloat<Float2>
     {
         [FieldOffset( 0 )] public readonly float x;
         [FieldOffset( 4 )] public readonly float y;

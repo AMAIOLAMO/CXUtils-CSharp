@@ -223,6 +223,11 @@ namespace CXUtils.Common
         /// </summary>
         public static float MapNeg11To01( float value ) => value * .5f + .5f;
 
+		/// <summary>
+		///     Maps the given value from (0 ~ 1) to some output
+		/// </summary>
+		public static float Map01( float value, float outMin, float outMax ) => value * (outMax - outMin) + outMin;
+		
         public static float Clamp( float value, float min, float max ) => value < min ? min : value > max ? max : value;
         public static double Clamp( double value, double min, double max ) => value < min ? min : value > max ? max : value;
         public static int Clamp( int value, int min, int max ) => value < min ? min : value > max ? max : value;

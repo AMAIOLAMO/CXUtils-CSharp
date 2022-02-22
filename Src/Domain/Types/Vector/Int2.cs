@@ -13,7 +13,7 @@ namespace CXUtils.Domain.Types
     /// </summary>
     [Serializable]
     [StructLayout( LayoutKind.Explicit )]
-    public readonly struct Int2 : ITypeVectorInt<Int2>
+    public readonly struct Int2 : IVectorInt<Int2>
     {
         [FieldOffset( 0 )] public readonly int x;
         [FieldOffset( 4 )] public readonly int y;

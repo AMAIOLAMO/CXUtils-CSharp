@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CXUtils.Domain.Types
 {
-    public interface ITypeVector<T, TValue> : IEquatable<T>, IFormattable
+    public interface IVector<T, TValue> : IEquatable<T>, IFormattable
     {
         T Min( T other );
         T Max( T other );
@@ -15,11 +15,11 @@ namespace CXUtils.Domain.Types
         TValue Dot( T other );
     }
 
-    public interface ITypeVectorInt<T> : ITypeVector<T, int>, IEnumerable<T>
+    public interface IVectorInt<T> : IVector<T, int>, IEnumerable<T>
     {
     }
 
-    public interface ITypeVectorFloat<T> : ITypeVector<T, float>
+    public interface IVectorFloat<T> : IVector<T, float>
     {
         T Normalized { get; }
 
