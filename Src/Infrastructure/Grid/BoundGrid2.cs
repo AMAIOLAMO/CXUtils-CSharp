@@ -188,25 +188,5 @@ namespace CXUtils.Infrastructure
 		}
 
 		#endregion
-
-		#region Bounds
-
-		/// <summary>
-		///     Get grid's bounds on global position
-		/// </summary>
-		public AABBFloat2 GetGlobalBounds()
-		{
-			Float2 center = LocalToGlobal(WholeSize * .5f);
-
-			return new AABBFloat2(center, (Float2)GridSize);
-		}
-
-		/// <summary>
-		///     Get grid's bounds on grid position
-		/// </summary>
-		public AABBFloat2 GetLocalBounds() =>
-			new AABBFloat2((Float2)0f, (Float2)GridSize);
-
-		#endregion
 	}
 }
