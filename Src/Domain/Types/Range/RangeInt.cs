@@ -34,8 +34,8 @@ namespace CXUtils.Domain.Types.Range
 
 		#region Operator Overloading
 
-		public static explicit operator RangeInt(RangeFloat range) => new((int)range.min, (int)range.max);
-		public static explicit operator RangeInt(RangeDouble range) => new((int)range.min, (int)range.max);
+		public static explicit operator RangeInt(RangeFloat range) => new RangeInt((int)range.min, (int)range.max);
+		public static explicit operator RangeInt(RangeDouble range) => new RangeInt((int)range.min, (int)range.max);
 
 		#endregion
 	}

@@ -8,7 +8,7 @@ namespace CXUtils.Utilities.Array
 	{
 		public static string ToFormatString<T>(this T[] array, string between = ", ")
 		{
-			using IPoolObject<StringBuilder> poolObj = CommonPools.StringBuilder.Pop(out StringBuilder builder);
+			using IPoolItem _ = CommonPools.StringBuilder.PopScope(out StringBuilder builder);
 
 			for (int i = 0; i < array.Length - 1; ++i)
 			{

@@ -31,8 +31,8 @@ namespace CXUtils.Domain.Types.Range
 		[Pure] public double MapTo(double value, double outMin, double outMax) =>
 			MathUtils.Map(value, min, max, outMin, outMax);
 
-		[Pure] public static RangeDouble One      => new(0d, 1d);
-		[Pure] public static RangeDouble Polarity => new(-1d, 1d);
+		[Pure] public static RangeDouble One      => new RangeDouble(0d, 1d);
+		[Pure] public static RangeDouble Polarity => new RangeDouble(-1d, 1d);
 
 		[Pure] public double Range => max - min;
 

@@ -31,11 +31,11 @@ namespace CXUtils.Domain.Types.Range
 		[Pure] public float MapTo(float value, float outMin, float outMax) =>
 			MathUtils.Map(value, min, max, outMin, outMax);
 
-		public static explicit operator RangeFloat(RangeInt range) => new(range.min, range.max);
-		public static explicit operator RangeFloat(RangeDouble range) => new((float)range.min, (float)range.max);
+		public static explicit operator RangeFloat(RangeInt range) => new RangeFloat(range.min, range.max);
+		public static explicit operator RangeFloat(RangeDouble range) => new RangeFloat((float)range.min, (float)range.max);
 
-		[Pure] public static RangeFloat Normalize => new(0f, 1f);
-		[Pure] public static RangeFloat Polarity  => new(-1f, 1f);
+		[Pure] public static RangeFloat Normalize => new RangeFloat(0f, 1f);
+		[Pure] public static RangeFloat Polarity  => new RangeFloat(-1f, 1f);
 
 		[Pure] public float Range => max - min;
 

@@ -34,7 +34,7 @@ namespace CXUtils.Utilities
         public static T[] LengthZero<T>( T[] value, string nameOfValue )
         {
             #if DEBUG
-            if ( value.Length == 0 ) throw new ArgumentException( GuardMessage.MESSAGE_ARRAY_LENGTH_ZERO, nameOfValue );
+            if ( value.Length == 0 ) throw new ArgumentException( GuardMessage.MessageArrayLengthZero, nameOfValue );
             #endif
 
             return value;
@@ -43,7 +43,7 @@ namespace CXUtils.Utilities
         public static T[] LengthNotEqual<T>( T[] value, int length, string nameOfValue )
         {
             #if DEBUG
-            if ( value.Length != length ) throw new ArgumentException( GuardMessage.MESSAGE_ARRAY_LENGTH_NOT_EQUAL_TO + $" {length}", nameOfValue );
+            if ( value.Length != length ) throw new ArgumentException( GuardMessage.MessageArrayLengthNotEqualTo + $" {length}", nameOfValue );
             #endif
 
             return value;
@@ -52,7 +52,7 @@ namespace CXUtils.Utilities
         public static T[] LengthLess<T>( T[] value, int length, string nameOfValue )
         {
             #if DEBUG
-            if ( value.Length < length ) throw new ArgumentException( GuardMessage.MESSAGE_ARRAY_LENGTH_SMALLER_THAN + $" {length}", nameOfValue );
+            if ( value.Length < length ) throw new ArgumentException( GuardMessage.MessageArrayLengthSmallerThan + $" {length}", nameOfValue );
             #endif
 
             return value;
@@ -90,7 +90,7 @@ namespace CXUtils.Utilities
         public static T LengthZero<T>( T value, string nameOfValue ) where T : ICollection
         {
             #if DEBUG
-            if ( value.Count == 0 ) throw new ArgumentException( GuardMessage.MESSAGE_COLLECTION_LENGTH_ZERO, nameOfValue );
+            if ( value.Count == 0 ) throw new ArgumentException( GuardMessage.MessageCollectionLengthZero, nameOfValue );
             #endif
 
             return value;
@@ -99,7 +99,7 @@ namespace CXUtils.Utilities
         public static T LengthNotEqual<T>( T value, int length, string nameOfValue ) where T : ICollection
         {
             #if DEBUG
-            if ( value.Count != length ) throw new ArgumentException( GuardMessage.MESSAGE_COLLECTION_LENGTH_NOT_EQUAL_TO + $" {length}", nameOfValue );
+            if ( value.Count != length ) throw new ArgumentException( GuardMessage.MessageCollectionLengthNotEqualTo + $" {length}", nameOfValue );
             #endif
 
             return value;
@@ -108,7 +108,7 @@ namespace CXUtils.Utilities
         public static T LengthLess<T>( T value, int length, string nameOfValue ) where T : ICollection
         {
             #if DEBUG
-            if ( value.Count < length ) throw new ArgumentException( GuardMessage.MESSAGE_COLLECTION_LENGTH_SMALLER_THAN + $" {length}", nameOfValue );
+            if ( value.Count < length ) throw new ArgumentException( GuardMessage.MessageCollectionLengthSmallerThan + $" {length}", nameOfValue );
             #endif
 
             return value;
@@ -150,7 +150,7 @@ namespace CXUtils.Utilities
         public static int NegativeOrZero( int value, string nameOfValue )
         {
             #if DEBUG
-            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE_OR_ZERO, nameOfValue );
+            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MessageNegativeOrZero, nameOfValue );
             #endif
 
             return value;
@@ -159,7 +159,7 @@ namespace CXUtils.Utilities
         public static int Negative( int value, string nameOfValue )
         {
             #if DEBUG
-            if ( value < 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE, nameOfValue );
+            if ( value < 0 ) throw new ArgumentException( GuardMessage.MessageNegative, nameOfValue );
             #endif
 
             return value;
@@ -168,7 +168,7 @@ namespace CXUtils.Utilities
         public static int Zero( int value, string nameOfValue )
         {
             #if DEBUG
-            if ( value == 0 ) throw new ArgumentException( GuardMessage.MESSAGE_ZERO, nameOfValue );
+            if ( value == 0 ) throw new ArgumentException( GuardMessage.MessageZero, nameOfValue );
             #endif
 
             return value;
@@ -207,7 +207,7 @@ namespace CXUtils.Utilities
         public static float NegativeOrZero( float value, string nameOfValue )
         {
             #if DEBUG
-            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE_OR_ZERO, nameOfValue );
+            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MessageNegativeOrZero, nameOfValue );
             #endif
 
             return value;
@@ -216,7 +216,7 @@ namespace CXUtils.Utilities
         public static float Negative( float value, string nameOfValue )
         {
             #if DEBUG
-            if ( value < 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE, nameOfValue );
+            if ( value < 0 ) throw new ArgumentException( GuardMessage.MessageNegative, nameOfValue );
             #endif
 
             return value;
@@ -225,7 +225,7 @@ namespace CXUtils.Utilities
         public static float Zero( float value, string nameOfValue )
         {
             #if DEBUG
-            if ( value == 0f ) throw new ArgumentException( GuardMessage.MESSAGE_ZERO, nameOfValue );
+            if ( value == 0f ) throw new ArgumentException( GuardMessage.MessageZero, nameOfValue );
             #endif
 
             return value;
@@ -263,7 +263,7 @@ namespace CXUtils.Utilities
         public static double NegativeOrZero( double value, string nameOfValue )
         {
             #if DEBUG
-            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE_OR_ZERO, nameOfValue );
+            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MessageNegativeOrZero, nameOfValue );
             #endif
 
             return value;
@@ -272,7 +272,7 @@ namespace CXUtils.Utilities
         public static double Negative( double value, string nameOfValue )
         {
             #if DEBUG
-            if ( value < 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE, nameOfValue );
+            if ( value < 0 ) throw new ArgumentException( GuardMessage.MessageNegative, nameOfValue );
             #endif
 
             return value;
@@ -281,7 +281,7 @@ namespace CXUtils.Utilities
         public static double Zero( double value, string nameOfValue )
         {
             #if DEBUG
-            if ( value == 0d ) throw new ArgumentException( GuardMessage.MESSAGE_ZERO, nameOfValue );
+            if ( value == 0d ) throw new ArgumentException( GuardMessage.MessageZero, nameOfValue );
             #endif
 
             return value;
@@ -361,7 +361,7 @@ namespace CXUtils.Utilities
         public static string NullOrEmpty( string value, string nameOfValue )
         {
             #if DEBUG
-            if ( string.IsNullOrEmpty( value ) ) throw new ArgumentException( GuardMessage.MESSAGE_NULL_OR_EMPTY, nameOfValue );
+            if ( string.IsNullOrEmpty( value ) ) throw new ArgumentException( GuardMessage.MessageNullOrEmpty, nameOfValue );
             #endif
 
             return value;
@@ -379,7 +379,7 @@ namespace CXUtils.Utilities
         public static string NullOrWhiteSpace( string value, string nameOfValue )
         {
             #if DEBUG
-            if ( string.IsNullOrWhiteSpace( value ) ) throw new ArgumentException( GuardMessage.MESSAGE_NULL_OR_WHITESPACE, nameOfValue );
+            if ( string.IsNullOrWhiteSpace( value ) ) throw new ArgumentException( GuardMessage.MessageNullOrWhitespace, nameOfValue );
             #endif
 
             return value;
