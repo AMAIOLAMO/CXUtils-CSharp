@@ -19,7 +19,7 @@ namespace CXUtils.Domain.Types
 			SetLoop(isLoop);
 		}
 
-		public CubicBezier2 GetSegment(int i) => new(GetSegmentRaw(i));
+		public CubicBezier2 GetSegment(int i) => new CubicBezier2(GetSegmentRaw(i));
 
 		public override void PushAnchor(Float2 anchor)
 		{

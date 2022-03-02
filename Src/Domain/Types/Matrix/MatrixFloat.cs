@@ -201,7 +201,7 @@ namespace CXUtils.Domain.Types
 		/// <summary>
 		///     Builds a floating point null matrix (Filled with 0f)
 		/// </summary>
-		public static MatrixFloat Build(int row, int column) => new(row, column);
+		public static MatrixFloat Build(int row, int column) => new MatrixFloat(row, column);
 
 		/// <summary>
 		///     Builds a floating point matrix with the values initialized by <paramref name="initializeFunction" />
@@ -217,7 +217,7 @@ namespace CXUtils.Domain.Types
 			return result;
 		}
 
-		public static MatrixFloat BuildDimension(MatrixFloat other) => new(other.row, other.column);
+		public static MatrixFloat BuildDimension(MatrixFloat other) => new MatrixFloat(other.row, other.column);
 
 		public static MatrixFloat BuildSquare(int side) => Build(side, side);
 		public static MatrixFloat BuildSquare(int side, Func<int, int, float> initializeFunc) => Build(side, side, initializeFunc);

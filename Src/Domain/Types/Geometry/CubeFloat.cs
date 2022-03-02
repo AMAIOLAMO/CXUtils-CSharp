@@ -12,9 +12,9 @@ namespace CXUtils.Domain.Types
 	{
 		public CubeFloat(Float3 min, Float3 max) => (this.min, this.max) = (min, max);
 
-		public static CubeFloat Create(Float3 min, Float3 size) => new(min, min + size);
+		public static CubeFloat Create(Float3 min, Float3 size) => new CubeFloat(min, min + size);
 
-		public static implicit operator CubeFloat(CubeInt value) => new((Float3)value.min, (Float3)value.max);
+		public static implicit operator CubeFloat(CubeInt value) => new CubeFloat((Float3)value.min, (Float3)value.max);
 
 		public Float3 Size => max - min;
 
@@ -28,8 +28,8 @@ namespace CXUtils.Domain.Types
 				return size.x * size.y * size.z;
 			}
 		}
-
-		[FieldOffset(0)]  public readonly Float3 min;
 		[FieldOffset(12)] public readonly Float3 max;
+
+		[FieldOffset(0)] public readonly Float3 min;
 	}
 }

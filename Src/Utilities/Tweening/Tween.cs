@@ -208,30 +208,30 @@ namespace CXUtils.Common
 
 		#region Lerp Vectors
 
-		public static Float2 Lerp(this Float2 a, Float2 b, float t) => new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
+		public static Float2 Lerp(this Float2 a, Float2 b, float t) => new Float2(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
 
-		public static Float2 LerpClamp(this Float2 a, Float2 b, float t) => new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t));
+		public static Float2 LerpClamp(this Float2 a, Float2 b, float t) => new Float2(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t));
 
-		public static Float3 Lerp(this Float3 a, Float3 b, float t) => new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
+		public static Float3 Lerp(this Float3 a, Float3 b, float t) => new Float3(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 
-		public static Float3 LerpClamp(this Float3 a, Float3 b, float t) => new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t));
+		public static Float3 LerpClamp(this Float3 a, Float3 b, float t) => new Float3(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t));
 
-		public static Float4 Lerp(this Float4 a, Float4 b, float t) => new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t), Lerp(a.w, b.w, t));
+		public static Float4 Lerp(this Float4 a, Float4 b, float t) => new Float4(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t), Lerp(a.w, b.w, t));
 
-		public static Float4 LerpClamp(this Float4 a, Float4 b, float t) => new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t), LerpClamp(a.w, b.w, t));
+		public static Float4 LerpClamp(this Float4 a, Float4 b, float t) => new Float4(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t), LerpClamp(a.w, b.w, t));
 
 
-		public static Int2 Lerp(this Int2 a, Int2 b, float t) => new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
+		public static Int2 Lerp(this Int2 a, Int2 b, float t) => new Int2(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
 
-		public static Int2 LerpClamp(this Int2 a, Int2 b, float t) => new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t));
+		public static Int2 LerpClamp(this Int2 a, Int2 b, float t) => new Int2(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t));
 
-		public static Int3 Lerp(this Int3 a, Int3 b, float t) => new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
+		public static Int3 Lerp(this Int3 a, Int3 b, float t) => new Int3(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 
-		public static Int3 LerpClamp(this Int3 a, Int3 b, float t) => new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t));
+		public static Int3 LerpClamp(this Int3 a, Int3 b, float t) => new Int3(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t));
 
-		public static Int4 Lerp(this Int4 a, Int4 b, float t) => new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t), Lerp(a.w, b.w, t));
+		public static Int4 Lerp(this Int4 a, Int4 b, float t) => new Int4(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t), Lerp(a.w, b.w, t));
 
-		public static Int4 LerpClamp(this Int4 a, Int4 b, float t) => new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t), LerpClamp(a.w, b.w, t));
+		public static Int4 LerpClamp(this Int4 a, Int4 b, float t) => new Int4(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t), LerpClamp(a.w, b.w, t));
 
 		#endregion
 	}

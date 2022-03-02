@@ -12,7 +12,7 @@ namespace CXUtils.Domain.Types
 	{
 		public CubeInt(Int3 min, Int3 max) => (this.min, this.max) = (min, max);
 
-		public static CubeInt Create(Int3 min, Int3 size) => new(min, min + size);
+		public static CubeInt Create(Int3 min, Int3 size) => new CubeInt(min, min + size);
 
 		public Int3 Size => max - min;
 
