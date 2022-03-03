@@ -79,13 +79,13 @@ namespace CXUtils.Domain.Types
 
 		public Float3 Normalized => Magnitude == 0f ? Zero : this / Magnitude;
 
-		public                           Float3 Floor => new Float3(x.Floor(), y.Floor(), z.Floor());
-		public                           Float3 Ceil  => new Float3(x.Ceil(), y.Ceil(), z.Ceil());
-		public                           Float3 Halve => this * .5f;
-		
-		[FieldOffset(0)] public readonly float  x;
-		[FieldOffset(4)] public readonly float  y;
-		[FieldOffset(8)] public readonly float  z;
+		public Float3 Floor => new Float3(x.Floor(), y.Floor(), z.Floor());
+		public Float3 Ceil  => new Float3(x.Ceil(), y.Ceil(), z.Ceil());
+		public Float3 Halve => this * .5f;
+
+		[FieldOffset(0)] public readonly float x;
+		[FieldOffset(4)] public readonly float y;
+		[FieldOffset(8)] public readonly float z;
 
 		#region Operator overloading
 
@@ -135,11 +135,15 @@ namespace CXUtils.Domain.Types
 		public Float3 Reflect(Float3 normal) => this - 2f * Dot(normal) * normal;
 
 		public Float3 MagnitudeOf(float magnitude) => Normalized * magnitude;
-		public Float3 Map(Func<float, float> mapFunction) => new Float3(mapFunction(x), mapFunction(y), mapFunction(z));
+		public Float3 Map(Func<float, float> func) => new Float3(func(x), func(y), func(z));
 
 		public Float3 OffsetX(float value) => new Float3(x + value, y, z);
 		public Float3 OffsetY(float value) => new Float3(x, y + value, z);
 		public Float3 OffsetZ(float value) => new Float3(x, y, z + value);
+
+		public Float3 SwapX(float value) => new Float3(value, y, z);
+		public Float3 SwapY(float value) => new Float3(x, value, z);
+		public Float3 SwapZ(float value) => new Float3(x, y, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			"(" + x.ToString(format, formatProvider) + ", " + y.ToString(format, formatProvider) + ", " + z.ToString(format, formatProvider) + ")";

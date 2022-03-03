@@ -84,10 +84,13 @@ namespace CXUtils.Domain.Types
 
 		public int Dot(Int2 other) => x * other.x + y * other.y;
 
-		public Int2 Map(Func<int, int> mapFunction) => new Int2(mapFunction(x), mapFunction(y));
+		public Int2 Map(Func<int, int> func) => new Int2(func(x), func(y));
 
 		public Int2 OffsetX(int value) => new Int2(x + value, y);
 		public Int2 OffsetY(int value) => new Int2(x, y + value);
+
+		public Int2 SwapX(int value) => new Int2(value, y);
+		public Int2 SwapY(int value) => new Int2(x, value);
 
 		public bool Equals(Int2 other) => x == other.x && y == other.y;
 

@@ -9,9 +9,9 @@ namespace CXUtils.Domain.Types
         T Max( T other );
 
         /// <summary>
-        ///     Maps the <paramref name="mapFunction" /> to all axis
+        ///     Maps the <paramref name="func" /> to all axis
         /// </summary>
-        T Map( Func<TValue, TValue> mapFunction );
+        T Map( Func<TValue, TValue> func );
         TValue Dot( T other );
     }
 

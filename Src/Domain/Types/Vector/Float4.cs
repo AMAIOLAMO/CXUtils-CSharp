@@ -137,12 +137,17 @@ namespace CXUtils.Domain.Types
 		///     returns a new Float4 with a direction of this and a specified target magnitude
 		/// </summary>
 		public Float4 MagnitudeOf(float magnitude) => Normalized * magnitude;
-		public Float4 Map(Func<float, float> mapFunction) => new Float4(mapFunction(x), mapFunction(y), mapFunction(z), mapFunction(w));
+		public Float4 Map(Func<float, float> func) => new Float4(func(x), func(y), func(z), func(w));
 
 		public Float4 OffsetX(float value) => new Float4(x + value, y, z, w);
 		public Float4 OffsetY(float value) => new Float4(x, y + value, z, w);
 		public Float4 OffsetZ(float value) => new Float4(x, y, z + value, w);
 		public Float4 OffsetW(float value) => new Float4(x, y, z, w + value);
+
+		public Float4 SwapX(float value) => new Float4(value, y, z, w);
+		public Float4 SwapY(float value) => new Float4(x, value, z, w);
+		public Float4 SwapZ(float value) => new Float4(x, y, value, w);
+		public Float4 SwapW(float value) => new Float4(x, y, z, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			"(" + x.ToString(format, formatProvider) + ", " + y.ToString(format, formatProvider) + ", " + z.ToString(format, formatProvider) + ", " + w.ToString(format, formatProvider) + ")";

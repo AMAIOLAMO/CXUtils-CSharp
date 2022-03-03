@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using CXUtils.Common;
+
 #if CXUTILS_UNSAFE
 using CXUtils.Debugging;
 #endif
@@ -133,10 +134,13 @@ namespace CXUtils.Domain.Types
 		///     returns a new Float2 with a direction of this and a specified target magnitude
 		/// </summary>
 		public Float2 MagnitudeOf(float magnitude) => Normalized * magnitude;
-		public Float2 Map(Func<float, float> mapFunction) => new Float2(mapFunction(x), mapFunction(y));
+		public Float2 Map(Func<float, float> func) => new Float2(func(x), func(y));
 
 		public Float2 OffsetX(float value) => new Float2(x + value, y);
 		public Float2 OffsetY(float value) => new Float2(x, y + value);
+
+		public Float2 SwapX(float value) => new Float2(value, y);
+		public Float2 SwapY(float value) => new Float2(x, value);
 
 		public override string ToString() => "(" + x + ", " + y + ")";
 		public string ToString(string format) => "(" + x.ToString(format) + ", " + y.ToString(format) + ")";
