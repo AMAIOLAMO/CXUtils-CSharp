@@ -13,15 +13,10 @@ namespace CXUtils.Infrastructure
 			this.root = root;
 		}
 
-		public void Dispose()
-		{
-			root.Free(value);
-		}
+		public void Dispose() => root.Free(value);
 
 		readonly IPool<T> root;
 
 		readonly T value;
-
-		bool disposed;
 	}
 }

@@ -9,11 +9,12 @@ namespace CXUtils.Domain.Types
     /// </summary>
     [Serializable]
     [StructLayout( LayoutKind.Explicit )]
-    public readonly struct LineFloat2
+    public readonly struct Line2
     {
         [FieldOffset( 0 )] public readonly Float2 a;
         [FieldOffset( 8 )] public readonly Float2 b;
-        public LineFloat2( Float2 a, Float2 b ) => ( this.a, this.b ) = ( a, b );
+		
+        public Line2( Float2 a, Float2 b ) => ( this.a, this.b ) = ( a, b );
 
         /// <summary>
         ///     Samples a point in between the two points using <paramref name="t" />
@@ -23,7 +24,7 @@ namespace CXUtils.Domain.Types
         /// <summary>
         ///     Checks if two lines intersect
         /// </summary>
-        public bool Intersect( LineFloat2 other, out float t, out float u )
+        public bool Intersect( Line2 other, out float t, out float u )
         {
             float x1Mx2 = a.x - b.x,
                 x1Mx3 = a.x - other.a.x,
@@ -44,7 +45,7 @@ namespace CXUtils.Domain.Types
             return tBool && uBool;
         }
 
-        public static explicit operator LineFloat2( LineFloat3 value ) =>
-			new LineFloat2( (Float2)value.a, (Float2)value.b );
+        public static explicit operator Line2( Line3 value ) =>
+			new Line2( (Float2)value.a, (Float2)value.b );
     }
 }

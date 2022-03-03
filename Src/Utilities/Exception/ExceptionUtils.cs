@@ -50,8 +50,8 @@ namespace CXUtils.Common
         public static Exception LengthZero   => new Exception( VALUE_LENGTH_ZERO );
 
         public static Exception Get( string valueName, object value, InvalidReason reason, string detail = default ) =>
-            throw new Exception( $"{valueName} of value {value} is invalid. [Reason: {reason}] {detail}" ); // valueName + " of value: " + value + " is invalid. [ Reason: " + GetReasonString( reason ) + " ] " + detail );
-
+            throw new Exception( $"{valueName} of value {value} is invalid. [Reason: {reason}] {detail}" );
+		
         public static Exception Get( string valueName, InvalidReason reason, string detail = default ) =>
             throw new Exception( $"{valueName} is invalid. [Reason: {reason}] {detail}" );
 

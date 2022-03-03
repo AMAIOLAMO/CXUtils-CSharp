@@ -2,7 +2,7 @@
 
 namespace CXUtils.Infrastructure
 {
-	public sealed class StringBuilderPool : Pool<StringBuilder>
+	public sealed class StringBuilderPool : PoolBase<StringBuilder>
 	{
 		public StringBuilderPool(int amount) : base(amount) => Populate(amount);
 

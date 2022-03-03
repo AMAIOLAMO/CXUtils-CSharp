@@ -1,5 +1,4 @@
-﻿#nullable enable
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using CXUtils.Common;
@@ -74,9 +73,9 @@ namespace CXUtils.Domain.Types
 
 		public bool Equals(Float3x3 other) => this == other;
 
-		public string ToString(string? format, IFormatProvider? formatProvider)
+		public string ToString(string format, IFormatProvider formatProvider)
 		{
-			using IPoolItem? _ = CommonPools.StringBuilder.PopScope(out StringBuilder? sb);
+			using IPoolItem _ = CommonPools.StringBuilder.PopScope(out StringBuilder sb);
 
 			sb.Append("| " + iHat.x + ", " + jHat.x + ", " + kHat.x + " |\n");
 			sb.Append("| " + iHat.y + ", " + jHat.y + ", " + kHat.y + " |\n");
@@ -84,7 +83,7 @@ namespace CXUtils.Domain.Types
 			return sb.ToString();
 		}
 
-		public override bool Equals(object? obj) => obj is Float3x3 other && Equals(other);
+		public override bool Equals(object obj) => obj is Float3x3 other && Equals(other);
 
 		public override int GetHashCode()
 		{
