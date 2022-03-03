@@ -1,6 +1,6 @@
 ﻿namespace CXUtils.Domain.Types.Utils
 {
-    public static class FloatSwizzleUtils
+    public static class FloatSwizzles
     {
         #region Float2
 

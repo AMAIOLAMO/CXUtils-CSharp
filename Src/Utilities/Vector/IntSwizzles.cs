@@ -1,6 +1,6 @@
 ﻿namespace CXUtils.Domain.Types.Utils
 {
-    public static class IntSwizzleUtils
+    public static class IntSwizzles
     {
         #region Int2
 
