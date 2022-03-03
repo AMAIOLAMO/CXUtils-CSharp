@@ -105,8 +105,8 @@ namespace CXUtils.Domain.Types
 		public static Float4 operator /(float value, Float4 a) => a / value;
 		public static Float4 operator -(Float4 a) => new Float4(-a.x, -a.y, -a.z, -a.w);
 
-		public static bool operator ==(Float4 a, Float4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-		public static bool operator !=(Float4 a, Float4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
+		public static bool operator ==(Float4 a, Float4 b) => a.x.AlmostEqual(b.x) && a.y.AlmostEqual(b.y) && a.z.AlmostEqual(b.z) && a.w.AlmostEqual(b.w);
+		public static bool operator !=(Float4 a, Float4 b) => !(a == b);
 
 		public static explicit operator Float4(float value) => new Float4(value, value, value, value);
 		public static implicit operator Float4(Float3 value) => new Float4(value.x, value.y, value.z);
@@ -136,7 +136,7 @@ namespace CXUtils.Domain.Types
 		/// <summary>
 		///     returns a new Float4 with a direction of this and a specified target magnitude
 		/// </summary>
-		public Float4 MagnitudeOf(float magnitude) => Normalized * magnitude;
+		public Float4 AsMagnitude(float magnitude) => Normalized * magnitude;
 		public Float4 Map(Func<float, float> func) => new Float4(func(x), func(y), func(z), func(w));
 
 		public Float4 OffsetX(float value) => new Float4(x + value, y, z, w);
@@ -144,10 +144,10 @@ namespace CXUtils.Domain.Types
 		public Float4 OffsetZ(float value) => new Float4(x, y, z + value, w);
 		public Float4 OffsetW(float value) => new Float4(x, y, z, w + value);
 
-		public Float4 SwapX(float value) => new Float4(value, y, z, w);
-		public Float4 SwapY(float value) => new Float4(x, value, z, w);
-		public Float4 SwapZ(float value) => new Float4(x, y, value, w);
-		public Float4 SwapW(float value) => new Float4(x, y, z, value);
+		public Float4 AsX(float value) => new Float4(value, y, z, w);
+		public Float4 AsY(float value) => new Float4(x, value, z, w);
+		public Float4 AsZ(float value) => new Float4(x, y, value, w);
+		public Float4 AsW(float value) => new Float4(x, y, z, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			"(" + x.ToString(format, formatProvider) + ", " + y.ToString(format, formatProvider) + ", " + z.ToString(format, formatProvider) + ", " + w.ToString(format, formatProvider) + ")";

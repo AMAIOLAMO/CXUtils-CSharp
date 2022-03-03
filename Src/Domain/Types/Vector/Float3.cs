@@ -100,8 +100,8 @@ namespace CXUtils.Domain.Types
 		public static Float3 operator /(float value, Float3 a) => a / value;
 		public static Float3 operator -(Float3 a) => new Float3(-a.x, -a.y, -a.z);
 
-		public static bool operator ==(Float3 a, Float3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
-		public static bool operator !=(Float3 a, Float3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
+		public static bool operator ==(Float3 a, Float3 b) => a.x.AlmostEqual(b.x) && a.y.AlmostEqual(b.y) && a.z.AlmostEqual(b.z);
+		public static bool operator !=(Float3 a, Float3 b) => !(a == b);
 
 		public static explicit operator Float3(float value) => new Float3(value, value, value);
 		public static explicit operator Float3(Int3 value) => new Float3(value.x, value.y, value.z);
@@ -134,16 +134,16 @@ namespace CXUtils.Domain.Types
 
 		public Float3 Reflect(Float3 normal) => this - 2f * Dot(normal) * normal;
 
-		public Float3 MagnitudeOf(float magnitude) => Normalized * magnitude;
+		public Float3 AsMagnitude(float magnitude) => Normalized * magnitude;
 		public Float3 Map(Func<float, float> func) => new Float3(func(x), func(y), func(z));
 
 		public Float3 OffsetX(float value) => new Float3(x + value, y, z);
 		public Float3 OffsetY(float value) => new Float3(x, y + value, z);
 		public Float3 OffsetZ(float value) => new Float3(x, y, z + value);
 
-		public Float3 SwapX(float value) => new Float3(value, y, z);
-		public Float3 SwapY(float value) => new Float3(x, value, z);
-		public Float3 SwapZ(float value) => new Float3(x, y, value);
+		public Float3 AsX(float value) => new Float3(value, y, z);
+		public Float3 AsY(float value) => new Float3(x, value, z);
+		public Float3 AsZ(float value) => new Float3(x, y, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			"(" + x.ToString(format, formatProvider) + ", " + y.ToString(format, formatProvider) + ", " + z.ToString(format, formatProvider) + ")";

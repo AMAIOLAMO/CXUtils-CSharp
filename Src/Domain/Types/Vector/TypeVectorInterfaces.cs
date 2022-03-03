@@ -36,6 +36,6 @@ namespace CXUtils.Domain.Types
         /// <summary>
         ///     returns a new vector with a new magnitude of value
         /// </summary>
-        T MagnitudeOf( float value );
+        T AsMagnitude( float value );
     }
 }

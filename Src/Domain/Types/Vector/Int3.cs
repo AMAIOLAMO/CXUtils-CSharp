@@ -95,9 +95,9 @@ namespace CXUtils.Domain.Types
 		public Int3 OffsetY(int value) => new Int3(x, y + value, z);
 		public Int3 OffsetZ(int value) => new Int3(x, y, z + value);
 
-		public Int3 SwapX(int value) => new Int3(value, y, z);
-		public Int3 SwapY(int value) => new Int3(x, value, z);
-		public Int3 SwapZ(int value) => new Int3(x, y, value);
+		public Int3 AsX(int value) => new Int3(value, y, z);
+		public Int3 AsY(int value) => new Int3(x, value, z);
+		public Int3 AsZ(int value) => new Int3(x, y, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			"(" + x.ToString(format, formatProvider) + ", " + y.ToString(format, formatProvider) + ", " + z.ToString(format, formatProvider) + ")";

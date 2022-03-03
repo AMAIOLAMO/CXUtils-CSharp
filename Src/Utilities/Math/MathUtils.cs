@@ -1,5 +1,6 @@
 using System;
 using CXUtils.Mathematics;
+using Unity.Mathematics;
 
 namespace CXUtils.Common
 {
@@ -63,8 +64,10 @@ namespace CXUtils.Common
             #endif
         }
 
-        public static bool AlmostEqual( this float value, float compared = 0f, float precision = float.Epsilon ) => Math.Abs( value - compared ) < precision;
-        public static bool AlmostEqual( this double value, double compared = 0d, double precision = double.Epsilon ) => Math.Abs( value - compared ) < precision;
+        public static bool AlmostEqual( this float value, float other = 0f, float relativeTolerance = 1e-09f, float absoluteTolerance = 0f) =>
+			Math.Abs( value - other ) <= Math.Max(relativeTolerance * Math.Max(Math.Abs(value), Math.Abs(other)), absoluteTolerance);
+        public static bool AlmostEqual( this double value, double other = 0d, float relativeTolerance = 1e-09f, float absoluteTolerance = 0f) =>
+			Math.Abs( value - other ) <= Math.Max(relativeTolerance * Math.Max(Math.Abs(value), Math.Abs(other)), absoluteTolerance);
 
         /// <summary>
         ///     This will loop the <paramref name="value" /> back to 0, when <paramref name="value" /> is an integer

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
+using CXUtils.Common;
 #if CXUTILS_UNSAFE
 using System.Diagnostics;
 #endif
@@ -89,8 +91,8 @@ namespace CXUtils.Domain.Types
 		public Int2 OffsetX(int value) => new Int2(x + value, y);
 		public Int2 OffsetY(int value) => new Int2(x, y + value);
 
-		public Int2 SwapX(int value) => new Int2(value, y);
-		public Int2 SwapY(int value) => new Int2(x, value);
+		public Int2 AsX(int value) => new Int2(value, y);
+		public Int2 AsY(int value) => new Int2(x, value);
 
 		public bool Equals(Int2 other) => x == other.x && y == other.y;
 
@@ -114,7 +116,8 @@ namespace CXUtils.Domain.Types
 					yield return new Int2(x, y);
 		}
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-		public string ToString(string format) => "(" + x.ToString(format) + ", " + y.ToString(format) + ")";
+		public string ToString(string format) =>
+			"(" + x.ToString(format) + ", " + y.ToString(format) + ")";
 
 		#endregion
 	}
