@@ -15,8 +15,8 @@ namespace CXUtils.Domain
 		public abstract T this[int x, int y] { get; set; }
 		public abstract T this[in Int2 cell] { get; set; }
 
-		public Float2 CellSize { get; }
-		public Float2 Origin   { get; }
+		public Float2 CellSize { get; set; }
+		public Float2 Origin   { get; set; }
 
 		public float HalfCellX => CellSize.x / 2f;
 		public float HalfCellY => CellSize.y / 2f;

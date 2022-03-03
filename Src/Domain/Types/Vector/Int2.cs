@@ -111,8 +111,8 @@ namespace CXUtils.Domain.Types
 		public override string ToString() => "(" + x + ", " + y + ")";
 		public IEnumerator<Int2> GetEnumerator()
 		{
-			for (int x = 0; x < this.x; ++x)
-				for (int y = 0; y < this.y; ++y)
+			for (int y = 0; y < this.y; ++y)
+				for (int x = 0; x < this.x; ++x)
 					yield return new Int2(x, y);
 		}
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

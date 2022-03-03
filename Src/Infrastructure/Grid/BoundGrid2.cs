@@ -13,14 +13,14 @@ namespace CXUtils.Infrastructure
 
 		public bool ContainsCell(int x, int y) =>
 			!(x < 0 || y < 0 ||
-			  x > Width || y > Height);
+			  x >= Width || y >= Height);
 
 		public bool ContainsCell(Int2 cell) => ContainsCell(cell.x, cell.y);
 
 		/// <summary>
 		///     If the Global position given is contained in the grid
 		/// </summary>
-		public bool ContainsGlobal(Float2 global) => ContainsLocal(GlobalToLocal(global));
+		public bool ContainsGlobal(Float2 global) => ContainsCell(GlobalToCell(global));
 
 		/// <summary>
 		///     If the local position given is contained in the grid
