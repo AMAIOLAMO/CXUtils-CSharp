@@ -11,7 +11,7 @@ namespace CXUtils.Domain.Types
         /// <summary>
         ///     Maps the <paramref name="mapFunction" /> to all axis
         /// </summary>
-        T MapAxis( Func<TValue, TValue> mapFunction );
+        T Map( Func<TValue, TValue> mapFunction );
         TValue Dot( T other );
     }
 

@@ -63,8 +63,8 @@ namespace CXUtils.Common
             #endif
         }
 
-        public static bool IsApproximate( this float value, float compared = 0f, float precision = float.Epsilon ) => Math.Abs( value - compared ) < precision;
-        public static bool IsApproximate( this double value, double compared = 0d, double precision = double.Epsilon ) => Math.Abs( value - compared ) < precision;
+        public static bool AlmostEqual( this float value, float compared = 0f, float precision = float.Epsilon ) => Math.Abs( value - compared ) < precision;
+        public static bool AlmostEqual( this double value, double compared = 0d, double precision = double.Epsilon ) => Math.Abs( value - compared ) < precision;
 
         /// <summary>
         ///     This will loop the <paramref name="value" /> back to 0, when <paramref name="value" /> is an integer

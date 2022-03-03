@@ -8,23 +8,20 @@ using System.Diagnostics;
 
 namespace CXUtils.Domain.Types
 {
-    /// <summary>
-    ///     represents two integers
-    /// </summary>
-    [Serializable]
-    [StructLayout( LayoutKind.Explicit )]
-    public readonly struct Int2 : IVectorInt<Int2>
-    {
-        [FieldOffset( 0 )] public readonly int x;
-        [FieldOffset( 4 )] public readonly int y;
+	/// <summary>
+	///     represents two integers
+	/// </summary>
+	[Serializable]
+	[StructLayout(LayoutKind.Explicit)]
+	public readonly struct Int2 : IVectorInt<Int2>
+	{
+		public Int2(int x = 0, int y = 0) => (this.x, this.y) = (x, y);
+		public Int2(Int2 other) => (x, y) = (other.x, other.y);
 
-        public Int2( int x = 0, int y = 0 ) => ( this.x, this.y ) = ( x, y );
-        public Int2( Int2 other ) => ( x, y ) = ( other.x, other.y );
-
-        public int this[ int index ]
-        {
-            get
-            {
+		public int this[int index]
+		{
+			get
+			{
                 #if CXUTILS_UNSAFE
                 unsafe
                 {
@@ -32,87 +29,90 @@ namespace CXUtils.Domain.Types
                     fixed ( int* ptr = &x ) return ptr[index];
                 }
                 #else
-                switch ( index )
-                {
-                    case 0:
-                        return x;
-                    case 1:
-                        return y;
+				switch (index)
+				{
+					case 0:
+						return x;
+					case 1:
+						return y;
 
-                    default:
-                        throw new IndexOutOfRangeException();
-                }
+					default:
+						throw new IndexOutOfRangeException();
+				}
                 #endif
-            }
-        }
+			}
+		}
 
-        public static Int2 MinValue => (Int2)int.MinValue;
-        public static Int2 MaxValue => (Int2)int.MaxValue;
+		public static Int2 MinValue => (Int2)int.MinValue;
+		public static Int2 MaxValue => (Int2)int.MaxValue;
 
-        public static Int2 Zero => (Int2)0;
-        public static Int2 One  => (Int2)1;
+		public static Int2 Zero => (Int2)0;
+		public static Int2 One  => (Int2)1;
 
-        public static Int2 UnitY    => new Int2( y: 1 );
-        public static Int2 NegUnitY => new Int2( y: -1 );
-        public static Int2 UnitX    => new Int2( 1 );
-        public static Int2 NegUnitX => new Int2( -1 );
+		public static Int2 UnitY    => new Int2(y: 1);
+		public static Int2 NegUnitY => new Int2(y: -1);
+		public static Int2 UnitX    => new Int2(1);
+		public static Int2 NegUnitX => new Int2(-1);
 
-        #region Operator overloading
+		[FieldOffset(0)] public readonly int x;
+		[FieldOffset(4)] public readonly int y;
 
-        public static Int2 operator +( Int2 a, Int2 b ) => new Int2( a.x + b.x, a.y + b.y );
-        public static Int2 operator -( Int2 a, Int2 b ) => new Int2( a.x - b.x, a.y - b.y );
-        public static Int2 operator *( Int2 a, Int2 b ) => new Int2( a.x * b.x, a.y * b.y );
-        public static Int2 operator /( Int2 a, Int2 b ) => new Int2( a.x / b.x, a.y / b.y );
-        public static Int2 operator *( Int2 a, int value ) => new Int2( a.x * value, a.y * value );
-        public static Int2 operator /( Int2 a, int value ) => new Int2( a.x / value, a.y / value );
-        public static Int2 operator %( Int2 a, int value ) => new Int2( a.x % value, a.y % value );
-        public static Int2 operator *( int value, Int2 a ) => a * value;
-        public static Int2 operator /( int value, Int2 a ) => a / value;
-        public static Int2 operator -( Int2 a ) => new Int2( -a.x, -a.y );
-        public static bool operator ==( Int2 a, Int2 b ) => a.x == b.x && a.y == b.y;
-        public static bool operator !=( Int2 a, Int2 b ) => a.x != b.x || a.y != b.y;
+		#region Operator overloading
 
-        public static explicit operator Int2( Int3 value ) => new Int2( value.x, value.y );
-        public static explicit operator Int2( int value ) => new Int2( value, value );
+		public static Int2 operator +(Int2 a, Int2 b) => new Int2(a.x + b.x, a.y + b.y);
+		public static Int2 operator -(Int2 a, Int2 b) => new Int2(a.x - b.x, a.y - b.y);
+		public static Int2 operator *(Int2 a, Int2 b) => new Int2(a.x * b.x, a.y * b.y);
+		public static Int2 operator /(Int2 a, Int2 b) => new Int2(a.x / b.x, a.y / b.y);
+		public static Int2 operator *(Int2 a, int value) => new Int2(a.x * value, a.y * value);
+		public static Int2 operator /(Int2 a, int value) => new Int2(a.x / value, a.y / value);
+		public static Int2 operator %(Int2 a, int value) => new Int2(a.x % value, a.y % value);
+		public static Int2 operator *(int value, Int2 a) => a * value;
+		public static Int2 operator /(int value, Int2 a) => a / value;
+		public static Int2 operator -(Int2 a) => new Int2(-a.x, -a.y);
+		public static bool operator ==(Int2 a, Int2 b) => a.x == b.x && a.y == b.y;
+		public static bool operator !=(Int2 a, Int2 b) => a.x != b.x || a.y != b.y;
 
-        #endregion
+		public static explicit operator Int2(Int3 value) => new Int2(value.x, value.y);
+		public static explicit operator Int2(int value) => new Int2(value, value);
 
-        #region Utility
+		#endregion
 
-        public Int2 Min( Int2 other ) => new Int2( Math.Min( x, other.x ), Math.Min( y, other.y ) );
-        public Int2 Max( Int2 other ) => new Int2( Math.Max( x, other.x ), Math.Max( y, other.y ) );
+		#region Utility
 
-        public int Dot( Int2 other ) => x * other.x + y * other.y;
+		public Int2 Min(Int2 other) => new Int2(Math.Min(x, other.x), Math.Min(y, other.y));
+		public Int2 Max(Int2 other) => new Int2(Math.Max(x, other.x), Math.Max(y, other.y));
 
-        public Int2 MapAxis( Func<int, int> mapFunction ) => new Int2( mapFunction( x ), mapFunction( y ) );
+		public int Dot(Int2 other) => x * other.x + y * other.y;
 
-        public Int2 OffsetX( int value ) => new Int2( x + value, y );
-        public Int2 OffsetY( int value ) => new Int2( x, y + value );
+		public Int2 Map(Func<int, int> mapFunction) => new Int2(mapFunction(x), mapFunction(y));
 
-        public bool Equals( Int2 other ) => x == other.x && y == other.y;
+		public Int2 OffsetX(int value) => new Int2(x + value, y);
+		public Int2 OffsetY(int value) => new Int2(x, y + value);
 
-        public string ToString( string format, IFormatProvider formatProvider ) =>
-            "(" + x.ToString( format, formatProvider ) + ", " + y.ToString( format, formatProvider ) + ")";
-        public override bool Equals( object obj ) => obj is Int2 other && Equals( other );
+		public bool Equals(Int2 other) => x == other.x && y == other.y;
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ( x.GetHashCode() * 397 ) ^ y.GetHashCode();
-            }
-        }
+		public string ToString(string format, IFormatProvider formatProvider) =>
+			"(" + x.ToString(format, formatProvider) + ", " + y.ToString(format, formatProvider) + ")";
+		public override bool Equals(object obj) => obj is Int2 other && Equals(other);
 
-        public override string ToString() => "(" + x + ", " + y + ")";
-        public IEnumerator<Int2> GetEnumerator()
-        {
-            for ( int x = 0; x < this.x; ++x )
-                for ( int y = 0; y < this.y; ++y )
-                    yield return new Int2( x, y );
-        }
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-        public string ToString( string format ) => "(" + x.ToString( format ) + ", " + y.ToString( format ) + ")";
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return (x.GetHashCode() * 397) ^ y.GetHashCode();
+			}
+		}
 
-        #endregion
-    }
+		public override string ToString() => "(" + x + ", " + y + ")";
+		public IEnumerator<Int2> GetEnumerator()
+		{
+			for (int x = 0; x < this.x; ++x)
+				for (int y = 0; y < this.y; ++y)
+					yield return new Int2(x, y);
+		}
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+		public string ToString(string format) => "(" + x.ToString(format) + ", " + y.ToString(format) + ")";
+
+		#endregion
+	}
 }

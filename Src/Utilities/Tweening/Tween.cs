@@ -67,10 +67,10 @@ namespace CXUtils.Common
 		public static float EaseInOutCubic(float t) => t < .5f ? 4f * t * t * t : 1f - MathUtils.Pow(-2f * t + 2f, 3f) * .5f;
 
 		public static float EaseInExpo(float t) => t == 0f ? 0f : MathUtils.Pow(2f, 10f * t - 10f);
-		public static float EaseOutExpo(float t) => t.IsApproximate(1f) ? 1f : 1f - MathUtils.Pow(2f, -10f * t);
+		public static float EaseOutExpo(float t) => t.AlmostEqual(1f) ? 1f : 1f - MathUtils.Pow(2f, -10f * t);
 		public static float EaseInOutExpo(float t) => t == 0
 			? 0f
-			: t.IsApproximate(1f)
+			: t.AlmostEqual(1f)
 				? 1f
 				: t < .5f
 					? MathUtils.Pow(2f, 20f * t - 10f) / 2f
@@ -97,17 +97,17 @@ namespace CXUtils.Common
 
 		public static float EaseInElastic(float t) => t == 0f
 			? 0f
-			: t.IsApproximate(1f)
+			: t.AlmostEqual(1f)
 				? 1f
 				: -MathUtils.Pow(2f, 10f * t - 10f) * MathUtils.Sin((t * 10f - 10.75f) * ElasticC1);
 		public static float EaseOutElastic(float t) => t == 0f
 			? 0f
-			: t.IsApproximate(1f)
+			: t.AlmostEqual(1f)
 				? 1f
 				: MathUtils.Pow(2f, -10f * t) * MathUtils.Sin((t * 10f - .75f) * ElasticC1) + 1f;
 		public static float EaseInOutElastic(float t) => t == 0f
 			? 0f
-			: t.IsApproximate(1f)
+			: t.AlmostEqual(1f)
 				? 1f
 				: t < .5f
 					? (float)(-(MathUtils.Pow(2f, 20f * t - 10f) * MathUtils.Sin((20f * t - 11.125f) * ElasticC2)) * .5)

@@ -18,8 +18,8 @@ namespace CXUtils.Domain
 		public Float2 CellSize { get; }
 		public Float2 Origin   { get; }
 
-		public float HalfCellX => CellSize.x * .5f;
-		public float HalfCellY => CellSize.y * .5f;
+		public float HalfCellX => CellSize.x / 2f;
+		public float HalfCellY => CellSize.y / 2f;
 
 		/// <summary>
 		///     The half size of the cell size
@@ -28,16 +28,16 @@ namespace CXUtils.Domain
 
 		#region Utilities
 
-		public abstract Float2 CellToGlobal(int x, int y);
+		public virtual Float2 CellToGlobal(int x, int y) => CellToGlobal(new Int2(x, y));
 		public abstract Float2 CellToGlobal(in Int2 cell);
 
-		public abstract Int2 GlobalToCell(float x, float y);
+		public virtual Int2 GlobalToCell(float x, float y) => GlobalToCell(new Float2(x, y));
 		public abstract Int2 GlobalToCell(in Float2 global);
 
-		public abstract Float2 LocalToGlobal(float x, float y);
+		public virtual Float2 LocalToGlobal(float x, float y) => LocalToGlobal(new Float2(x, y));
 		public abstract Float2 LocalToGlobal(in Float2 local);
 
-		public abstract Float2 GlobalToLocal(float x, float y);
+		public virtual Float2 GlobalToLocal(float x, float y) => GlobalToLocal(new Float2(x, y));
 		public abstract Float2 GlobalToLocal(in Float2 global);
 
 		public virtual void Swap(int x1, int y1, int x2, int y2) =>

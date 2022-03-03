@@ -7,18 +7,15 @@ namespace CXUtils.Infrastructure
 	/// <summary>
 	///     A 2D Limited size / bounded grid system
 	/// </summary>
-	/// <typeparam name="T">The type that each cell stores</typeparam>
-	public class BoundGrid2<T> : UnSpacedGrid2<T>, INullableGrid2<T>
+	public class BoundGrid2<T> : TightGrid2<T>, INullableGrid2<T>
 	{
 		#region Utilities
 
 		public bool ContainsCell(int x, int y) =>
-			x < 0 || y < 0 ||
-			x > Width || y > Height;
+			!(x < 0 || y < 0 ||
+			  x > Width || y > Height);
 
-		public bool ContainsCell(Int2 cell) =>
-			cell.x < 0 || cell.y < 0 ||
-			cell.x > Width || cell.y > Height;
+		public bool ContainsCell(Int2 cell) => ContainsCell(cell.x, cell.y);
 
 		/// <summary>
 		///     If the Global position given is contained in the grid
@@ -32,7 +29,7 @@ namespace CXUtils.Infrastructure
 		{
 			Float2 wholeSize = WholeSize;
 
-			return !(local.x < 0f || local.y < 0f ||
+			return  !(local.x < 0f || local.y < 0f ||
 					 local.x > wholeSize.x || local.y > wholeSize.y);
 		}
 

@@ -92,7 +92,7 @@ namespace CXUtils.Domain.Types
         public int Dot( Int3 other ) => x * other.x + y * other.y + z * other.z;
         public int Dot( Int4 other ) => x * other.x + y * other.y + z * other.z + w * other.w;
 
-        public Int4 MapAxis( Func<int, int> mapFunction ) => new Int4( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
+        public Int4 Map( Func<int, int> mapFunction ) => new Int4( mapFunction( x ), mapFunction( y ), mapFunction( z ), mapFunction( w ) );
 
         public Int4 OffsetX( int value ) => new Int4( x + value, y, z, w );
         public Int4 OffsetY( int value ) => new Int4( x, y + value, z, w );

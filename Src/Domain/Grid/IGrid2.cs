@@ -2,6 +2,9 @@
 
 namespace CXUtils.Domain
 {
+	/// <summary>
+	///     Implements a Grid in 2D
+	/// </summary>
 	public interface IGrid2<T>
 	{
 		/// <summary>
