@@ -1,6 +1,5 @@
 using System;
 using CXUtils.Mathematics;
-using Unity.Mathematics;
 
 namespace CXUtils.Common
 {
