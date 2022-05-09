@@ -20,8 +20,6 @@ namespace CXUtils.Domain.Types.Range
 		[Pure] public bool Contains(int value) => !(value < min || value > max);
 		[Pure] public int Loop(int value) => (value - min).Loop(max - min);
 
-		[Pure] public int Sample(int x) => Tween.Lerp(min, max, x);
-
 		[Pure] public int RemapFrom(int value, RangeInt inRange) => MathUtils.Remap(value, inRange.min, inRange.min, min, max);
 		[Pure] public int RemapFrom(int min, int inMin, int inMax) => MathUtils.Remap(inMax, min, inMin, this.min, max);
 		[Pure] public int RemapTo(int value, RangeInt outRange) => MathUtils.Remap(value, min, max, outRange.min, outRange.max);

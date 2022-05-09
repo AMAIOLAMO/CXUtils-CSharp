@@ -1,4 +1,5 @@
-﻿using CXUtils.Domain.Types;
+﻿using System;
+using CXUtils.Domain.Types;
 using CXUtils.Mathematics;
 
 namespace CXUtils.Common
@@ -21,7 +22,7 @@ namespace CXUtils.Common
 	{
 		#region Interpolation
 
-		#region Lerp
+		#region Linear Interpolation
 
 		/// <summary>
 		///     linear interpolates between <paramref name="a" /> and <paramref name="b" /> using <paramref name="t" /> <br />
@@ -41,42 +42,46 @@ namespace CXUtils.Common
 
 		public static double LerpClamp(double a, double b, double t) => Lerp(a, b, MathUtils.ClampUnit(t));
 
-		/// <inheritdoc cref="Lerp(float, float, float)" />
-		public static int Lerp(int a, int b, float t) => ((b - a) * t).FloorInt() + a;
-
-		public static int LerpClamp(int a, int b, float t) => Lerp(a, b, MathUtils.ClampUnit(t));
-
 		#endregion
 
-		#region Inverse Lerp
+		#region Inverse Linear Interpolation
 
 		/// <summary>
 		///     Returns the unclamped percentage between <paramref name="a" /> and <paramref name="b" /> by
-		///     <paramref name="value" />
+		///     <paramref name="t" />
 		///     NOTE: the result value is not clamped
 		/// </summary>
-		public static float InverseLerp(float a, float b, float value) => -a / (b - a);
+		public static float InverseLerp(float a, float b, float t) => (t - a) / (b - a);
 
 		/// <summary>
-		///     Returns the clamped percentage between <paramref name="a" /> and <paramref name="b" /> by <paramref name="value" />
+		///     Returns the clamped percentage between <paramref name="a" /> and <paramref name="b" /> by <paramref name="t" />
 		/// </summary>
-		public static float InverseLerpClamp(float a, float b, float value) =>
-			InverseLerp(a, b, MathUtils.Clamp(value, a, b));
+		public static float InverseLerpClamp(float a, float b, float t) =>
+			InverseLerp(a, b, MathUtils.Clamp(t, a, b));
 
 		/// <inheritdoc cref="InverseLerp(float,float,float)" />
-		public static double InverseLerp(double a, double b, double value) => -a / (b - a);
+		public static double InverseLerp(double a, double b, double t) => (t - a) / (b - a);
 
 		/// <inheritdoc cref="InverseLerpClamp(float,float,float)" />
-		public static double InverseLerpClamp(double a, double b, double value) =>
-			InverseLerp(a, b, MathUtils.Clamp(value, a, b));
+		public static double InverseLerpClamp(double a, double b, double t) =>
+			InverseLerp(a, b, MathUtils.Clamp(t, a, b));
 
-		/// <inheritdoc cref="InverseLerp(float,float,float)" />
-		public static int InverseLerp(int a, int b, int value) => -a / (b - a);
+		#endregion
 
-		/// <inheritdoc cref="InverseLerpClamp(float,float,float)" />
-		public static int InverseLerpClamp(int a, int b, int value) =>
-			InverseLerp(a, b, MathUtils.Clamp(value, a, b));
+		#region Multiplicative Linear Interpolation
 
+		public static float Eerp(float a, float b, float t) =>
+			MathUtils.Pow(a, 1f - t) * MathUtils.Pow(b, t);
+
+		public static float EerpClamp(float a, float b, float t) =>
+			Eerp(a, b, MathUtils.ClampUnit(t));
+
+		public static double Eerp(double a, double b, double t) =>
+			Math.Pow(a, 1f - t) * Math.Pow(b, t);
+
+		public static double EerpClamp(double a, double b, double t) =>
+			Eerp(a, b, MathUtils.ClampUnit(t));
+		
 		#endregion
 
 		#endregion
@@ -235,7 +240,9 @@ namespace CXUtils.Common
 
 		#endregion
 
-		#region Lerp Vectors
+		#region Interpolate Vectors
+
+		#region Linear Interpolation
 
 		public static Float2 Lerp(this Float2 a, Float2 b, float t) =>
 			new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
@@ -253,26 +260,53 @@ namespace CXUtils.Common
 			new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t), Lerp(a.w, b.w, t));
 
 		public static Float4 LerpClamp(this Float4 a, Float4 b, float t) =>
-			new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t), LerpClamp(a.w, b.w, t));
+			new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t), LerpClamp(a.w, b.w, t));		
 
+		#endregion
 
-		public static Int2 Lerp(this Int2 a, Int2 b, float t) =>
-			new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
+		#region Inverse Linear Interpolation
 
-		public static Int2 LerpClamp(this Int2 a, Int2 b, float t) =>
-			new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t));
+		public static Float2 InverseLerp(this Float2 a, Float2 b, float t) =>
+			new(InverseLerp(a.x, b.x, t), InverseLerp(a.y, b.y, t));
 
-		public static Int3 Lerp(this Int3 a, Int3 b, float t) =>
-			new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
+		public static Float2 InverseLerpClamp(this Float2 a, Float2 b, float t) =>
+			new(InverseLerpClamp(a.x, b.x, t), InverseLerpClamp(a.y, b.y, t));
 
-		public static Int3 LerpClamp(this Int3 a, Int3 b, float t) =>
-			new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t));
+		public static Float3 InverseLerp(this Float3 a, Float3 b, float t) =>
+			new(InverseLerp(a.x, b.x, t), InverseLerp(a.y, b.y, t), InverseLerp(a.z, b.z, t));
 
-		public static Int4 Lerp(this Int4 a, Int4 b, float t) =>
-			new(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t), Lerp(a.w, b.w, t));
+		public static Float3 InverseLerpClamp(this Float3 a, Float3 b, float t) =>
+			new(InverseLerpClamp(a.x, b.x, t), InverseLerpClamp(a.y, b.y, t), InverseLerpClamp(a.z, b.z, t));
 
-		public static Int4 LerpClamp(this Int4 a, Int4 b, float t) =>
-			new(LerpClamp(a.x, b.x, t), LerpClamp(a.y, b.y, t), LerpClamp(a.z, b.z, t), LerpClamp(a.w, b.w, t));
+		public static Float4 InverseLerp(this Float4 a, Float4 b, float t) =>
+			new(InverseLerp(a.x, b.x, t), InverseLerp(a.y, b.y, t), InverseLerp(a.z, b.z, t), InverseLerp(a.w, b.w, t));
+
+		public static Float4 InverseLerpClamp(this Float4 a, Float4 b, float t) =>
+			new(InverseLerpClamp(a.x, b.x, t), InverseLerpClamp(a.y, b.y, t), InverseLerpClamp(a.z, b.z, t), InverseLerpClamp(a.w, b.w, t));
+
+		#endregion
+
+		#region Multiplicative Linear Interpolation
+
+		public static Float2 Eerp(this Float2 a, Float2 b, float t) =>
+			new(Eerp(a.x, b.x, t), Eerp(a.y, b.y, t));
+
+		public static Float2 EerpClamp(this Float2 a, Float2 b, float t) =>
+			new(EerpClamp(a.x, b.x, t), EerpClamp(a.y, b.y, t));
+
+		public static Float3 Eerp(this Float3 a, Float3 b, float t) =>
+			new(Eerp(a.x, b.x, t), Eerp(a.y, b.y, t), Eerp(a.z, b.z, t));
+
+		public static Float3 EerpClamp(this Float3 a, Float3 b, float t) =>
+			new(EerpClamp(a.x, b.x, t), EerpClamp(a.y, b.y, t), EerpClamp(a.z, b.z, t));
+
+		public static Float4 Eerp(this Float4 a, Float4 b, float t) =>
+			new(Eerp(a.x, b.x, t), Eerp(a.y, b.y, t), Eerp(a.z, b.z, t), Eerp(a.w, b.w, t));
+
+		public static Float4 EerpClamp(this Float4 a, Float4 b, float t) =>
+			new(EerpClamp(a.x, b.x, t), EerpClamp(a.y, b.y, t), EerpClamp(a.z, b.z, t), EerpClamp(a.w, b.w, t));
+
+		#endregion
 
 		#endregion
 	}
