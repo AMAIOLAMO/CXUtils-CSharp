@@ -56,7 +56,7 @@ namespace CXUtils.Domain.Types
 
                 return new Float3(
                     MathUtils.Atan2( sinXCosY, cosXCosY ),
-                    Math.Abs( sinY ) >= 1f ? MathUtils.CopySign( Constants.HalfPi, sinY ) : MathUtils.Asin( sinY ),
+                    Math.Abs( sinY ) >= 1f ? MathUtils.CopySign( Constants.HALF_PI, sinY ) : MathUtils.Asin( sinY ),
                     MathUtils.Atan2( sinZCosY, cosZCosY )
                 );
             }
@@ -81,7 +81,7 @@ namespace CXUtils.Domain.Types
             );
         }
 
-        public static Quaternion operator -( Quaternion value ) => new Quaternion( -value.values.x, -value.values.y, -value.values.z, -value.values.w + Constants.Tau );
+        public static Quaternion operator -( Quaternion value ) => new Quaternion( -value.values.x, -value.values.y, -value.values.z, -value.values.w + Constants.TAU );
 
         public static bool operator ==( Quaternion left, Quaternion right ) => left.values == right.values;
         public static bool operator !=( Quaternion left, Quaternion right ) => left.values != right.values;

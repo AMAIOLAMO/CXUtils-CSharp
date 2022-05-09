@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace CXUtils.Common
 {
@@ -31,16 +32,18 @@ namespace CXUtils.Common
 
 			return true;
 		}
-
+		
+		
+		
 		public void SetSpan(float span) => Span = span;
 
 		public void Reset() => Span = 0f;
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
-			"Current Span: " + Span.ToString(format, formatProvider);
+			$"Current Span: {Span.ToString(format, formatProvider)}";
 
 		public event Action MaxTicked;
 
-		public override string ToString() => "Current Span: " + Span;
+		public override string ToString() => $"Current Span: {Span.ToString(CultureInfo.InvariantCulture)}";
 	}
 }

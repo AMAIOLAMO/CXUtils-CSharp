@@ -22,10 +22,10 @@ namespace CXUtils.Domain.Types.Range
 
 		[Pure] public int Sample(int x) => Tween.Lerp(min, max, x);
 
-		[Pure] public int MapFrom(int value, RangeInt inRange) => MathUtils.Map(value, inRange.min, inRange.min, min, max);
-		[Pure] public int MapFrom(int min, int inMin, int inMax) => MathUtils.Map(inMax, min, inMin, this.min, max);
-		[Pure] public int MapTo(int value, RangeInt outRange) => MathUtils.Map(value, min, max, outRange.min, outRange.max);
-		[Pure] public int MapTo(int value, int outMin, int outMax) => MathUtils.Map(value, min, max, outMin, outMax);
+		[Pure] public int RemapFrom(int value, RangeInt inRange) => MathUtils.Remap(value, inRange.min, inRange.min, min, max);
+		[Pure] public int RemapFrom(int min, int inMin, int inMax) => MathUtils.Remap(inMax, min, inMin, this.min, max);
+		[Pure] public int RemapTo(int value, RangeInt outRange) => MathUtils.Remap(value, min, max, outRange.min, outRange.max);
+		[Pure] public int RemapTo(int value, int outMin, int outMax) => MathUtils.Remap(value, min, max, outMin, outMax);
 
 		[Pure] public int Range => max - min;
 
@@ -34,8 +34,8 @@ namespace CXUtils.Domain.Types.Range
 
 		#region Operator Overloading
 
-		public static explicit operator RangeInt(RangeFloat range) => new RangeInt((int)range.min, (int)range.max);
-		public static explicit operator RangeInt(RangeDouble range) => new RangeInt((int)range.min, (int)range.max);
+		public static explicit operator RangeInt(RangeFloat range) => new((int)range.min, (int)range.max);
+		public static explicit operator RangeInt(RangeDouble range) => new((int)range.min, (int)range.max);
 
 		#endregion
 	}
