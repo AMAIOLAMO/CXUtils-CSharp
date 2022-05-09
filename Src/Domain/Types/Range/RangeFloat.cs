@@ -8,7 +8,7 @@ namespace CXUtils.Domain.Types.Range
 {
 	[Serializable]
 	[StructLayout(LayoutKind.Explicit)]
-	public readonly struct RangeFloat
+	public readonly struct RangeFloat : IRange<RangeFloat, float>
 	{
 		public RangeFloat(float min, float max)
 		{
@@ -20,8 +20,6 @@ namespace CXUtils.Domain.Types.Range
 		[Pure] public bool Contains(float value) => !(value < min || value > max);
 		[Pure] public float Loop(float value) => (value - min).Loop(max - min);
 
-		[Pure] public float Sample(float x) => Tween.Lerp(min, max, x);
-
 		[Pure] public float RemapFrom(float value, RangeFloat inRange) =>
 			MathUtils.Remap(value, inRange.min, inRange.max, min, max);
 		[Pure] public float RemapFrom(float value, float inMin, float inMax) =>
@@ -31,10 +29,13 @@ namespace CXUtils.Domain.Types.Range
 		[Pure] public float RemapTo(float value, float outMin, float outMax) =>
 			MathUtils.Remap(value, min, max, outMin, outMax);
 
-		[Pure] public static RangeFloat Unit     => new(0f, 1f);
-		[Pure] public static RangeFloat Polarity => new(-1f, 1f);
-
 		[Pure] public float Range => max - min;
+
+		[Pure] public float Sample(float x) => Tween.Lerp(min, max, x);
+
+		[Pure] public static RangeFloat Unit => new(0f, 1f);
+
+		[Pure] public static RangeFloat Polarity => new(-1f, 1f);
 
 		[FieldOffset(0)] public readonly float min;
 		[FieldOffset(4)] public readonly float max;

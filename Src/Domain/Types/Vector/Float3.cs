@@ -73,11 +73,27 @@ namespace CXUtils.Domain.Types
 
 		public float Sum => x + y + z;
 
-		public float MaxPart => x > y ? x > z ? x : z :
-			y > z ? y : z;
+		public float MaxPart
+		{
+			get
+			{
+				float max = x;
+				if (max < y) max = y;
+				if (max < z) max = z;
+				return max;
+			}
+		}
 
-		public float MinPart => x < y ? x < z ? x : z :
-			y < z ? y : z;
+		public float MinPart
+		{
+			get
+			{
+				float min = x;
+				if (min > y) min = y;
+				if (min > z) min = z;
+				return min;
+			}
+		}
 
 		public Float2 LeftFloat2  => new(x, y);
 		public Float2 RightFloat2 => new(y, z);
