@@ -41,15 +41,15 @@ namespace CXUtils.Utilities
 		///     Randomly decides and returns a boolean <br />
 		///     NOTE: excludes threshold (value > threshold)
 		/// </summary>
-		public bool EvaluateWeight(double threshold = .5f) => NextDouble() > threshold;
+		public bool EvalWeight(double threshold = .5f) => NextDouble() > threshold;
 
 		/// <summary>
 		///     Randomly decides between two items <br />
 		///     NOTE: excludes threshold (value > threshold)
 		/// </summary>
-		public T EvaluateWeight<T>(in T t1, in T t2, double threshold = .5d) => EvaluateWeight(threshold) ? t1 : t2;
+		public T EvalWeight<T>(in T t1, in T t2, double threshold = .5d) => EvalWeight(threshold) ? t1 : t2;
 
-		public int EvaluateWeights(int totalWeight, params int[] itemWeights)
+		public int EvalWeights(int totalWeight, params int[] itemWeights)
 		{
 			Assertion.AssertInvalid(itemWeights.Length != 0, nameof(itemWeights), InvalidReason.LengthZero);
 			//assume weights are correct
@@ -65,10 +65,10 @@ namespace CXUtils.Utilities
 				rand -= itemWeights[i];
 			}
 
-			throw ExceptionUtils.Get(nameof(totalWeight), totalWeight, InvalidReason.InvalidValue, $"the given {nameof(totalWeight)} is not the correct weight!");
+			throw ExceptionUtils.Get(nameof(totalWeight), totalWeight, InvalidReason.InvalidValue);
 		}
 
-		public int EvaluateWeights(params int[] itemWeights)
+		public int EvalWeights(params int[] itemWeights)
 		{
 			Assertion.AssertInvalid(itemWeights.Length != 0, nameof(itemWeights), itemWeights, InvalidReason.LengthZero);
 
@@ -77,7 +77,7 @@ namespace CXUtils.Utilities
 			//get total
 			foreach (int weight in itemWeights) total += weight;
 
-			return EvaluateWeights(total, itemWeights);
+			return EvalWeights(total, itemWeights);
 		}
 
 		/// <summary>
@@ -114,7 +114,7 @@ namespace CXUtils.Utilities
 			throw ExceptionUtils.NotAccessible;
 		}
 
-		public T EvaluateWeights<T>(T[] array, params int[] itemWeights) => array[EvaluateWeights(itemWeights)];
+		public T EvalWeights<T>(T[] array, params int[] itemWeights) => array[EvalWeights(itemWeights)];
 
 		#endregion
 
