@@ -74,9 +74,11 @@ namespace CXUtils.Common
 		/// <inheritdoc cref="Loop(float, float)" />
 		public static double Loop(this double value, double amount) => value - Math.Floor(value / amount) * amount;
 
+		public static float Step(this float value) => Floor(value);
+		public static float Step(this float value, float stepSize) => Floor(value / stepSize);
 		#endregion
 
-		#region Math Functions
+		#region Math Methods
 
 		public static float Cos(float angle)
 		{
@@ -115,9 +117,11 @@ namespace CXUtils.Common
 		}
 
         #if NETCOREAPP2_0_OR_GREATER
+		
 		public static float Acosh(float angle) => MathF.Acosh(angle);
 		public static float Asinh(float angle) => MathF.Asinh(angle);
 		public static float ATanh(float angle) => MathF.Atanh(angle);
+		
         #endif
 
 		public static float Tan(float angle)
@@ -212,14 +216,30 @@ namespace CXUtils.Common
 			(value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 
 		/// <summary>
+		///     Remaps the given value from the given range to the another given range and also clamp the value
+		/// </summary>
+		public static float RemapClamp(float value, float inMin, float inMax, float outMin, float outMax) =>
+			Remap(Clamp(value, inMin, inMax), inMin, inMax, outMin, outMax);
+		
+		/// <inheritdoc cref="RemapClamp(float,float,float,float,float)"/>
+		public static double RemapClamp(double value, double inMin, double inMax, double outMin, double outMax) =>
+			Remap(Clamp(value, inMin, inMax), inMin, inMax, outMin, outMax);
+		
+		/// <inheritdoc cref="RemapClamp(float,float,float,float,float)"/>
+		public static int RemapClamp(int value, int inMin, int inMax, int outMin, int outMax) =>
+			Remap(Clamp(value, inMin, inMax), inMin, inMax, outMin, outMax);
+
+		/// <summary>
 		///     Remaps the given value from Polar(-1 ~ 1) to Unit(0 ~ 1)
 		/// </summary>
 		public static float RemapPolarToUnit(float value) => value * .5f + .5f;
+		public static double RemapPolarToUnit(double value) => value * .5f + .5f;
 
 		/// <summary>
 		///     Remaps the given value from Unit(0 ~ 1) to some output
 		/// </summary>
 		public static float RemapUnit(float value, float outMin, float outMax) => value * (outMax - outMin) + outMin;
+		public static double RemapUnit(double value, double outMin, double outMax) => value * (outMax - outMin) + outMin;
 
 		public static float Clamp(float value, float min, float max) =>
 			value < min ? min : value > max ? max : value;
@@ -235,17 +255,13 @@ namespace CXUtils.Common
 
 		#endregion
 
-		#region Rounding
+		#region Useful Methods
 
-		public static float RoundOnStep(float value, float step)
-		{
-            #if NETCOREAPP2_0_OR_GREATER
-			return MathF.Round(value / step) * step;
-            #else
-            return (float)Math.Round( value / step ) * step;
-            #endif
-		}
-		public static double RoundOnStep(double value, double step) => Math.Round(value / step) * step;
+		public static float RoundedStep(float value, float step) =>
+			MathF.Round(value / step) * step;
+		public static double RoundedStep(double value, double step) =>
+			Math.Round(value / step) * step;
+
 
 		#endregion
 	}

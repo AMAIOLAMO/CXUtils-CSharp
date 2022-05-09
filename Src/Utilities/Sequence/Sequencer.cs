@@ -10,38 +10,38 @@ namespace CXUtils.Common
 	public class Sequencer : IEnumerable<Action>
 	{
 		public Sequencer() =>
-			actions = new List<Action>();
+			_actions = new List<Action>();
 		public Sequencer(int capacity) =>
-			actions = new List<Action>(capacity);
+			_actions = new List<Action>(capacity);
 		public Sequencer(IEnumerable<Action> collection) =>
-			actions = new List<Action>(collection);
+			_actions = new List<Action>(collection);
 
-		public IEnumerator<Action> GetEnumerator() => new Enumerator(actions);
+		public IEnumerator<Action> GetEnumerator() => new Enumerator(_actions);
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 		public Sequencer Append(Action action)
 		{
-			actions.Add(action);
+			_actions.Add(action);
 			return this;
 		}
 
 		public Sequencer RemoveAt(int index)
 		{
-			actions.RemoveAt(index);
+			_actions.RemoveAt(index);
 			return this;
 		}
 
 		public Action this[int index]
 		{
-			get => actions[index];
-			set => actions[index] = value;
+			get => _actions[index];
+			set => _actions[index] = value;
 		}
 
-		public int Capacity => actions.Capacity;
+		public int Capacity => _actions.Capacity;
 
-		public int Count => actions.Count;
+		public int Count => _actions.Count;
 
-		readonly List<Action> actions;
+		readonly List<Action> _actions;
 
 		class Enumerator : IEnumerator<Action>
 		{
