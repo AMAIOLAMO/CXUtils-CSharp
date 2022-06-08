@@ -12,7 +12,7 @@ namespace CXUtils.Domain.Types.Range
 	{
 		public RangeInt(int min, int max)
 		{
-			Assertion.Assert(max >= min);
+			Assertion.When(max >= min);
 			(this.min, this.max) = (min, max);
 		}
 

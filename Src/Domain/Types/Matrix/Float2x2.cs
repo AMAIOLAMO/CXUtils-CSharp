@@ -91,7 +91,7 @@ namespace CXUtils.Domain.Types
 
 		public Float2x2 GetInverse()
 		{
-			Assertion.Assert(!IsSingular, "Cannot get the inverse of a singular matrix!");
+			Assertion.When(!IsSingular, "Cannot get the inverse of a singular matrix!");
 
 			float scalar = 1f / Determinant;
 			return new Float2x2(new Float2(jHat.y * scalar, -iHat.y * scalar), new Float2(-jHat.x * scalar, iHat.x * scalar));

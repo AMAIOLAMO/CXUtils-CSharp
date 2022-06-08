@@ -51,7 +51,7 @@ namespace CXUtils.Utilities
 
 		public int EvalWeights(int totalWeight, params int[] itemWeights)
 		{
-			Assertion.AssertInvalid(itemWeights.Length != 0, nameof(itemWeights), InvalidReason.LengthZero);
+			Assertion.Invalid(itemWeights.Length != 0, nameof(itemWeights), InvalidReason.LengthZero);
 			//assume weights are correct
 
 			int rand = Next(0, totalWeight + 1);
@@ -70,7 +70,7 @@ namespace CXUtils.Utilities
 
 		public int EvalWeights(params int[] itemWeights)
 		{
-			Assertion.AssertInvalid(itemWeights.Length != 0, nameof(itemWeights), itemWeights, InvalidReason.LengthZero);
+			Assertion.Invalid(itemWeights.Length != 0, nameof(itemWeights), itemWeights, InvalidReason.LengthZero);
 
 			int total = 0;
 

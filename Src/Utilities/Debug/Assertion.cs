@@ -9,36 +9,38 @@ namespace CXUtils.Debugging
 	/// </summary>
 	public static class Assertion
 	{
-		[Conditional("DEBUG")]
-		public static void Assert(bool condition, string message)
+		const string CONDITIONAL_DEBUG = "DEBUG";
+
+		[Conditional(CONDITIONAL_DEBUG)]
+		public static void When(bool condition, string message)
 		{
 			if (condition) return;
 
 			throw new Exception(message);
 		}
-		
-		[Conditional("DEBUG")]
-		public static void Assert(bool condition)
+
+		[Conditional(CONDITIONAL_DEBUG)]
+		public static void When(bool condition)
 		{
 			if (condition) return;
 
 			throw new Exception();
 		}
-
-		[Conditional("DEBUG")]
-		public static void AssertError(bool condition, Exception exception)
+		
+		[Conditional(CONDITIONAL_DEBUG)]
+		public static void Error(bool condition, Exception exception)
 		{
 			if (condition) return;
 
 			throw exception;
 		}
+		
+		[Conditional(CONDITIONAL_DEBUG)]
+		public static void Invalid(bool condition, string valueName, object value, InvalidReason reason) =>
+			Error(condition, ExceptionUtils.Get(valueName, value, reason));
 
-		[Conditional("DEBUG")]
-		public static void AssertInvalid(bool condition, string valueName, object value, InvalidReason reason) =>
-			AssertError(condition, ExceptionUtils.Get(valueName, value, reason));
-
-		[Conditional("DEBUG")]
-		public static void AssertInvalid(bool condition, string valueName, InvalidReason reason) =>
-			AssertError(condition, ExceptionUtils.Get(valueName, reason));
+		[Conditional(CONDITIONAL_DEBUG)]
+		public static void Invalid(bool condition, string valueName, InvalidReason reason) =>
+			Error(condition, ExceptionUtils.Get(valueName, reason));
 	}
 }

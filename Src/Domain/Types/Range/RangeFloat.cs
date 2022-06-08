@@ -12,7 +12,7 @@ namespace CXUtils.Domain.Types.Range
 	{
 		public RangeFloat(float min, float max)
 		{
-			Assertion.Assert(max >= min);
+			Assertion.When(max >= min);
 			(this.min, this.max) = (min, max);
 		}
 
