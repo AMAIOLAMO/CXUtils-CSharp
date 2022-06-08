@@ -8,52 +8,47 @@ namespace CXUtils.Functional
 		{
 			_resultValue = resultValue;
 			_exception = null;
-
-			_successful = true;
 		}
 
 		public Result(Exception exception)
 		{
 			_resultValue = default;
 			_exception = exception;
-
-			_successful = false;
-		}
-
-		/// <summary>
-		///     Matches the result and calls actions
-		/// </summary>
-		public void Match(Action<T> successAction, Action<Exception> failureAction)
-		{
-			if (_successful)
-			{
-				successAction(_resultValue);
-
-				return;
-			}
-			// else
-
-			failureAction(_exception);
 		}
 
 		public bool Success(out T resultValue)
 		{
 			resultValue = _resultValue;
 
-			return _successful;
+			return Successful;
 		}
 
 		public bool Failure(out Exception exception)
 		{
 			exception = _exception;
 
-			return !_successful;
+			return !Successful;
 		}
 
-		readonly bool _successful;
+		public void Match(Action<T> successAction, Action<Exception> failureAction)
+		{
+			if (Successful)
+			{
+				failureAction(_exception);
+
+				return;
+			}
+			// else
+
+			successAction(_resultValue);
+		}
+
+		public static implicit operator Result<T>(Exception exception) => new(exception);
 
 		readonly T _resultValue;
 
 		readonly Exception _exception;
+
+		bool Successful => _exception != null;
 	}
 }
