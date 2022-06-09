@@ -7,21 +7,21 @@ namespace CXUtils.Common.Generic
 	/// </summary>
 	public sealed class Heap<T> : ICloneable where T : class, IHeapItem<T>
 	{
-		public Heap(int size) => items = new T[size];
+		public Heap(int size) => _items = new T[size];
 
 		/// <summary>
 		///     Total length of not null items in this Heap
 		/// </summary>
 		public int Count { get; private set; }
 		
-		T[] items;
+		T[] _items;
 
 		#region Script Methods
 
 		/// <summary>
 		///     Check if this heap contains this item
 		/// </summary>
-		public bool Contains(T item) => Equals(items[item.HeapIndex], item);
+		public bool Contains(T item) => Equals(_items[item.HeapIndex], item);
 
 		/// <summary>
 		///     Adds an item to the bottom and sort it up
@@ -29,7 +29,7 @@ namespace CXUtils.Common.Generic
 		public void Add(T item)
 		{
 			item.HeapIndex = Count;
-			items[Count] = item;
+			_items[Count] = item;
 			SortUp(item);
 			++Count;
 		}
@@ -39,11 +39,11 @@ namespace CXUtils.Common.Generic
 		/// </summary>
 		public T PopFirst()
 		{
-			T firstItem = items[0];
+			T firstItem = _items[0];
 			--Count;
-			items[0] = items[Count];
-			items[0].HeapIndex = 0;
-			SortDown(items[0]);
+			_items[0] = _items[Count];
+			_items[0].HeapIndex = 0;
+			SortDown(_items[0]);
 			return firstItem;
 		}
 
@@ -72,9 +72,9 @@ namespace CXUtils.Common.Generic
 
 				int swapIndex = childIndexLeft;
 
-				if (childIndexRight < Count && items[childIndexLeft].CompareTo(items[childIndexRight]) < 0) swapIndex = childIndexRight;
+				if (childIndexRight < Count && _items[childIndexLeft].CompareTo(_items[childIndexRight]) < 0) swapIndex = childIndexRight;
 
-				if (item.CompareTo(items[swapIndex]) < 0) Swap(item, items[swapIndex]);
+				if (item.CompareTo(_items[swapIndex]) < 0) Swap(item, _items[swapIndex]);
 
 				return;
 			}
@@ -88,7 +88,7 @@ namespace CXUtils.Common.Generic
 			int parentIndex = (item.HeapIndex - 1) / 2;
 			while (true)
 			{
-				T parentItem = items[parentIndex];
+				T parentItem = _items[parentIndex];
 
 				if (item.CompareTo(parentItem) > 0) Swap(item, parentItem);
 				else break;
@@ -102,11 +102,11 @@ namespace CXUtils.Common.Generic
 		/// </summary>
 		public void Swap(T itemA, T itemB)
 		{
-			(items[itemA.HeapIndex], items[itemB.HeapIndex]) = (itemB, itemA);
+			(_items[itemA.HeapIndex], _items[itemB.HeapIndex]) = (itemB, itemA);
 			(itemA.HeapIndex, itemB.HeapIndex) = (itemB.HeapIndex, itemA.HeapIndex);
 		}
 
-		public object Clone() => new Heap<T>(items.Length) { items = items.Clone() as T[] };
+		public object Clone() => new Heap<T>(_items.Length) { _items = _items.Clone() as T[] };
 
 		#endregion
 	}

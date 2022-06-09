@@ -21,11 +21,13 @@ namespace CXUtils.Domain.Types
 
 		public CubicBezier2 GetSegment(int i) => new CubicBezier2(GetSegmentRaw(i));
 
-		public override void PushAnchor(Float2 anchor)
+		public override void PushAnchor(Float2 newAnchor)
 		{
+			Float2 newControlPoint = (points[points.Count - 1] + newAnchor).Halve; // the new anchor's new control point
+			
 			points.Add(points[points.Count - 1] * 2f - points[points.Count - 2]); // last control point's other side control point
-			points.Add((points[points.Count - 1] + anchor).Halve); // the new anchor's new control point
-			points.Add(anchor); // finally the new anchor
+			points.Add(newControlPoint);
+			points.Add(newAnchor);
 		}
 
 		/// <summary>

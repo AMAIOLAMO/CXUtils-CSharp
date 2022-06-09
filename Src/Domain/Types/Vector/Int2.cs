@@ -89,8 +89,8 @@ namespace CXUtils.Domain.Types
 		public Int2 OffsetX(int value) => new(x + value, y);
 		public Int2 OffsetY(int value) => new(x, y + value);
 
-		public Int2 AsX(int value) => new(value, y);
-		public Int2 AsY(int value) => new(x, value);
+		public Int2 WithX(int value) => new(value, y);
+		public Int2 WithY(int value) => new(x, value);
 
 		public bool Equals(Int2 other) => x == other.x && y == other.y;
 

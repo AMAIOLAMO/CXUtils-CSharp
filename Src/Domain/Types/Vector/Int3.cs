@@ -95,9 +95,9 @@ namespace CXUtils.Domain.Types
 		public Int3 OffsetY(int value) => new(x, y + value, z);
 		public Int3 OffsetZ(int value) => new(x, y, z + value);
 
-		public Int3 AsX(int value) => new(value, y, z);
-		public Int3 AsY(int value) => new(x, value, z);
-		public Int3 AsZ(int value) => new(x, y, value);
+		public Int3 WithX(int value) => new(value, y, z);
+		public Int3 WithY(int value) => new(x, value, z);
+		public Int3 WithZ(int value) => new(x, y, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			$"({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)})";

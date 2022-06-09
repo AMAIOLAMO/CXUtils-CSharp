@@ -99,10 +99,10 @@ namespace CXUtils.Domain.Types
 		public Int4 OffsetZ(int value) => new(x, y, z + value, w);
 		public Int4 OffsetW(int value) => new(x, y, z, w + value);
 
-		public Int4 AsX(int value) => new(value, y, z, w);
-		public Int4 AsY(int value) => new(x, value, z, w);
-		public Int4 AsZ(int value) => new(x, y, value, w);
-		public Int4 AsW(int value) => new(x, y, z, value);
+		public Int4 WithX(int value) => new(value, y, z, w);
+		public Int4 WithY(int value) => new(x, value, z, w);
+		public Int4 WithZ(int value) => new(x, y, value, w);
+		public Int4 WithW(int value) => new(x, y, z, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			$"({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";

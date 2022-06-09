@@ -141,8 +141,8 @@ namespace CXUtils.Domain.Types
 		public Float2 OffsetX(float value) => new(x + value, y);
 		public Float2 OffsetY(float value) => new(x, y + value);
 
-		public Float2 AsX(float value) => new(value, y);
-		public Float2 AsY(float value) => new(x, value);
+		public Float2 WithX(float value) => new(value, y);
+		public Float2 WithY(float value) => new(x, value);
 
 		public override string ToString() =>
 			$"({x.ToString(CultureInfo.InvariantCulture)}, {y.ToString(CultureInfo.InvariantCulture)})";

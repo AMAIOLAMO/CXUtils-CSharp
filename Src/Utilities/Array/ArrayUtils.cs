@@ -17,9 +17,15 @@ namespace CXUtils.Utilities.Array
 			}
 
 			//and last
-			builder.Append(array[array.Length - 1]);
+			builder.Append(array.LastElement());
 
 			return builder.ToString();
 		}
+
+		public static T LastElement<T>(this T[] array) =>
+			array[array.Length - 1];
+
+		public static T FirstElement<T>(this T[] array) =>
+			array[0];
 	}
 }

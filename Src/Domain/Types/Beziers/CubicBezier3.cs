@@ -8,22 +8,22 @@ namespace CXUtils.Domain.Types
 	/// </summary>
 	public readonly struct CubicBezier3
 	{
-		public CubicBezier3(Float3 control1, Float3 anchor1, Float3 control2, Float3 anchor2)
+		public CubicBezier3(Float3 anchor1, Float3 control1, Float3 control2, Float3 anchor2)
 		{
-			this.control1 = control1;
 			this.anchor1 = anchor1;
+			this.control1 = control1;
 			this.control2 = control2;
 			this.anchor2 = anchor2;
 		}
 
-		public CubicBezier3(Float3[] points)
+		public CubicBezier3(Float3[] points, int position = 0)
 		{
-			BezierUtils.AssertPoints(points);
+			BezierUtils.AssertPointArrayLength(points, position);
 
-			anchor1 = points[0];
-			control1 = points[1];
-			control2 = points[2];
-			anchor2 = points[3];
+			anchor1 = points[position + 0];
+			control1 = points[position + 1];
+			control2 = points[position + 2];
+			anchor2 = points[position + 3];
 		}
 
 		public Float3 Sample(float t) =>

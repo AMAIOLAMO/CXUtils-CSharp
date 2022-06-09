@@ -33,8 +33,6 @@ namespace CXUtils.Common
 			return true;
 		}
 		
-		
-		
 		public void SetSpan(float span) => Span = span;
 
 		public void Reset() => Span = 0f;

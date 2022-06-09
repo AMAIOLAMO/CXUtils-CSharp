@@ -158,10 +158,10 @@ namespace CXUtils.Domain.Types
 		public Float4 OffsetZ(float value) => new(x, y, z + value, w);
 		public Float4 OffsetW(float value) => new(x, y, z, w + value);
 
-		public Float4 AsX(float value) => new(value, y, z, w);
-		public Float4 AsY(float value) => new(x, value, z, w);
-		public Float4 AsZ(float value) => new(x, y, value, w);
-		public Float4 AsW(float value) => new(x, y, z, value);
+		public Float4 WithX(float value) => new(value, y, z, w);
+		public Float4 WithY(float value) => new(x, value, z, w);
+		public Float4 WithZ(float value) => new(x, y, value, w);
+		public Float4 WithW(float value) => new(x, y, z, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			$"({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";

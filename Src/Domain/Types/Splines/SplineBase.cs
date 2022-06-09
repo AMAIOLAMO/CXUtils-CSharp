@@ -88,7 +88,7 @@ namespace CXUtils.Domain.Types
         protected int LoopIndex( int pointIndex ) => ( pointIndex + points.Count ) % points.Count;
 
         protected abstract void DoLoopChanged();
-        public abstract void PushAnchor( T anchor );
+        public abstract void PushAnchor( T newAnchor );
     }
 
 }

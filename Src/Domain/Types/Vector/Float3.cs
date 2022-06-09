@@ -158,9 +158,9 @@ namespace CXUtils.Domain.Types
 		public Float3 OffsetY(float value) => new(x, y + value, z);
 		public Float3 OffsetZ(float value) => new(x, y, z + value);
 
-		public Float3 AsX(float value) => new(value, y, z);
-		public Float3 AsY(float value) => new(x, value, z);
-		public Float3 AsZ(float value) => new(x, y, value);
+		public Float3 WithX(float value) => new(value, y, z);
+		public Float3 WithY(float value) => new(x, value, z);
+		public Float3 WithZ(float value) => new(x, y, value);
 
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			$"({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)})";
