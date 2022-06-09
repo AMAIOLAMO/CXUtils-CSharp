@@ -6,11 +6,13 @@ namespace CXUtils.Common
 	/// <summary>
 	///     A floating point driven Ticker
 	/// </summary>
-	public class Ticker : ITicker<float>
+	public class TickerFloat : ITicker<float>
 	{
-		public Ticker() => Span = 0f;
+		public TickerFloat(float span) => Span = span;
 
-		public Ticker(ITicker<float> other) => Span = other.Span;
+		public TickerFloat() : this(0f) { }
+
+		public TickerFloat(ITicker<float> other) : this(other.Span) { }
 
 		public float Span { get; private set; }
 
@@ -18,21 +20,26 @@ namespace CXUtils.Common
 		{
 			Span += delta;
 		}
-		
+
 		public bool TickMax(float delta, float max)
 		{
 			Span += delta;
 
+			return LoopIf(max);
+		}
+
+		public bool LoopIf(float max)
+		{
 			//if current Timer is not over max timer
 			if (Span < max) return false;
 
 			Span -= max;
 
-			MaxTicked?.Invoke();
+			Finished?.Invoke();
 
 			return true;
 		}
-		
+
 		public void SetSpan(float span) => Span = span;
 
 		public void Reset() => Span = 0f;
@@ -40,8 +47,9 @@ namespace CXUtils.Common
 		public string ToString(string format, IFormatProvider formatProvider) =>
 			$"Current Span: {Span.ToString(format, formatProvider)}";
 
-		public event Action MaxTicked;
+		public event Action Finished;
 
-		public override string ToString() => $"Current Span: {Span.ToString(CultureInfo.InvariantCulture)}";
+		public override string ToString() =>
+			$"Current Span: {Span.ToString(CultureInfo.InvariantCulture)}";
 	}
 }

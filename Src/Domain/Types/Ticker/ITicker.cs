@@ -19,15 +19,21 @@ namespace CXUtils.Common
 		bool TickMax(TSpan delta, TSpan max);
 
 		/// <summary>
+		///     Doesn't tick the ticker, but loops the ticker and fires <see cref="Finished"/> when <see cref="Span"/> reaches <paramref name="max" />
+		/// </summary>
+		public bool LoopIf(TSpan max);
+
+		/// <summary>
 		///     Set's the span value to the given <paramref name="span" />
 		/// </summary>
 		void SetSpan(TSpan span);
 
 		/// <summary>
-		///     reset's the <see cref="Ticker.Span" /> back to initial value
+		///     reset's the <see cref="TickerFloat.Span" /> back to initial value
 		/// </summary>
 		void Reset();
-		event Action MaxTicked;
+
+		event Action Finished;
 
 		TSpan Span { get; }
 	}
