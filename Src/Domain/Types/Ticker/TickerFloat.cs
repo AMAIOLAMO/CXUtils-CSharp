@@ -20,7 +20,7 @@ namespace CXUtils.Common
 		{
 			Span += delta;
 		}
-
+		
 		public bool TickMax(float delta, float max)
 		{
 			Span += delta;

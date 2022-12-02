@@ -29,21 +29,21 @@ namespace CXUtils.Utilities
 
         public static T[] LengthZero<T>( T[] value, string nameOfValue )
         {
-            if ( value.Length == 0 ) throw new ArgumentException( GuardMessage.MessageArrayLengthZero, nameOfValue );
+            if ( value.Length == 0 ) throw new ArgumentException( GuardMessage.MESSAGE_ARRAY_LENGTH_ZERO, nameOfValue );
 
             return value;
         }
 
         public static T[] LengthNotEqual<T>( T[] value, int length, string nameOfValue )
         {
-            if ( value.Length != length ) throw new ArgumentException( GuardMessage.MessageArrayLengthNotEqualTo + $" {length}", nameOfValue );
+            if ( value.Length != length ) throw new ArgumentException( GuardMessage.MESSAGE_ARRAY_LENGTH_NOT_EQUAL_TO + $" {length}", nameOfValue );
 
             return value;
         }
 
         public static T[] LengthLess<T>( T[] value, int length, string nameOfValue )
         {
-            if ( value.Length < length ) throw new ArgumentException( GuardMessage.MessageArrayLengthSmallerThan + $" {length}", nameOfValue );
+            if ( value.Length < length ) throw new ArgumentException( GuardMessage.MESSAGE_ARRAY_LENGTH_SMALLER_THAN + $" {length}", nameOfValue );
 
             return value;
         }
@@ -73,21 +73,21 @@ namespace CXUtils.Utilities
 
         public static T LengthZero<T>( T value, string nameOfValue ) where T : ICollection
         {
-            if ( value.Count == 0 ) throw new ArgumentException( GuardMessage.MessageCollectionLengthZero, nameOfValue );
+            if ( value.Count == 0 ) throw new ArgumentException( GuardMessage.MESSAGE_COLLECTION_LENGTH_ZERO, nameOfValue );
 
             return value;
         }
 
         public static T LengthNotEqual<T>( T value, int length, string nameOfValue ) where T : ICollection
         {
-            if ( value.Count != length ) throw new ArgumentException( GuardMessage.MessageCollectionLengthNotEqualTo + $" {length}", nameOfValue );
+            if ( value.Count != length ) throw new ArgumentException( GuardMessage.MESSAGE_COLLECTION_LENGTH_NOT_EQUAL_TO + $" {length}", nameOfValue );
 
             return value;
         }
 
         public static T LengthLess<T>( T value, int length, string nameOfValue ) where T : ICollection
         {
-            if ( value.Count < length ) throw new ArgumentException( GuardMessage.MessageCollectionLengthSmallerThan + $" {length}", nameOfValue );
+            if ( value.Count < length ) throw new ArgumentException( GuardMessage.MESSAGE_COLLECTION_LENGTH_SMALLER_THAN + $" {length}", nameOfValue );
 
             return value;
         }
@@ -121,21 +121,21 @@ namespace CXUtils.Utilities
 
         public static int NegativeOrZero( int value, string nameOfValue )
         {
-            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MessageNegativeOrZero, nameOfValue );
+            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE_OR_ZERO, nameOfValue );
 
             return value;
         }
 
         public static int Negative( int value, string nameOfValue )
         {
-            if ( value < 0 ) throw new ArgumentException( GuardMessage.MessageNegative, nameOfValue );
+            if ( value < 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE, nameOfValue );
 
             return value;
         }
 
         public static int Zero( int value, string nameOfValue )
         {
-            if ( value == 0 ) throw new ArgumentException( GuardMessage.MessageZero, nameOfValue );
+            if ( value == 0 ) throw new ArgumentException( GuardMessage.MESSAGE_ZERO, nameOfValue );
 
             return value;
         }
@@ -165,21 +165,21 @@ namespace CXUtils.Utilities
 
         public static float NegativeOrZero( float value, string nameOfValue )
         {
-            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MessageNegativeOrZero, nameOfValue );
+            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE_OR_ZERO, nameOfValue );
 
             return value;
         }
 
         public static float Negative( float value, string nameOfValue )
         {
-            if ( value < 0 ) throw new ArgumentException( GuardMessage.MessageNegative, nameOfValue );
+            if ( value < 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE, nameOfValue );
 
             return value;
         }
 
         public static float Zero( float value, string nameOfValue )
         {
-            if ( value == 0f ) throw new ArgumentException( GuardMessage.MessageZero, nameOfValue );
+            if ( value == 0f ) throw new ArgumentException( GuardMessage.MESSAGE_ZERO, nameOfValue );
 
             return value;
         }
@@ -209,21 +209,21 @@ namespace CXUtils.Utilities
 
         public static double NegativeOrZero( double value, string nameOfValue )
         {
-            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MessageNegativeOrZero, nameOfValue );
+            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE_OR_ZERO, nameOfValue );
 
             return value;
         }
 
         public static double Negative( double value, string nameOfValue )
         {
-            if ( value < 0 ) throw new ArgumentException( GuardMessage.MessageNegative, nameOfValue );
+            if ( value < 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE, nameOfValue );
 
             return value;
         }
 
         public static double Zero( double value, string nameOfValue )
         {
-            if ( value == 0d ) throw new ArgumentException( GuardMessage.MessageZero, nameOfValue );
+            if ( value == 0d ) throw new ArgumentException( GuardMessage.MESSAGE_ZERO, nameOfValue );
 
             return value;
         }
@@ -250,7 +250,7 @@ namespace CXUtils.Utilities
 
         public static decimal NegativeOrZero( decimal value, string nameOfValue )
         {
-            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MessageNegativeOrZero, nameOfValue );
+            if ( value <= 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE_OR_ZERO, nameOfValue );
 
             return value;
         }
@@ -259,14 +259,14 @@ namespace CXUtils.Utilities
 
         public static decimal Negative( decimal value, string nameOfValue )
         {
-            if ( value < 0 ) throw new ArgumentException( GuardMessage.MessageNegative, nameOfValue );
+            if ( value < 0 ) throw new ArgumentException( GuardMessage.MESSAGE_NEGATIVE, nameOfValue );
 
             return value;
         }
 
         public static decimal Zero( decimal value, string nameOfValue )
         {
-            if ( value == 0 ) throw new ArgumentException( GuardMessage.MessageZero, nameOfValue );
+            if ( value == 0 ) throw new ArgumentException( GuardMessage.MESSAGE_ZERO, nameOfValue );
 
             return value;
         }
@@ -330,7 +330,7 @@ namespace CXUtils.Utilities
 
         public static string NullOrEmpty( string value, string nameOfValue )
         {
-            if ( string.IsNullOrEmpty( value ) ) throw new ArgumentException( GuardMessage.MessageNullOrEmpty, nameOfValue );
+            if ( string.IsNullOrEmpty( value ) ) throw new ArgumentException( GuardMessage.MESSAGE_NULL_OR_EMPTY, nameOfValue );
 
             return value;
         }
@@ -344,7 +344,7 @@ namespace CXUtils.Utilities
 
         public static string NullOrWhiteSpace( string value, string nameOfValue )
         {
-            if ( string.IsNullOrWhiteSpace( value ) ) throw new ArgumentException( GuardMessage.MessageNullOrWhitespace, nameOfValue );
+            if ( string.IsNullOrWhiteSpace( value ) ) throw new ArgumentException( GuardMessage.MESSAGE_NULL_OR_WHITESPACE, nameOfValue );
 
             return value;
         }
